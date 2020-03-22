@@ -1,0 +1,115 @@
+plugins {
+    id 'org.springframework.boot' version '2.2.5.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'java'
+    id "nu.studer.jooq" version "3.0.3"
+}
+
+jooq {
+    version = '3.11.11'
+}
+
+
+group = 'com.corona.insights'
+version = '0.0.1'
+sourceCompatibility = '11'
+
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
+}
+
+ext {
+    set('springBootAdminVersion', "2.2.1")
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'org.springframework.boot:spring-boot-starter-jooq'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-web-services'
+    implementation 'de.codecentric:spring-boot-admin-starter-server'
+    implementation 'org.apache.commons:commons-csv:1.7'
+    jooqRuntime("mysql:mysql-connector-java:8.0.13")
+    compile group: 'org.eclipse.jgit', name: 'org.eclipse.jgit', version: '5.7.0.202003110725-r'
+    compile group: 'nu.studer', name: 'gradle-jooq-plugin', version: '3.0.3'
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
+    compile "org.jooq:jooq"
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'mysql:mysql-connector-java'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "de.codecentric:spring-boot-admin-dependencies:${springBootAdminVersion}"
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+tasks.register("cleanJooq") {
+    delete("generated-src/main/java")
+}
+
+jooq {
+    jooq(sourceSets.main) {
+        jdbc {
+            driver = 'com.mysql.jdbc.Driver'
+            url = "jdbc:mysql://localhost:3306/corona_insights"
+            user = "root"
+            password = "florence"
+        }
+        generator {
+            database {
+                includes = 'corona_insights.*'
+                forcedTypes {
+                    forcedType {
+                        name = 'varchar'
+                        expression = '.*'
+                        types = 'JSONB?'
+                    }
+                    forcedType {
+                        name = 'varchar'
+                        expression = '.*'
+                        types = 'INET'
+                    }
+                }
+            }
+            generate {
+                relations = true
+                deprecated = false
+                records = true
+                immutablePojos = false
+                fluentSetters = true
+                daos = true
+            }
+            target {
+                packageName = 'com.corona.insights.jooq'
+                directory = "generated-src/main/java"
+            }
+        }
+    }
+
+}
