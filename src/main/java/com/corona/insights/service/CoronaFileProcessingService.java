@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
-import java.math.BigInteger;
 import java.util.List;
 
 @Slf4j
@@ -33,7 +32,7 @@ public class CoronaFileProcessingService {
         coronaVirusReportDataModels.forEach(coronaVirusReportDataModel -> {
             try {
                 log.info("Started processing CoronaVirusReportModel file for state = {}", coronaVirusReportDataModel.getState());
-                process(coronaVirusReportDataModel);
+                process(coronaVirusReportDataModel, file.getName());
                 log.info("Successfully processed the CoronaVirus Report model = {}", coronaVirusReportDataModel.getState());
             }catch (Exception e) {
                 log.error("Error parsing the record = {}", coronaVirusReportDataModel);
@@ -41,13 +40,14 @@ public class CoronaFileProcessingService {
         });
     }
 
-    private void process(CoronaVirusReportDataModel coronaVirusReportDataModel) {
+    private void process(CoronaVirusReportDataModel coronaVirusReportDataModel, String fileName) {
 
         Location location = new Location();
         location.setCountry(coronaVirusReportDataModel.getCountry());
         location.setState(coronaVirusReportDataModel.getState());
         location.setLatitude(coronaVirusReportDataModel.getLatitude());
-        location.setLatitude(coronaVirusReportDataModel.getLongitude());
+        location.setLongitude(coronaVirusReportDataModel.getLongitude());
+        location.setFileName(fileName);
         log.info("saving location data");
         Integer locationId = locationDao.createOrUpdate(location);
 
@@ -57,9 +57,9 @@ public class CoronaFileProcessingService {
         cases.setConfirmed(coronaVirusReportDataModel.getConfirmed());
         cases.setDeaths(coronaVirusReportDataModel.getDeaths());
         cases.setRecovered(coronaVirusReportDataModel.getRecovered());
+        cases.setFileName(fileName);
         log.info("Saving the case data");
         casesDao.createOrUpdate(cases);
-
     }
 
 }

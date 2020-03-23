@@ -1,5 +1,6 @@
 package com.corona.insights.parser.csv;
 
+import de.siegmar.fastcsv.reader.CsvRow;
 import org.apache.commons.csv.CSVRecord;
 
 import java.io.File;
@@ -8,6 +9,6 @@ import java.util.List;
 
 public interface CSVParser {
 
-    public List<CSVRecord> parseCSV(File file) throws IOException;
+    public List<CsvRow> parseCSV(File file) throws IOException;
 
 }

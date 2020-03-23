@@ -7,9 +7,9 @@ public enum CoronaReportCSVHeaders {
     LAST_UPDATE("Last Update"),
     CONFIRMED("Confirmed"),
     DEATHS("Deaths"),
-    RECOVERED("Recovered");
-    //LATITUDE("Latitude"),
-    //LONGITUDE("Longitude");
+    RECOVERED("Recovered"),
+    LATITUDE("Latitude"),
+    LONGITUDE("Longitude");
 
     private final String header;
 

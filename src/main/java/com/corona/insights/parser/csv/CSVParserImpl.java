@@ -1,42 +1,39 @@
 package com.corona.insights.parser.csv;
 
+import de.siegmar.fastcsv.reader.CsvContainer;
+import de.siegmar.fastcsv.reader.CsvReader;
+import de.siegmar.fastcsv.reader.CsvRow;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
 @Component
 public class CSVParserImpl implements CSVParser {
 
-    private CSVFormat csvFormat;
+    private CsvReader csvReader = new CsvReader();
 
     @Override
-    public List<CSVRecord> parseCSV(File file) throws IOException {
+    public List<CsvRow> parseCSV(File file) throws IOException {
         return readData(file);
     }
 
-    private List<CSVRecord> readData(File file) throws IOException {
-        InputStream csvFile = new FileInputStream(file);
-        InputStreamReader input = new InputStreamReader(csvFile);
-        if(csvFormat == null) {
-            synchronized (this){
-                if (csvFormat == null) {
-                    buildCSVFormatObject();
-                }
-            }
-        }
-        return org.apache.commons.csv.CSVParser.parse(input, csvFormat).getRecords();
+    private List<CsvRow> readData(File file) throws IOException {
+        csvReader.parse(file, StandardCharsets.UTF_8);
+
+        CsvReader csvReader = new CsvReader();
+        csvReader.setContainsHeader(true);
+
+        CsvContainer csv = csvReader.read(file, StandardCharsets.UTF_8);
+
+        return csv.getRows();
     }
 
-    private void buildCSVFormatObject() throws IOException {
-        CSVFormat csvFormat = CSVFormat.RFC4180.withFirstRecordAsHeader()
-                .withIgnoreSurroundingSpaces()
-                .withNullString("");
-        this.csvFormat = csvFormat.withFirstRecordAsHeader();
-    }
 
 }

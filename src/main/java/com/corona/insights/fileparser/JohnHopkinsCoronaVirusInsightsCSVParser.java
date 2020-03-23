@@ -4,6 +4,7 @@ import com.corona.insights.model.CoronaVirusReportDataModel;
 import com.corona.insights.parser.csv.CSVParser;
 import com.corona.insights.parser.csv.CoronaReportCSVHeaders;
 import com.corona.insights.parser.csv.CoronaVirusFileParser;
+import de.siegmar.fastcsv.reader.CsvRow;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.stereotype.Component;
@@ -24,8 +25,10 @@ public class JohnHopkinsCoronaVirusInsightsCSVParser implements CoronaVirusFileP
 
     private CSVParser csvParser;
 
-    private final String DATE_FORMAT = "yyyyMMddHHmm";
+    private final String ALT_DATE_FORMAT = "MM/dd/yyyy HH:mm";
+    private final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
     private final DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
+    private final DateFormat altDateFormat = new SimpleDateFormat(ALT_DATE_FORMAT);
 
     public JohnHopkinsCoronaVirusInsightsCSVParser(CSVParser csvParser) {
         this.csvParser = csvParser;
@@ -33,7 +36,7 @@ public class JohnHopkinsCoronaVirusInsightsCSVParser implements CoronaVirusFileP
 
     @Override
     public List<CoronaVirusReportDataModel> parse(File file) {
-        List<CSVRecord> csvRecords = new ArrayList<>();
+        List<CsvRow> csvRecords = new ArrayList<>();
         try {
             log.info("Parsing csv file = {}", file.getName());
             csvRecords = csvParser.parseCSV(file);
@@ -45,23 +48,26 @@ public class JohnHopkinsCoronaVirusInsightsCSVParser implements CoronaVirusFileP
     }
 
     @Override
-    public List<CoronaVirusReportDataModel> mappedRecord(List<CSVRecord> csvRecords) {
+    public List<CoronaVirusReportDataModel> mappedRecord(List<CsvRow> csvRecords) {
         List<CoronaVirusReportDataModel> coronaVirusReportDataModels = new ArrayList<>();
-        csvRecords.forEach(csvRecord -> {
+        for(CsvRow csvRecord : csvRecords) {
             CoronaVirusReportDataModel coronaVirusReportDataModel = new CoronaVirusReportDataModel();
-
-            coronaVirusReportDataModel.setCountry(csvRecord.get(CoronaReportCSVHeaders.COUNTRY_REGION));
-            coronaVirusReportDataModel.setState(csvRecord.get(CoronaReportCSVHeaders.STATE_PROVINCE));
-            //coronaVirusReportDataModel.setLatitude(new BigDecimal(csvRecord.get(CoronaReportCSVHeaders.LATITUDE)));
-            //coronaVirusReportDataModel.setLongitude(new BigDecimal(csvRecord.get(CoronaReportCSVHeaders.LONGITUDE)));
-            coronaVirusReportDataModel.setReportedDate(buildDateTime(csvRecord.get(CoronaReportCSVHeaders.LAST_UPDATE)));
-            coronaVirusReportDataModel.setConfirmed(Long.valueOf(csvRecord.get(CoronaReportCSVHeaders.CONFIRMED)));
-            coronaVirusReportDataModel.setDeaths(Integer.valueOf(csvRecord.get(CoronaReportCSVHeaders.DEATHS)));
-            coronaVirusReportDataModel.setRecovered(Long.valueOf(csvRecord.get(CoronaReportCSVHeaders.RECOVERED)));
+            coronaVirusReportDataModel.setCountry(csvRecord.getField(CoronaReportCSVHeaders.COUNTRY_REGION.toString()));
+            coronaVirusReportDataModel.setState(csvRecord.getField(CoronaReportCSVHeaders.STATE_PROVINCE.toString()));
+            String latitude = csvRecord.getField(CoronaReportCSVHeaders.LATITUDE.toString());
+            if(!latitude.isEmpty()) coronaVirusReportDataModel.setLatitude(new BigDecimal(latitude));
+            String longitude = csvRecord.getField(CoronaReportCSVHeaders.LONGITUDE.toString());
+            if(!longitude.isEmpty()) coronaVirusReportDataModel.setLongitude(new BigDecimal(longitude));
+            coronaVirusReportDataModel.setReportedDate(buildDateTime(csvRecord.getField(CoronaReportCSVHeaders.LAST_UPDATE.toString())));
+            String confirmed = csvRecord.getField(CoronaReportCSVHeaders.CONFIRMED.toString());
+            coronaVirusReportDataModel.setConfirmed(!confirmed.isEmpty() ? Long.valueOf(confirmed) : null);
+            String deaths = csvRecord.getField(CoronaReportCSVHeaders.DEATHS.toString());
+            coronaVirusReportDataModel.setDeaths(!deaths.isEmpty() ? Integer.valueOf(deaths) : null);
+            String recovered = csvRecord.getField(CoronaReportCSVHeaders.RECOVERED.toString());
+            coronaVirusReportDataModel.setRecovered(!recovered.isEmpty() ? Long.valueOf(recovered) : null);
 
             coronaVirusReportDataModels.add(coronaVirusReportDataModel);
-
-        });
+        }
         return coronaVirusReportDataModels;
     }
 
@@ -69,7 +75,11 @@ public class JohnHopkinsCoronaVirusInsightsCSVParser implements CoronaVirusFileP
         Timestamp dateTime = null;
         if(date != null) {
             try {
-                dateTime = new Timestamp(dateFormat.parse(date).getTime());
+                if(!date.contains("/")) {
+                    dateTime = new Timestamp(dateFormat.parse(date).getTime());
+                }else {
+                    dateTime = new Timestamp(altDateFormat.parse(date).getTime());
+                }
             } catch (ParseException e) {
                 log.error("Unable to parse date = {}", date);
             }

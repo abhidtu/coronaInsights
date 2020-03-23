@@ -27,13 +27,15 @@ public class FileProcessScheduler {
         log.info("Executing FileProcessScheduler, fetching files to process");
         List<File> filesToProcess = fileContainerClient.getFilesToProcess();
         log.info("Fetched = {} files for processing", filesToProcess.size());
+
         for (File file : filesToProcess) {
             try {
                 File fileToProcess = fileContainerClient.markFileForProcessing(file);
                 coronaFileProcessingService.processFile(fileToProcess);
                 fileContainerClient.deleteFile(fileToProcess);
-            } catch (IOException e) {
-                log.error("Exception while processing file = {}", file.getName());
+            } catch (Exception e) {
+                log.error("Exception while processing file = {}, exception = {}", file.getName(), e.getMessage());
+                e.printStackTrace();
             }
         }
     }
