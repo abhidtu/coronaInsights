@@ -22,11 +22,14 @@ public class FileProcessScheduler {
         this.coronaFileProcessingService = coronaFileProcessingService;
     }
 
-    @Scheduled(cron = "0 * * ? * *")
+    //@Scheduled(cron = "0 * * ? * *")
     public void pollForFiles() {
         log.info("Executing FileProcessScheduler, fetching files to process");
         List<File> filesToProcess = fileContainerClient.getFilesToProcess();
         log.info("Fetched = {} files for processing", filesToProcess.size());
+
+
+
 
         for (File file : filesToProcess) {
             try {

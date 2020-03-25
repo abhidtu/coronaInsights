@@ -55,9 +55,9 @@ public class JohnHopkinsCoronaVirusInsightsCSVParser implements CoronaVirusFileP
             coronaVirusReportDataModel.setCountry(csvRecord.getField(CoronaReportCSVHeaders.COUNTRY_REGION.toString()));
             coronaVirusReportDataModel.setState(csvRecord.getField(CoronaReportCSVHeaders.STATE_PROVINCE.toString()));
             String latitude = csvRecord.getField(CoronaReportCSVHeaders.LATITUDE.toString());
-            if(!latitude.isEmpty()) coronaVirusReportDataModel.setLatitude(new BigDecimal(latitude));
+            if(latitude != null && !latitude.isEmpty()) coronaVirusReportDataModel.setLatitude(new BigDecimal(latitude));
             String longitude = csvRecord.getField(CoronaReportCSVHeaders.LONGITUDE.toString());
-            if(!longitude.isEmpty()) coronaVirusReportDataModel.setLongitude(new BigDecimal(longitude));
+            if(longitude != null && !longitude.isEmpty()) coronaVirusReportDataModel.setLongitude(new BigDecimal(longitude));
             coronaVirusReportDataModel.setReportedDate(buildDateTime(csvRecord.getField(CoronaReportCSVHeaders.LAST_UPDATE.toString())));
             String confirmed = csvRecord.getField(CoronaReportCSVHeaders.CONFIRMED.toString());
             coronaVirusReportDataModel.setConfirmed(!confirmed.isEmpty() ? Long.valueOf(confirmed) : null);
