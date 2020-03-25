@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
+import java.sql.Date;
 import java.util.List;
 
 @Slf4j
@@ -41,7 +42,6 @@ public class CoronaFileProcessingService {
     }
 
     private void process(CoronaVirusReportDataModel coronaVirusReportDataModel, String fileName) {
-
         Location location = new Location();
         location.setCountry(coronaVirusReportDataModel.getCountry());
         location.setState(coronaVirusReportDataModel.getState());
@@ -53,10 +53,11 @@ public class CoronaFileProcessingService {
 
         Cases cases = new Cases();
         cases.setLocationId(locationId);
-        cases.setReportingDate(coronaVirusReportDataModel.getReportedDate());
+        cases.setReportingDate(Date.valueOf(coronaVirusReportDataModel.getReportedDate()));
         cases.setConfirmed(coronaVirusReportDataModel.getConfirmed());
         cases.setDeaths(coronaVirusReportDataModel.getDeaths());
         cases.setRecovered(coronaVirusReportDataModel.getRecovered());
+        cases.setReportingTimestamp(coronaVirusReportDataModel.getReportedTimestamp());
         cases.setFileName(fileName);
         log.info("Saving the case data");
         casesDao.createOrUpdate(cases);

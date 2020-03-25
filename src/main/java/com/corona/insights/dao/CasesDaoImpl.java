@@ -16,8 +16,8 @@ public class CasesDaoImpl extends CasesDao {
     }
 
     public void createOrUpdate(Cases cases) {
-        DSL.using(configuration()).insertInto(CASES, CASES.LOCATION_ID, CASES.REPORTING_DATE, CASES.CONFIRMED, CASES.DEATHS, CASES.RECOVERED, CASES.FILE_NAME)
-                .values(cases.getLocationId(), cases.getReportingDate(), cases.getConfirmed(), cases.getDeaths(), cases.getRecovered(), cases.getFileName())
+        DSL.using(configuration()).insertInto(CASES, CASES.LOCATION_ID, CASES.REPORTING_DATE, CASES.CONFIRMED, CASES.DEATHS, CASES.RECOVERED, CASES.REPORTING_TIMESTAMP, CASES.FILE_NAME)
+                .values(cases.getLocationId(), cases.getReportingDate(), cases.getConfirmed(), cases.getDeaths(), cases.getRecovered(), cases.getReportingTimestamp(), cases.getFileName())
                 .onDuplicateKeyIgnore()
                 .execute();
     }

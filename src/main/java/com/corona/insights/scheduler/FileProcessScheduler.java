@@ -28,9 +28,6 @@ public class FileProcessScheduler {
         List<File> filesToProcess = fileContainerClient.getFilesToProcess();
         log.info("Fetched = {} files for processing", filesToProcess.size());
 
-
-
-
         for (File file : filesToProcess) {
             try {
                 File fileToProcess = fileContainerClient.markFileForProcessing(file);
