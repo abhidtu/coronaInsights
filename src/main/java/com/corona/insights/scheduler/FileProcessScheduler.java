@@ -3,11 +3,9 @@ package com.corona.insights.scheduler;
 import com.corona.insights.client.FileContainerClient;
 import com.corona.insights.service.CoronaFileProcessingService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -29,13 +27,15 @@ public class FileProcessScheduler {
         log.info("Fetched = {} files for processing", filesToProcess.size());
 
         for (File file : filesToProcess) {
-            try {
-                File fileToProcess = fileContainerClient.markFileForProcessing(file);
-                coronaFileProcessingService.processFile(fileToProcess);
-                fileContainerClient.deleteFile(fileToProcess);
-            } catch (Exception e) {
-                log.error("Exception while processing file = {}, exception = {}", file.getName(), e.getMessage());
-                e.printStackTrace();
+            if(coronaFileProcessingService.isNotProcessed(file.getName())) {
+                try {
+                    File fileToProcess = fileContainerClient.markFileForProcessing(file);
+                    coronaFileProcessingService.processFile(fileToProcess);
+                    fileContainerClient.deleteFile(fileToProcess);
+                } catch (Exception e) {
+                    log.error("Exception while processing file = {}, exception = {}", file.getName(), e.getMessage());
+                    e.printStackTrace();
+                }
             }
         }
     }

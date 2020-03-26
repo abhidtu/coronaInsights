@@ -28,17 +28,17 @@ public class CoronaFileProcessingService {
     }
 
     public void processFile(File file) {
-        log.info("processing file = {}", file.getName());
-        List<CoronaVirusReportDataModel> coronaVirusReportDataModels = coronaVirusFileParser.parse(file);
-        coronaVirusReportDataModels.forEach(coronaVirusReportDataModel -> {
-            try {
-                log.info("Started processing CoronaVirusReportModel file for state = {}", coronaVirusReportDataModel.getState());
-                process(coronaVirusReportDataModel, file.getName());
-                log.info("Successfully processed the CoronaVirus Report model = {}", coronaVirusReportDataModel.getState());
-            }catch (Exception e) {
-                log.error("Error parsing the record = {}", coronaVirusReportDataModel);
-            }
-        });
+            log.info("processing file = {}", file.getName());
+            List<CoronaVirusReportDataModel> coronaVirusReportDataModels = coronaVirusFileParser.parse(file);
+            coronaVirusReportDataModels.forEach(coronaVirusReportDataModel -> {
+                try {
+                    log.info("Started processing CoronaVirusReportModel file for state = {}", coronaVirusReportDataModel.getState());
+                    process(coronaVirusReportDataModel, file.getName());
+                    log.info("Successfully processed the CoronaVirus Report model = {}", coronaVirusReportDataModel.getState());
+                } catch (Exception e) {
+                    log.error("Error parsing the record = {}", coronaVirusReportDataModel);
+                }
+            });
     }
 
     private void process(CoronaVirusReportDataModel coronaVirusReportDataModel, String fileName) {
@@ -61,6 +61,10 @@ public class CoronaFileProcessingService {
         cases.setFileName(fileName);
         log.info("Saving the case data");
         casesDao.createOrUpdate(cases);
+    }
+
+    public boolean isNotProcessed(String fileName) {
+        return casesDao.fetchByFileName(fileName) == null;
     }
 
 }
