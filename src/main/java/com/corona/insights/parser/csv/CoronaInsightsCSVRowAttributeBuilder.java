@@ -2,12 +2,8 @@ package com.corona.insights.parser.csv;
 
 import de.siegmar.fastcsv.reader.CsvRow;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
-import org.thymeleaf.util.DateUtils;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 

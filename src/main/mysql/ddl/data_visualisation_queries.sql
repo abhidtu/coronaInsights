@@ -1,0 +1,1 @@
+select c.`reporting_date` as "time", sum(c.`confirmed`) as "confirmed cases - China" from cases c join location l on c.`location_id`=l.`id` where l.`country` like "%china%" group by c.`reporting_date` order by c.`reporting_date` desc;

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -63,7 +64,15 @@ public class CoronaFileProcessingService {
         casesDao.createOrUpdate(cases);
     }
 
-    public boolean isNotProcessed(String fileName) {
+    public List<File> getNewFilesToProcess(List<File> files) {
+        List<File> newFiles = new ArrayList<>();
+        files.forEach(file -> {
+            if(isNotProcessed(file.getName())) newFiles.add(file);
+        });
+        return newFiles;
+    }
+
+    private boolean isNotProcessed(String fileName) {
         return casesDao.fetchByFileName(fileName).isEmpty();
     }
 

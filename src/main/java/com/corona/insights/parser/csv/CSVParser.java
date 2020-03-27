@@ -1,7 +1,6 @@
 package com.corona.insights.parser.csv;
 
 import de.siegmar.fastcsv.reader.CsvRow;
-import org.apache.commons.csv.CSVRecord;
 
 import java.io.File;
 import java.io.IOException;

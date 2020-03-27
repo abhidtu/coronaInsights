@@ -26,18 +26,17 @@ public class FileProcessScheduler {
         List<File> filesToProcess = fileContainerClient.getFilesToProcess();
         log.info("Fetched = {} files for processing", filesToProcess.size());
 
-        for (File file : filesToProcess) {
-            if(coronaFileProcessingService.isNotProcessed(file.getName())) {
-                try {
-                    File fileToProcess = fileContainerClient.markFileForProcessing(file);
-                    coronaFileProcessingService.processFile(fileToProcess);
-                    fileContainerClient.deleteFile(fileToProcess);
-                } catch (Exception e) {
-                    log.error("Exception while processing file = {}, exception = {}", file.getName(), e.getMessage());
-                    e.printStackTrace();
-                }
-            }else {
-                log.info("File = {} already processed, skipping", file.getName());
+        List<File> newFiles = coronaFileProcessingService.getNewFilesToProcess(filesToProcess);
+        log.info("Found = {} new files to process", newFiles.size());
+
+        for (File file : newFiles) {
+            try {
+                File fileToProcess = fileContainerClient.markFileForProcessing(file);
+                coronaFileProcessingService.processFile(fileToProcess);
+                fileContainerClient.deleteFile(fileToProcess);
+            } catch (Exception e) {
+                log.error("Exception while processing file = {}, exception = {}", file.getName(), e.getMessage());
+                e.printStackTrace();
             }
         }
     }
