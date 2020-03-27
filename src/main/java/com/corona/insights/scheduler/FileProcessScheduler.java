@@ -3,6 +3,7 @@ package com.corona.insights.scheduler;
 import com.corona.insights.client.FileContainerClient;
 import com.corona.insights.service.CoronaFileProcessingService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -20,7 +21,7 @@ public class FileProcessScheduler {
         this.coronaFileProcessingService = coronaFileProcessingService;
     }
 
-    //@Scheduled(cron = "0 * * ? * *")
+    @Scheduled(cron = "0 0 */2 ? * *")
     public void pollForFiles() {
         log.info("Executing FileProcessScheduler, fetching files to process");
         List<File> filesToProcess = fileContainerClient.getFilesToProcess();
@@ -36,7 +37,6 @@ public class FileProcessScheduler {
                 fileContainerClient.deleteFile(fileToProcess);
             } catch (Exception e) {
                 log.error("Exception while processing file = {}, exception = {}", file.getName(), e.getMessage());
-                e.printStackTrace();
             }
         }
     }

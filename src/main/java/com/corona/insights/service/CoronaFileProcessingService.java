@@ -37,7 +37,7 @@ public class CoronaFileProcessingService {
                     process(coronaVirusReportDataModel, file.getName());
                     log.info("Successfully processed the CoronaVirus Report model = {}", coronaVirusReportDataModel.getState());
                 } catch (Exception e) {
-                    log.error("Error parsing the record = {}", coronaVirusReportDataModel);
+                    log.error("Error parsing the record = {}", coronaVirusReportDataModel.toString());
                 }
             });
     }

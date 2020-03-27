@@ -22,11 +22,12 @@ public class GitScheduler {
         this.gitClient = gitClient;
     }
 
-    //@Scheduled(cron = "0 * * ? * *")
+    @Scheduled(cron = "0 0 */2 ? * *")
     public void pollForRepo() {
         try {
             log.info("Executing the repository poll scheduler");
             cloneOrUpdate();
+            log.info("Successfully completed the repository poll scheduler");
         } catch (Exception e) {
             log.info("Error updating the repository");
         }
@@ -34,8 +35,9 @@ public class GitScheduler {
 
     private void cloneOrUpdate() throws GitAPIException, IOException {
         if(!gitClient.existsLocally()) {
-            log.info("Repository exists locally");
+            log.warn("Repository does not exists locally");
             gitClient.clone(branch);
+            log.info("Successfully cloned the repository");
         }else {
             log.info("Repository already exists will update");
             gitClient.pull();

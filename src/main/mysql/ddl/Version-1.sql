@@ -10,8 +10,9 @@ CREATE TABLE `cases` (
   `created_At` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `file_name` (`file_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=24708 DEFAULT CHARSET=latin1;
+  KEY `file_name` (`file_name`),
+  KEY `composite_unique_index` (`location_id`,`reporting_timestamp`,`recovered`,`confirmed`,`deaths`,`file_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `location` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,

@@ -2,15 +2,15 @@ package com.corona.insights.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.math.BigDecimal;
-import java.sql.Date;
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 
 @Getter
 @Setter
+@ToString
 public class CoronaVirusReportDataModel {
 
     private String country;
