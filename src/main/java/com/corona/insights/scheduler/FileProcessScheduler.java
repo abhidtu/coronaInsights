@@ -36,6 +36,8 @@ public class FileProcessScheduler {
                     log.error("Exception while processing file = {}, exception = {}", file.getName(), e.getMessage());
                     e.printStackTrace();
                 }
+            }else {
+                log.info("File = {} already processed, skipping", file.getName());
             }
         }
     }

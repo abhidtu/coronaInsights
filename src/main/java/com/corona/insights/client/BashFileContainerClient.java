@@ -36,7 +36,7 @@ public class BashFileContainerClient implements FileContainerClient {
         File[] files = new File(sourceFolderPath).listFiles();
         if(files != null) {
             for (File file : files) {
-                if (file.isFile()) {
+                if (file.isFile() && !file.getName().equals(".gitignore") && !file.getName().equals("README.md")) {
                     results.add(file);
                 }
             }

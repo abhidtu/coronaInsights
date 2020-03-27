@@ -64,7 +64,7 @@ public class CoronaFileProcessingService {
     }
 
     public boolean isNotProcessed(String fileName) {
-        return casesDao.fetchByFileName(fileName) == null;
+        return casesDao.fetchByFileName(fileName).isEmpty();
     }
 
 }

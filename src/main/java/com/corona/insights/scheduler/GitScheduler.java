@@ -39,6 +39,7 @@ public class GitScheduler {
         }else {
             log.info("Repository already exists will update");
             gitClient.pull();
+            log.info("Successfully updated the repository");
         }
     }
 

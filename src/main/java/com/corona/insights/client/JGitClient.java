@@ -56,10 +56,10 @@ public class JGitClient implements GitClient {
 
     @Override
     public void pull() throws GitAPIException, IOException {
-        log.info("Cloning git repo = {}", localRepo);
+        log.info("updating git repo = {}", localRepo);
         gitObj.getRepository().resolve("HEAD");
         gitObj = new Git(localRepo);
-        PullCommand pull = gitObj.pull();
+        gitObj.pull().call();
     }
 
     @Override
