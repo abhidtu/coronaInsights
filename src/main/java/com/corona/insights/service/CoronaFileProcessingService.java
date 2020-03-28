@@ -33,7 +33,7 @@ public class CoronaFileProcessingService {
             List<CoronaVirusReportDataModel> coronaVirusReportDataModels = coronaVirusFileParser.parse(file);
             coronaVirusReportDataModels.forEach(coronaVirusReportDataModel -> {
                 try {
-                    log.info("Started processing CoronaVirusReportModel file for state = {}", coronaVirusReportDataModel.getState());
+                    log.info("Started processing CoronaVirusReportModel file for state = {}", coronaVirusReportDataModel.toString());
                     process(coronaVirusReportDataModel, file.getName());
                     log.info("Successfully processed the CoronaVirus Report model = {}", coronaVirusReportDataModel.getState());
                 } catch (Exception e) {
