@@ -69,7 +69,7 @@ dependencyManagement {
 test {
     useJUnitPlatform()
 }
-
+/*
 tasks.register("cleanJooq") {
     delete("generated-src/main/java")
 }
@@ -114,3 +114,4 @@ jooq {
     }
 
 }
+*/

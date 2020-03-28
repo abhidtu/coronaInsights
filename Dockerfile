@@ -8,7 +8,7 @@ WORKDIR /code
 
 RUN mkdir -p /apps/bin
 
-RUN ./gradlew clean build && cp -a /code/build/libs/coronainsights-0.0.1.jar /apps/bin/
+RUN ./gradlew clean build -x test && cp -a /code/build/libs/coronainsights-0.0.1.jar /apps/bin/
 
 EXPOSE 8080
 
