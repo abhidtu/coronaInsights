@@ -78,9 +78,9 @@ jooq {
     jooq(sourceSets.main) {
         jdbc {
             driver = 'com.mysql.jdbc.Driver'
-            url = "jdbc:mysql://34.83.173.131:3306/corona_insights"
+            url = "jdbc:mysql://localhost:3306/corona_insights"
             user = "root"
-            password = 'Florence1$'
+            password = 'florence'
         }
         generator {
             database {
@@ -108,7 +108,7 @@ jooq {
             }
             target {
                 packageName = 'com.corona.insights.jooq'
-                directory = "generated-src/main/java"
+                directory = "src/main/java"
             }
         }
     }
