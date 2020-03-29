@@ -5,9 +5,12 @@ import com.corona.insights.jooq.corona_insights.CoronaInsights;
 import com.corona.insights.jooq.corona_insights.tables.daos.CasesDao;
 import com.corona.insights.jooq.corona_insights.tables.daos.LocationDao;
 import com.corona.insights.jooq.corona_insights.tables.pojos.Cases;
+import com.corona.insights.jooq.corona_insights.tables.pojos.Location;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Slf4j
 @Component
@@ -20,10 +23,14 @@ public class CoronaETLProcessingService {
 
     public void process() {
 
-        coronaInsightsETLProcessor.setCountry("US");
-        coronaInsightsETLProcessor.extract();
-        coronaInsightsETLProcessor.transform();
-        coronaInsightsETLProcessor.load();
+        List<Location> locations = locationDao.findAll();
+
+        for (Location location : locations) {
+            coronaInsightsETLProcessor.setCountry(location.getCountry());
+            coronaInsightsETLProcessor.extract();
+            coronaInsightsETLProcessor.transform();
+            coronaInsightsETLProcessor.load();
+        }
 
     }
 
