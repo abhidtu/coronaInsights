@@ -16,7 +16,6 @@ import javax.annotation.Generated;
 import org.jooq.Identity;
 import org.jooq.UniqueKey;
 import org.jooq.impl.Internal;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -37,9 +36,9 @@ public class Keys {
     // IDENTITY definitions
     // -------------------------------------------------------------------------
 
-    public static final Identity<AgeWiseCasesRecord, UInteger> IDENTITY_AGE_WISE_CASES = Identities0.IDENTITY_AGE_WISE_CASES;
-    public static final Identity<CasesRecord, UInteger> IDENTITY_CASES = Identities0.IDENTITY_CASES;
-    public static final Identity<LocationRecord, UInteger> IDENTITY_LOCATION = Identities0.IDENTITY_LOCATION;
+    public static final Identity<AgeWiseCasesRecord, Integer> IDENTITY_AGE_WISE_CASES = Identities0.IDENTITY_AGE_WISE_CASES;
+    public static final Identity<CasesRecord, Integer> IDENTITY_CASES = Identities0.IDENTITY_CASES;
+    public static final Identity<LocationRecord, Integer> IDENTITY_LOCATION = Identities0.IDENTITY_LOCATION;
 
     // -------------------------------------------------------------------------
     // UNIQUE and PRIMARY KEY definitions
@@ -59,9 +58,9 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     private static class Identities0 {
-        public static Identity<AgeWiseCasesRecord, UInteger> IDENTITY_AGE_WISE_CASES = Internal.createIdentity(AgeWiseCases.AGE_WISE_CASES, AgeWiseCases.AGE_WISE_CASES.ID);
-        public static Identity<CasesRecord, UInteger> IDENTITY_CASES = Internal.createIdentity(Cases.CASES, Cases.CASES.ID);
-        public static Identity<LocationRecord, UInteger> IDENTITY_LOCATION = Internal.createIdentity(Location.LOCATION, Location.LOCATION.ID);
+        public static Identity<AgeWiseCasesRecord, Integer> IDENTITY_AGE_WISE_CASES = Internal.createIdentity(AgeWiseCases.AGE_WISE_CASES, AgeWiseCases.AGE_WISE_CASES.ID);
+        public static Identity<CasesRecord, Integer> IDENTITY_CASES = Internal.createIdentity(Cases.CASES, Cases.CASES.ID);
+        public static Identity<LocationRecord, Integer> IDENTITY_LOCATION = Internal.createIdentity(Location.LOCATION, Location.LOCATION.ID);
     }
 
     private static class UniqueKeys0 {

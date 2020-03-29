@@ -27,7 +27,6 @@ import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UInteger;
 import org.jooq.types.ULong;
 
 
@@ -62,7 +61,7 @@ public class AgeWiseCases extends TableImpl<AgeWiseCasesRecord> {
     /**
      * The column <code>corona_insights.age_wise_cases.id</code>.
      */
-    public final TableField<AgeWiseCasesRecord, UInteger> ID = createField("id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false).identity(true), this, "");
+    public final TableField<AgeWiseCasesRecord, Integer> ID = createField("id", org.jooq.impl.SQLDataType.INTEGER.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>corona_insights.age_wise_cases.location_id</code>.
@@ -157,7 +156,7 @@ public class AgeWiseCases extends TableImpl<AgeWiseCasesRecord> {
      * {@inheritDoc}
      */
     @Override
-    public Identity<AgeWiseCasesRecord, UInteger> getIdentity() {
+    public Identity<AgeWiseCasesRecord, Integer> getIdentity() {
         return Keys.IDENTITY_AGE_WISE_CASES;
     }
 

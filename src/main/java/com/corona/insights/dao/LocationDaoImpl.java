@@ -4,7 +4,6 @@ import com.corona.insights.jooq.corona_insights.tables.daos.LocationDao;
 import com.corona.insights.jooq.corona_insights.tables.pojos.Location;
 import org.jooq.Configuration;
 import org.jooq.impl.DSL;
-import org.jooq.types.UInteger;
 import org.springframework.stereotype.Repository;
 
 import static com.corona.insights.dao.DaoUtils.checkNull;
@@ -33,7 +32,7 @@ public class LocationDaoImpl extends LocationDao {
             return find(location);
         }else {
             if(location.getLatitude()!=null  && location.getLongitude() != null) {
-                location.setId(UInteger.valueOf(id));
+                location.setId(Integer.valueOf(id));
                 updateLocationInfo(location);
             }
         }

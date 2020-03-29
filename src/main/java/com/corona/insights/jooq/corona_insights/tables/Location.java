@@ -28,7 +28,6 @@ import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -62,7 +61,7 @@ public class Location extends TableImpl<LocationRecord> {
     /**
      * The column <code>corona_insights.location.id</code>.
      */
-    public final TableField<LocationRecord, UInteger> ID = createField("id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false).identity(true), this, "");
+    public final TableField<LocationRecord, Integer> ID = createField("id", org.jooq.impl.SQLDataType.INTEGER.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>corona_insights.location.country</code>.
@@ -152,7 +151,7 @@ public class Location extends TableImpl<LocationRecord> {
      * {@inheritDoc}
      */
     @Override
-    public Identity<LocationRecord, UInteger> getIdentity() {
+    public Identity<LocationRecord, Integer> getIdentity() {
         return Keys.IDENTITY_LOCATION;
     }
 

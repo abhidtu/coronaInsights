@@ -20,6 +20,11 @@ public class CoronaETLProcessingService {
 
     public void process() {
 
+        coronaInsightsETLProcessor.setCountry("US");
+        coronaInsightsETLProcessor.extract();
+        coronaInsightsETLProcessor.transform();
+        coronaInsightsETLProcessor.load();
+
     }
 
 }

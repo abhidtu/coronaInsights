@@ -27,8 +27,8 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
+import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.UInteger;
 
 
 /**
@@ -62,7 +62,7 @@ public class Cases extends TableImpl<CasesRecord> {
     /**
      * The column <code>corona_insights.cases.id</code>.
      */
-    public final TableField<CasesRecord, UInteger> ID = createField("id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false).identity(true), this, "");
+    public final TableField<CasesRecord, Integer> ID = createField("id", SQLDataType.INTEGER.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>corona_insights.cases.location_id</code>.
@@ -162,7 +162,7 @@ public class Cases extends TableImpl<CasesRecord> {
      * {@inheritDoc}
      */
     @Override
-    public Identity<CasesRecord, UInteger> getIdentity() {
+    public Identity<CasesRecord, Integer> getIdentity() {
         return Keys.IDENTITY_CASES;
     }
 

@@ -2,6 +2,7 @@ package com.corona.insights.controller;
 
 import com.corona.insights.scheduler.FileProcessScheduler;
 import com.corona.insights.scheduler.GitScheduler;
+import com.corona.insights.service.CoronaETLProcessingService;
 import com.corona.insights.service.CoronaFileProcessingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ public class CoronaInsights {
 
     private GitScheduler gitScheduler;
 
+    private CoronaETLProcessingService coronaETLProcessingService;
+
     @Autowired
     public void setFileProcessScheduler(FileProcessScheduler fileProcessScheduler) {
         this.fileProcessScheduler = fileProcessScheduler;
@@ -27,6 +30,11 @@ public class CoronaInsights {
     @Autowired
     public void setGitScheduler(GitScheduler gitScheduler) {
         this.gitScheduler = gitScheduler;
+    }
+
+    @Autowired
+    public void setCoronaETLProcessingService(CoronaETLProcessingService coronaETLProcessingService) {
+        this.coronaETLProcessingService = coronaETLProcessingService;
     }
 
     @RequestMapping(value="/insights/processFiles" , method= RequestMethod.GET)
@@ -40,6 +48,13 @@ public class CoronaInsights {
     public ResponseEntity pullUpdates() {
         log.info("Processing Files");
         gitScheduler.pollForRepo();
+        return ResponseEntity.ok().build();
+    }
+
+    @RequestMapping(value="/insights/etl" , method= RequestMethod.GET)
+    public ResponseEntity runETLJob() {
+        log.info("Executing ETL Job");
+        coronaETLProcessingService.process();
         return ResponseEntity.ok().build();
     }
 
