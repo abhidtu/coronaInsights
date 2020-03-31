@@ -8,6 +8,7 @@ import org.jooq.Table;
 import org.jooq.impl.DSL;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
 import java.util.List;
 
 import static com.corona.insights.jooq.corona_insights.tables.Cases.CASES;
@@ -32,7 +33,7 @@ public class CasesDaoImpl extends CasesDao {
     public List<CoronaVirusCountryWiseData> aggregateDataForCountry(String country) {
         Table<?> aggregated = DSL.using(configuration()).select(DSL.max(CASES.CONFIRMED).as("aggregated_confirmed"), DSL.max(CASES.DEATHS).as("aggregated_deaths"), DSL.max(CASES.CONFIRMED).as("aggregated_recovered"), DSL.max(CASES.REPORTING_DATE).as("aggregated_reporting_date"))
                                  .from(CASES.join(LOCATION).on(CASES.LOCATION_ID.eq(LOCATION.ID))).where(LOCATION.COUNTRY.eq(country)).groupBy(CASES.CONFIRMED, CASES.REPORTING_DATE, CASES.LOCATION_ID).asTable("aggregated");
-        return DSL.using(configuration()).select(aggregated.field("aggregated_reporting_date").as("reportedDate"), DSL.sum(aggregated.field("aggregated_confirmed").coerce(Integer.class)).as("confirmed"), DSL.sum(aggregated.field("aggregated_deaths").coerce(Integer.class)).as("deaths"), DSL.sum(aggregated.field("aggregated_recovered").coerce(Integer.class)).as("recovered"))
+        return DSL.using(configuration()).select(aggregated.field("aggregated_reporting_date").as("reportedDate").cast(Date.class), DSL.sum(aggregated.field("aggregated_confirmed").coerce(Integer.class)).as("confirmed"), DSL.sum(aggregated.field("aggregated_deaths").coerce(Integer.class)).as("deaths"), DSL.sum(aggregated.field("aggregated_recovered").coerce(Integer.class)).as("recovered"))
                                          .from(aggregated).groupBy(aggregated.field("aggregated_reporting_date")).orderBy(aggregated.field("aggregated_reporting_date").desc())
                                          .fetchInto(CoronaVirusCountryWiseData.class);
     }
