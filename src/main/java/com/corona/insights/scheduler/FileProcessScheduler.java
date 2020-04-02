@@ -1,6 +1,7 @@
 package com.corona.insights.scheduler;
 
 import com.corona.insights.client.FileContainerClient;
+import com.corona.insights.service.CoronaETLProcessingService;
 import com.corona.insights.service.CoronaFileProcessingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -15,10 +16,12 @@ public class FileProcessScheduler {
 
     private FileContainerClient fileContainerClient;
     private CoronaFileProcessingService coronaFileProcessingService;
+    private CoronaETLProcessingService coronaETLProcessingService;
 
-    public FileProcessScheduler(FileContainerClient fileContainerClient, CoronaFileProcessingService coronaFileProcessingService) {
+    public FileProcessScheduler(FileContainerClient fileContainerClient, CoronaFileProcessingService coronaFileProcessingService, CoronaETLProcessingService coronaETLProcessingService) {
         this.fileContainerClient = fileContainerClient;
         this.coronaFileProcessingService = coronaFileProcessingService;
+        this.coronaETLProcessingService = coronaETLProcessingService;
     }
 
     @Scheduled(cron = "0 0 */2 ? * *")
@@ -39,6 +42,7 @@ public class FileProcessScheduler {
                 log.error("Exception while processing file = {}, exception = {}", file.getName(), e.getMessage());
             }
         }
+        coronaETLProcessingService.process();
     }
 
 }
