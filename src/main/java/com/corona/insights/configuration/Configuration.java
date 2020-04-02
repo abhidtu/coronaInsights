@@ -4,9 +4,14 @@ import com.corona.insights.client.BashFileContainerClient;
 import com.corona.insights.client.FileContainerClient;
 import com.corona.insights.client.JGitClient;
 import lombok.extern.slf4j.Slf4j;
+import org.jooq.SQLDialect;
+import org.jooq.impl.DefaultConfiguration;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+
+import javax.sql.DataSource;
 
 @Slf4j
 @Component
@@ -42,5 +47,6 @@ public class Configuration {
     FileContainerClient getFileContainerClient() {
         return new BashFileContainerClient(sourceFolderPath, fileContainerBasePath, incomingFolder, processingFolder, archiveFolder);
     }
+
 
 }

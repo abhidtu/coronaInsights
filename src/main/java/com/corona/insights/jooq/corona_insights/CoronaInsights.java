@@ -7,6 +7,7 @@ package com.corona.insights.jooq.corona_insights;
 import com.corona.insights.jooq.DefaultCatalog;
 import com.corona.insights.jooq.corona_insights.tables.AgeWiseCases;
 import com.corona.insights.jooq.corona_insights.tables.Cases;
+import com.corona.insights.jooq.corona_insights.tables.CountryWise;
 import com.corona.insights.jooq.corona_insights.tables.Location;
 
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class CoronaInsights extends SchemaImpl {
 
-    private static final long serialVersionUID = -2000712809;
+    private static final long serialVersionUID = 926343238;
 
     /**
      * The reference instance of <code>corona_insights</code>
@@ -49,6 +50,11 @@ public class CoronaInsights extends SchemaImpl {
      * The table <code>corona_insights.cases</code>.
      */
     public final Cases CASES = com.corona.insights.jooq.corona_insights.tables.Cases.CASES;
+
+    /**
+     * The table <code>corona_insights.country_wise</code>.
+     */
+    public final CountryWise COUNTRY_WISE = com.corona.insights.jooq.corona_insights.tables.CountryWise.COUNTRY_WISE;
 
     /**
      * The table <code>corona_insights.location</code>.
@@ -82,6 +88,7 @@ public class CoronaInsights extends SchemaImpl {
         return Arrays.<Table<?>>asList(
             AgeWiseCases.AGE_WISE_CASES,
             Cases.CASES,
+            CountryWise.COUNTRY_WISE,
             Location.LOCATION);
     }
 }

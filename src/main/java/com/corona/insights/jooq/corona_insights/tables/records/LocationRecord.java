@@ -31,7 +31,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class LocationRecord extends UpdatableRecordImpl<LocationRecord> implements Record8<Integer, String, String, BigDecimal, BigDecimal, String, Timestamp, Timestamp> {
 
-    private static final long serialVersionUID = 249119576;
+    private static final long serialVersionUID = 253167586;
 
     /**
      * Setter for <code>corona_insights.location.id</code>.

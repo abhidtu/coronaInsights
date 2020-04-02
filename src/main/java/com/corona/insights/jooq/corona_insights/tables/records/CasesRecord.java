@@ -31,7 +31,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class CasesRecord extends UpdatableRecordImpl<CasesRecord> implements Record10<Integer, Integer, Date, Long, Integer, Long, Timestamp, String, Timestamp, Timestamp> {
 
-    private static final long serialVersionUID = -1175485183;
+    private static final long serialVersionUID = -1762612197;
 
     /**
      * Setter for <code>corona_insights.cases.id</code>.

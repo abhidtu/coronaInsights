@@ -43,7 +43,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Location extends TableImpl<LocationRecord> {
 
-    private static final long serialVersionUID = 492287241;
+    private static final long serialVersionUID = -1651754815;
 
     /**
      * The reference instance of <code>corona_insights.location</code>

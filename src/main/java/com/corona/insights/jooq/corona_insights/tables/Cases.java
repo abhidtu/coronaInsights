@@ -27,7 +27,6 @@ import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
-import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
 
 
@@ -44,7 +43,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Cases extends TableImpl<CasesRecord> {
 
-    private static final long serialVersionUID = -1208992384;
+    private static final long serialVersionUID = 2101022475;
 
     /**
      * The reference instance of <code>corona_insights.cases</code>
@@ -62,7 +61,7 @@ public class Cases extends TableImpl<CasesRecord> {
     /**
      * The column <code>corona_insights.cases.id</code>.
      */
-    public final TableField<CasesRecord, Integer> ID = createField("id", SQLDataType.INTEGER.nullable(false).identity(true), this, "");
+    public final TableField<CasesRecord, Integer> ID = createField("id", org.jooq.impl.SQLDataType.INTEGER.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>corona_insights.cases.location_id</code>.
@@ -155,7 +154,7 @@ public class Cases extends TableImpl<CasesRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.CASES_FILE_NAME, Indexes.CASES_PRIMARY, Indexes.CASES_UNIQUE);
+        return Arrays.<Index>asList(Indexes.CASES_COMPOSITE_UNIQUE_INDEX, Indexes.CASES_FILE_NAME, Indexes.CASES_PRIMARY);
     }
 
     /**

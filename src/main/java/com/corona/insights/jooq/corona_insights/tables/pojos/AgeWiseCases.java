@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 
 import javax.annotation.Generated;
 
+import org.jooq.types.UInteger;
 import org.jooq.types.ULong;
 
 
@@ -27,7 +28,7 @@ public class AgeWiseCases implements Serializable {
 
     private static final long serialVersionUID = -895474932;
 
-    private Integer id;
+    private UInteger  id;
     private Integer   locationId;
     private Integer   age;
     private Timestamp reportingDate;
@@ -52,15 +53,15 @@ public class AgeWiseCases implements Serializable {
     }
 
     public AgeWiseCases(
-            Integer id,
-            Integer   locationId,
-            Integer   age,
-            Timestamp reportingDate,
-            Long      confirmed,
-            ULong     deaths,
-            ULong     recovered,
-            Timestamp createdAt,
-            Timestamp modifiedAt
+        UInteger  id,
+        Integer   locationId,
+        Integer   age,
+        Timestamp reportingDate,
+        Long      confirmed,
+        ULong     deaths,
+        ULong     recovered,
+        Timestamp createdAt,
+        Timestamp modifiedAt
     ) {
         this.id = id;
         this.locationId = locationId;
@@ -73,11 +74,11 @@ public class AgeWiseCases implements Serializable {
         this.modifiedAt = modifiedAt;
     }
 
-    public Integer getId() {
+    public UInteger getId() {
         return this.id;
     }
 
-    public AgeWiseCases setId(Integer id) {
+    public AgeWiseCases setId(UInteger id) {
         this.id = id;
         return this;
     }

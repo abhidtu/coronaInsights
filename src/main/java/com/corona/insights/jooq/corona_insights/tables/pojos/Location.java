@@ -24,9 +24,9 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Location implements Serializable {
 
-    private static final long serialVersionUID = -1206132954;
+    private static final long serialVersionUID = -572975137;
 
-    private Integer id;
+    private Integer    id;
     private String     country;
     private String     state;
     private BigDecimal latitude;
@@ -49,14 +49,14 @@ public class Location implements Serializable {
     }
 
     public Location(
-            Integer id,
-            String     country,
-            String     state,
-            BigDecimal latitude,
-            BigDecimal longitude,
-            String     fileName,
-            Timestamp  createdAt,
-            Timestamp  modifiedAt
+        Integer    id,
+        String     country,
+        String     state,
+        BigDecimal latitude,
+        BigDecimal longitude,
+        String     fileName,
+        Timestamp  createdAt,
+        Timestamp  modifiedAt
     ) {
         this.id = id;
         this.country = country;

@@ -6,6 +6,7 @@ package com.corona.insights.jooq.corona_insights;
 
 import com.corona.insights.jooq.corona_insights.tables.AgeWiseCases;
 import com.corona.insights.jooq.corona_insights.tables.Cases;
+import com.corona.insights.jooq.corona_insights.tables.CountryWise;
 import com.corona.insights.jooq.corona_insights.tables.Location;
 
 import javax.annotation.Generated;
@@ -33,6 +34,11 @@ public class Tables {
      * The table <code>corona_insights.cases</code>.
      */
     public static final Cases CASES = com.corona.insights.jooq.corona_insights.tables.Cases.CASES;
+
+    /**
+     * The table <code>corona_insights.country_wise</code>.
+     */
+    public static final CountryWise COUNTRY_WISE = com.corona.insights.jooq.corona_insights.tables.CountryWise.COUNTRY_WISE;
 
     /**
      * The table <code>corona_insights.location</code>.

@@ -24,9 +24,9 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Cases implements Serializable {
 
-    private static final long serialVersionUID = 1546911886;
+    private static final long serialVersionUID = -1695537697;
 
-    private Integer id;
+    private Integer   id;
     private Integer   locationId;
     private Date      reportingDate;
     private Long      confirmed;
@@ -53,16 +53,16 @@ public class Cases implements Serializable {
     }
 
     public Cases(
-            Integer id,
-            Integer   locationId,
-            Date      reportingDate,
-            Long      confirmed,
-            Integer   deaths,
-            Long      recovered,
-            Timestamp reportingTimestamp,
-            String    fileName,
-            Timestamp createdAt,
-            Timestamp modifiedAt
+        Integer   id,
+        Integer   locationId,
+        Date      reportingDate,
+        Long      confirmed,
+        Integer   deaths,
+        Long      recovered,
+        Timestamp reportingTimestamp,
+        String    fileName,
+        Timestamp createdAt,
+        Timestamp modifiedAt
     ) {
         this.id = id;
         this.locationId = locationId;
