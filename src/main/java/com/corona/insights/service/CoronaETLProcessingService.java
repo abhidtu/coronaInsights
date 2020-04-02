@@ -1,5 +1,8 @@
 package com.corona.insights.service;
 
+import com.corona.insights.dao.CasesDaoImpl;
+import com.corona.insights.dao.CountryWiseDaoImpl;
+import com.corona.insights.dao.LocationDaoImpl;
 import com.corona.insights.etl.CoronaInsightsETLProcessor;
 import com.corona.insights.jooq.corona_insights.CoronaInsights;
 import com.corona.insights.jooq.corona_insights.tables.daos.CasesDao;
@@ -17,16 +20,16 @@ import java.util.List;
 @AllArgsConstructor
 public class CoronaETLProcessingService {
 
-    private CoronaInsightsETLProcessor coronaInsightsETLProcessor;
-    private CasesDao casesDao;
-    private LocationDao locationDao;
+    private LocationDaoImpl locationDao;
+    private CasesDaoImpl casesDao;
+    private CountryWiseDaoImpl countryWiseDao;
 
     public void process() {
 
         List<Location> locations = locationDao.findAll();
 
         for (Location location : locations) {
-            coronaInsightsETLProcessor.setCountry(location.getCountry());
+            CoronaInsightsETLProcessor coronaInsightsETLProcessor = new CoronaInsightsETLProcessor(casesDao, countryWiseDao, location.getCountry());
             coronaInsightsETLProcessor.extract();
             coronaInsightsETLProcessor.transform();
             coronaInsightsETLProcessor.load();
