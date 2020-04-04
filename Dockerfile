@@ -10,6 +10,8 @@ RUN mkdir -p /apps/bin && mkdir -p /apps/filesContainer/processing
 
 RUN ./gradlew clean build -x test && cp -a /code/build/libs/coronainsights-0.0.1.jar /apps/bin/
 
+WORKDIR /apps/bin
+
 EXPOSE 8080
 
 CMD ["java", "-jar", "/apps/bin/coronainsights-0.0.1.jar"]

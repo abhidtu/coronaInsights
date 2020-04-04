@@ -8,6 +8,7 @@ import com.corona.insights.jooq.corona_insights.tables.AgeWiseCases;
 import com.corona.insights.jooq.corona_insights.tables.Cases;
 import com.corona.insights.jooq.corona_insights.tables.CountryWise;
 import com.corona.insights.jooq.corona_insights.tables.Location;
+import com.corona.insights.jooq.corona_insights.tables.Properties;
 
 import javax.annotation.Generated;
 
@@ -44,4 +45,9 @@ public class Tables {
      * The table <code>corona_insights.location</code>.
      */
     public static final Location LOCATION = com.corona.insights.jooq.corona_insights.tables.Location.LOCATION;
+
+    /**
+     * The table <code>corona_insights.properties</code>.
+     */
+    public static final Properties PROPERTIES = com.corona.insights.jooq.corona_insights.tables.Properties.PROPERTIES;
 }

@@ -8,10 +8,12 @@ import com.corona.insights.jooq.corona_insights.tables.AgeWiseCases;
 import com.corona.insights.jooq.corona_insights.tables.Cases;
 import com.corona.insights.jooq.corona_insights.tables.CountryWise;
 import com.corona.insights.jooq.corona_insights.tables.Location;
+import com.corona.insights.jooq.corona_insights.tables.Properties;
 import com.corona.insights.jooq.corona_insights.tables.records.AgeWiseCasesRecord;
 import com.corona.insights.jooq.corona_insights.tables.records.CasesRecord;
 import com.corona.insights.jooq.corona_insights.tables.records.CountryWiseRecord;
 import com.corona.insights.jooq.corona_insights.tables.records.LocationRecord;
+import com.corona.insights.jooq.corona_insights.tables.records.PropertiesRecord;
 
 import javax.annotation.Generated;
 
@@ -43,6 +45,7 @@ public class Keys {
     public static final Identity<CasesRecord, Integer> IDENTITY_CASES = Identities0.IDENTITY_CASES;
     public static final Identity<CountryWiseRecord, Integer> IDENTITY_COUNTRY_WISE = Identities0.IDENTITY_COUNTRY_WISE;
     public static final Identity<LocationRecord, Integer> IDENTITY_LOCATION = Identities0.IDENTITY_LOCATION;
+    public static final Identity<PropertiesRecord, UInteger> IDENTITY_PROPERTIES = Identities0.IDENTITY_PROPERTIES;
 
     // -------------------------------------------------------------------------
     // UNIQUE and PRIMARY KEY definitions
@@ -52,6 +55,7 @@ public class Keys {
     public static final UniqueKey<CasesRecord> KEY_CASES_PRIMARY = UniqueKeys0.KEY_CASES_PRIMARY;
     public static final UniqueKey<CountryWiseRecord> KEY_COUNTRY_WISE_PRIMARY = UniqueKeys0.KEY_COUNTRY_WISE_PRIMARY;
     public static final UniqueKey<LocationRecord> KEY_LOCATION_PRIMARY = UniqueKeys0.KEY_LOCATION_PRIMARY;
+    public static final UniqueKey<PropertiesRecord> KEY_PROPERTIES_PRIMARY = UniqueKeys0.KEY_PROPERTIES_PRIMARY;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
@@ -67,6 +71,7 @@ public class Keys {
         public static Identity<CasesRecord, Integer> IDENTITY_CASES = Internal.createIdentity(Cases.CASES, Cases.CASES.ID);
         public static Identity<CountryWiseRecord, Integer> IDENTITY_COUNTRY_WISE = Internal.createIdentity(CountryWise.COUNTRY_WISE, CountryWise.COUNTRY_WISE.ID);
         public static Identity<LocationRecord, Integer> IDENTITY_LOCATION = Internal.createIdentity(Location.LOCATION, Location.LOCATION.ID);
+        public static Identity<PropertiesRecord, UInteger> IDENTITY_PROPERTIES = Internal.createIdentity(Properties.PROPERTIES, Properties.PROPERTIES.ID);
     }
 
     private static class UniqueKeys0 {
@@ -74,5 +79,6 @@ public class Keys {
         public static final UniqueKey<CasesRecord> KEY_CASES_PRIMARY = Internal.createUniqueKey(Cases.CASES, "KEY_cases_PRIMARY", Cases.CASES.ID);
         public static final UniqueKey<CountryWiseRecord> KEY_COUNTRY_WISE_PRIMARY = Internal.createUniqueKey(CountryWise.COUNTRY_WISE, "KEY_country_wise_PRIMARY", CountryWise.COUNTRY_WISE.ID);
         public static final UniqueKey<LocationRecord> KEY_LOCATION_PRIMARY = Internal.createUniqueKey(Location.LOCATION, "KEY_location_PRIMARY", Location.LOCATION.ID);
+        public static final UniqueKey<PropertiesRecord> KEY_PROPERTIES_PRIMARY = Internal.createUniqueKey(Properties.PROPERTIES, "KEY_properties_PRIMARY", Properties.PROPERTIES.ID);
     }
 }

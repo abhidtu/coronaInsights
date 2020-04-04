@@ -57,4 +57,5 @@ public class BashFileContainerClient implements FileContainerClient {
         log.info("deleting file = {}", file.getName());
         file.delete();
     }
+
 }

@@ -8,6 +8,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
+import java.sql.Date;
 import java.util.List;
 
 @Slf4j
@@ -33,16 +34,18 @@ public class FileProcessScheduler {
         List<File> newFiles = coronaFileProcessingService.getNewFilesToProcess(filesToProcess);
         log.info("Found = {} new files to process", newFiles.size());
 
-        for (File file : newFiles) {
-            try {
-                File fileToProcess = fileContainerClient.markFileForProcessing(file);
-                coronaFileProcessingService.processFile(fileToProcess);
-                fileContainerClient.deleteFile(fileToProcess);
-            } catch (Exception e) {
-                log.error("Exception while processing file = {}, exception = {}", file.getName(), e.getMessage());
+        if(!newFiles.isEmpty()) {
+            for (File file : newFiles) {
+                try {
+                    File fileToProcess = fileContainerClient.markFileForProcessing(file);
+                    coronaFileProcessingService.processFile(fileToProcess);
+                    fileContainerClient.deleteFile(fileToProcess);
+                } catch (Exception e) {
+                    log.error("Exception while processing file = {}, exception = {}", file.getName(), e.getMessage());
+                }
             }
+            coronaETLProcessingService.process();
         }
-        coronaETLProcessingService.process();
     }
 
 }

@@ -6,6 +6,8 @@ import org.jooq.Configuration;
 import org.jooq.impl.DSL;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 import static com.corona.insights.dao.DaoUtils.checkNull;
 import static com.corona.insights.jooq.corona_insights.tables.Location.LOCATION;
 
@@ -42,6 +44,10 @@ public class LocationDaoImpl extends LocationDao {
     private void updateLocationInfo(Location location) {
         DSL.using(configuration()).update(LOCATION).set(LOCATION.LATITUDE, location.getLatitude()).set(LOCATION.LONGITUDE, location.getLongitude()).set(LOCATION.FILE_NAME, location.getFileName())
         .where(LOCATION.ID.eq(location.getId())).execute();
+    }
+
+    public List<String> getUniqueCountryList() {
+        return DSL.using(configuration()).selectDistinct(LOCATION.COUNTRY).from(LOCATION).fetchInto(String.class);
     }
 
 }

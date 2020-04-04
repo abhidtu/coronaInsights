@@ -42,7 +42,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class CountryWise extends TableImpl<CountryWiseRecord> {
 
-    private static final long serialVersionUID = 163175201;
+    private static final long serialVersionUID = -688811573;
 
     /**
      * The reference instance of <code>corona_insights.country_wise</code>
@@ -75,17 +75,17 @@ public class CountryWise extends TableImpl<CountryWiseRecord> {
     /**
      * The column <code>corona_insights.country_wise.confirmed</code>.
      */
-    public final TableField<CountryWiseRecord, Long> CONFIRMED = createField("confirmed", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
+    public final TableField<CountryWiseRecord, Long> CONFIRMED = createField("confirmed", org.jooq.impl.SQLDataType.BIGINT.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.BIGINT)), this, "");
 
     /**
      * The column <code>corona_insights.country_wise.deaths</code>.
      */
-    public final TableField<CountryWiseRecord, Integer> DEATHS = createField("deaths", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<CountryWiseRecord, Integer> DEATHS = createField("deaths", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.INTEGER)), this, "");
 
     /**
      * The column <code>corona_insights.country_wise.recovered</code>.
      */
-    public final TableField<CountryWiseRecord, Long> RECOVERED = createField("recovered", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
+    public final TableField<CountryWiseRecord, Long> RECOVERED = createField("recovered", org.jooq.impl.SQLDataType.BIGINT.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.BIGINT)), this, "");
 
     /**
      * Create a <code>corona_insights.country_wise</code> table reference

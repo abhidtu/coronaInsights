@@ -9,6 +9,7 @@ import com.corona.insights.jooq.corona_insights.tables.AgeWiseCases;
 import com.corona.insights.jooq.corona_insights.tables.Cases;
 import com.corona.insights.jooq.corona_insights.tables.CountryWise;
 import com.corona.insights.jooq.corona_insights.tables.Location;
+import com.corona.insights.jooq.corona_insights.tables.Properties;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,7 +35,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class CoronaInsights extends SchemaImpl {
 
-    private static final long serialVersionUID = 926343238;
+    private static final long serialVersionUID = -583234447;
 
     /**
      * The reference instance of <code>corona_insights</code>
@@ -60,6 +61,11 @@ public class CoronaInsights extends SchemaImpl {
      * The table <code>corona_insights.location</code>.
      */
     public final Location LOCATION = com.corona.insights.jooq.corona_insights.tables.Location.LOCATION;
+
+    /**
+     * The table <code>corona_insights.properties</code>.
+     */
+    public final Properties PROPERTIES = com.corona.insights.jooq.corona_insights.tables.Properties.PROPERTIES;
 
     /**
      * No further instances allowed
@@ -89,6 +95,7 @@ public class CoronaInsights extends SchemaImpl {
             AgeWiseCases.AGE_WISE_CASES,
             Cases.CASES,
             CountryWise.COUNTRY_WISE,
-            Location.LOCATION);
+            Location.LOCATION,
+            Properties.PROPERTIES);
     }
 }
