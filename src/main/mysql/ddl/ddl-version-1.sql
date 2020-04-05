@@ -38,3 +38,21 @@ CREATE TABLE `age_wise_cases` (
   `modified_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `country_wise` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `reporting_date` date NOT NULL,
+  `country` varchar(250) NOT NULL DEFAULT '',
+  `confirmed` bigint(20) NOT NULL DEFAULT '0',
+  `deaths` int(11) NOT NULL DEFAULT '0',
+  `recovered` bigint(20) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4790 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `properties` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `key` varchar(100) NOT NULL DEFAULT '',
+  `value` varchar(200) DEFAULT '',
+  `value_modified_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
