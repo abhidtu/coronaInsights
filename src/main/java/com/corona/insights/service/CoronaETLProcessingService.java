@@ -1,18 +1,13 @@
 package com.corona.insights.service;
 
-import com.corona.insights.dao.CasesDaoImpl;
-import com.corona.insights.dao.CountryWiseDaoImpl;
-import com.corona.insights.dao.LocationDaoImpl;
-import com.corona.insights.dao.PropertiesDaoImpl;
-import com.corona.insights.etl.CoronaInsightsETLProcessor;
-import com.corona.insights.jooq.corona_insights.tables.pojos.Location;
+import com.corona.insights.dao.*;
+import com.corona.insights.etl.CoronaInsightsCountriesETLProcessor;
+import com.corona.insights.etl.CoronaInsightsStateETLProcessor;
 import com.corona.insights.jooq.corona_insights.tables.pojos.Properties;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.sql.Date;
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -32,6 +27,7 @@ public class CoronaETLProcessingService {
     private LocationDaoImpl locationDao;
     private CasesDaoImpl casesDao;
     private CountryWiseDaoImpl countryWiseDao;
+    private StateWiseImplDao stateWiseDao;
     private PropertiesDaoImpl propertiesDao;
 
     public void process() {
@@ -41,14 +37,29 @@ public class CoronaETLProcessingService {
         Timestamp cutOffDate = getCutOffDate();
 
         for (String country : countryList) {
-            CoronaInsightsETLProcessor coronaInsightsETLProcessor = new CoronaInsightsETLProcessor(casesDao, countryWiseDao, country, cutOffDate);
-            coronaInsightsETLProcessor.extract();
-            coronaInsightsETLProcessor.transform();
-            coronaInsightsETLProcessor.load();
+            processCountriesData(country, cutOffDate);
+            List<String> states = locationDao.getUniqueStatesListForCountry(country);
+            for(String state : states) {
+                processStatesData(country, state, cutOffDate);
+            }
         }
 
         updateCutOffDate();
 
+    }
+
+    private void processCountriesData(String country, Timestamp cutOffDate) {
+        CoronaInsightsCountriesETLProcessor coronaInsightsCountriesETLProcessor = new CoronaInsightsCountriesETLProcessor(casesDao, countryWiseDao, country, cutOffDate);
+        coronaInsightsCountriesETLProcessor.extract();
+        coronaInsightsCountriesETLProcessor.transform();
+        coronaInsightsCountriesETLProcessor.load();
+    }
+
+    private void processStatesData(String country, String state, Timestamp cutOffDate) {
+        CoronaInsightsStateETLProcessor coronaInsightsStateETLProcessor = new CoronaInsightsStateETLProcessor(country, state, cutOffDate, casesDao, stateWiseDao);
+        coronaInsightsStateETLProcessor.extract();
+        coronaInsightsStateETLProcessor.transform();
+        coronaInsightsStateETLProcessor.load();
     }
 
     private Timestamp getCutOffDate() {

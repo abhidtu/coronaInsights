@@ -75,7 +75,7 @@ tasks.register("cleanJooq") {
 }
 
 jooq {
-    coronainsights(sourceSets.main) {
+    coronaincoronainsightssights(sourceSets.main) {
         jdbc {
             driver = 'com.mysql.jdbc.Driver'
             url = "jdbc:mysql://34.83.173.131:3306/corona_insights"

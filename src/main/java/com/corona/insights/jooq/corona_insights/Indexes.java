@@ -9,6 +9,7 @@ import com.corona.insights.jooq.corona_insights.tables.Cases;
 import com.corona.insights.jooq.corona_insights.tables.CountryWise;
 import com.corona.insights.jooq.corona_insights.tables.Location;
 import com.corona.insights.jooq.corona_insights.tables.Properties;
+import com.corona.insights.jooq.corona_insights.tables.StateWise;
 
 import javax.annotation.Generated;
 
@@ -42,6 +43,7 @@ public class Indexes {
     public static final Index COUNTRY_WISE_PRIMARY = Indexes0.COUNTRY_WISE_PRIMARY;
     public static final Index LOCATION_PRIMARY = Indexes0.LOCATION_PRIMARY;
     public static final Index PROPERTIES_PRIMARY = Indexes0.PROPERTIES_PRIMARY;
+    public static final Index STATE_WISE_PRIMARY = Indexes0.STATE_WISE_PRIMARY;
 
     // -------------------------------------------------------------------------
     // [#1459] distribute members to avoid static initialisers > 64kb
@@ -55,5 +57,6 @@ public class Indexes {
         public static Index COUNTRY_WISE_PRIMARY = Internal.createIndex("PRIMARY", CountryWise.COUNTRY_WISE, new OrderField[] { CountryWise.COUNTRY_WISE.ID }, true);
         public static Index LOCATION_PRIMARY = Internal.createIndex("PRIMARY", Location.LOCATION, new OrderField[] { Location.LOCATION.ID }, true);
         public static Index PROPERTIES_PRIMARY = Internal.createIndex("PRIMARY", Properties.PROPERTIES, new OrderField[] { Properties.PROPERTIES.ID }, true);
+        public static Index STATE_WISE_PRIMARY = Internal.createIndex("PRIMARY", StateWise.STATE_WISE, new OrderField[] { StateWise.STATE_WISE.ID }, true);
     }
 }

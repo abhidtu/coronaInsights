@@ -50,4 +50,8 @@ public class LocationDaoImpl extends LocationDao {
         return DSL.using(configuration()).selectDistinct(LOCATION.COUNTRY).from(LOCATION).fetchInto(String.class);
     }
 
+    public List<String> getUniqueStatesListForCountry(String country) {
+        return DSL.using(configuration()).selectDistinct(LOCATION.STATE).from(LOCATION).where(LOCATION.COUNTRY.eq(country)).and(LOCATION.STATE.isNotNull()).and(LOCATION.STATE.ne("")).fetchInto(String.class);
+    }
+
 }

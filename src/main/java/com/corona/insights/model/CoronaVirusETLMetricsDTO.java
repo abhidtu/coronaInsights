@@ -10,8 +10,10 @@ import java.sql.Date;
 @Slf4j
 @Getter
 @Setter
-public class CoronaVirusCountryWiseData {
+public class CoronaVirusETLMetricsDTO {
 
+    String country;
+    String state;
     Long confirmed;
     Integer deaths;
     Long recovered;
