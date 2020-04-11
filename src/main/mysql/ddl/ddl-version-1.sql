@@ -56,3 +56,16 @@ CREATE TABLE `properties` (
   `value_modified_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `state_wise` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `reporting_date` date NOT NULL,
+  `country` varchar(11) NOT NULL,
+  `state` varchar(11) NOT NULL DEFAULT '',
+  `confirmed` bigint(20) NOT NULL DEFAULT '0',
+  `deaths` int(11) NOT NULL DEFAULT '0',
+  `recovered` bigint(20) NOT NULL DEFAULT '0',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modified_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1531 DEFAULT CHARSET=utf8;
