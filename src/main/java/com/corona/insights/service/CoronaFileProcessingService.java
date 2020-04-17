@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +39,8 @@ public class CoronaFileProcessingService {
                     process(coronaVirusReportDataModel, file.getName());
                     log.info("Successfully processed the CoronaVirus Report model = {}", coronaVirusReportDataModel.getState());
                 } catch (Exception e) {
-                    log.error("Error parsing the record = {}", coronaVirusReportDataModel.toString());
+                    log.error("Error processing the record = {}", coronaVirusReportDataModel.toString());
+                    e.printStackTrace();
                 }
             });
     }
@@ -46,8 +49,8 @@ public class CoronaFileProcessingService {
         Location location = new Location();
         location.setCountry(coronaVirusReportDataModel.getCountry());
         location.setState(coronaVirusReportDataModel.getState());
-        location.setLatitude(coronaVirusReportDataModel.getLatitude());
-        location.setLongitude(coronaVirusReportDataModel.getLongitude());
+        location.setLatitude(trimLatLong(coronaVirusReportDataModel.getLatitude()));
+        location.setLongitude(trimLatLong(coronaVirusReportDataModel.getLongitude()));
         location.setFileName(fileName);
         log.info("saving location data");
         Integer locationId = locationDao.createOrUpdate(location);
@@ -75,6 +78,13 @@ public class CoronaFileProcessingService {
     private boolean isNotProcessed(String fileName) {
         log.info("Checking if {} is already processed", fileName);
         return casesDao.fetchByFileName(fileName).isEmpty();
+    }
+
+    private BigDecimal trimLatLong(BigDecimal latLong) {
+        if(latLong != null) {
+            latLong = latLong.setScale(6, RoundingMode.DOWN);
+        }
+        return latLong;
     }
 
 }

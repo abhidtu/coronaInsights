@@ -23,6 +23,8 @@ public class LocationDaoImpl extends LocationDao {
                 .select(LOCATION.ID).from(LOCATION)
                 .where(LOCATION.COUNTRY.eq(location.getCountry()))
                 .and(checkNull(LOCATION.STATE, location.getState()))
+                .and(checkNull(LOCATION.LATITUDE, location.getLatitude()))
+                .and(checkNull(LOCATION.LONGITUDE, location.getLongitude()))
                 .limit(1)
                 .fetchOneInto(Integer.class);
     }
@@ -32,11 +34,6 @@ public class LocationDaoImpl extends LocationDao {
         if(id == null) {
             insert(location);
             return find(location);
-        }else {
-            if(location.getLatitude()!=null  && location.getLongitude() != null) {
-                location.setId(Integer.valueOf(id));
-                updateLocationInfo(location);
-            }
         }
         return id;
     }
