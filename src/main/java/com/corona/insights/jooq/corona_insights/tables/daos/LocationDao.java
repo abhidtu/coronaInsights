@@ -81,6 +81,13 @@ public class LocationDao extends DAOImpl<LocationRecord, com.corona.insights.joo
     }
 
     /**
+     * Fetch records that have <code>district IN (values)</code>
+     */
+    public List<com.corona.insights.jooq.corona_insights.tables.pojos.Location> fetchByDistrict(String... values) {
+        return fetch(Location.LOCATION.DISTRICT, values);
+    }
+
+    /**
      * Fetch records that have <code>latitude IN (values)</code>
      */
     public List<com.corona.insights.jooq.corona_insights.tables.pojos.Location> fetchByLatitude(BigDecimal... values) {

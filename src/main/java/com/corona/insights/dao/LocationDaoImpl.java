@@ -6,6 +6,7 @@ import org.jooq.Configuration;
 import org.jooq.impl.DSL;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static com.corona.insights.dao.DaoUtils.checkNull;
@@ -49,6 +50,10 @@ public class LocationDaoImpl extends LocationDao {
 
     public List<String> getUniqueStatesListForCountry(String country) {
         return DSL.using(configuration()).selectDistinct(LOCATION.STATE).from(LOCATION).where(LOCATION.COUNTRY.eq(country)).and(LOCATION.STATE.isNotNull()).and(LOCATION.STATE.ne("")).fetchInto(String.class);
+    }
+
+    public List<Location> getUniqueLocationsForDistrict(String state) {
+        return DSL.using(configuration()).selectDistinct().from(LOCATION).where(LOCATION.STATE.eq(state)).and(LOCATION.LATITUDE.isNotNull().and(LOCATION.LONGITUDE.isNotNull())).fetchInto(Location.class);
     }
 
 }

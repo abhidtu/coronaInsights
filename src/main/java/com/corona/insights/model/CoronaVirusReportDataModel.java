@@ -15,6 +15,7 @@ public class CoronaVirusReportDataModel {
 
     private String country;
     private String state;
+    private String district;
     private BigDecimal latitude;
     private BigDecimal longitude;
     private LocalDate reportedDate;

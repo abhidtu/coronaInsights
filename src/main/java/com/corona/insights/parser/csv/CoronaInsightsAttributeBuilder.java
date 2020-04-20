@@ -25,6 +25,8 @@ public abstract class CoronaInsightsAttributeBuilder {
 
     public abstract String getState();
 
+    public abstract String getDistrict();
+
     public abstract BigDecimal getLatitude();
 
     public abstract BigDecimal getLongitude();

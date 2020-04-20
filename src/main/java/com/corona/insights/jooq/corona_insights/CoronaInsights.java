@@ -8,9 +8,11 @@ import com.corona.insights.jooq.DefaultCatalog;
 import com.corona.insights.jooq.corona_insights.tables.AgeWiseCases;
 import com.corona.insights.jooq.corona_insights.tables.Cases;
 import com.corona.insights.jooq.corona_insights.tables.CountryWise;
+import com.corona.insights.jooq.corona_insights.tables.DistrictWise;
 import com.corona.insights.jooq.corona_insights.tables.Location;
 import com.corona.insights.jooq.corona_insights.tables.Properties;
 import com.corona.insights.jooq.corona_insights.tables.StateWise;
+import com.corona.insights.jooq.corona_insights.tables.ZipCodeMapping;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,7 +38,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class CoronaInsights extends SchemaImpl {
 
-    private static final long serialVersionUID = 1286846962;
+    private static final long serialVersionUID = -1246417130;
 
     /**
      * The reference instance of <code>corona_insights</code>
@@ -59,6 +61,11 @@ public class CoronaInsights extends SchemaImpl {
     public final CountryWise COUNTRY_WISE = com.corona.insights.jooq.corona_insights.tables.CountryWise.COUNTRY_WISE;
 
     /**
+     * The table <code>corona_insights.district_wise</code>.
+     */
+    public final DistrictWise DISTRICT_WISE = com.corona.insights.jooq.corona_insights.tables.DistrictWise.DISTRICT_WISE;
+
+    /**
      * The table <code>corona_insights.location</code>.
      */
     public final Location LOCATION = com.corona.insights.jooq.corona_insights.tables.Location.LOCATION;
@@ -72,6 +79,11 @@ public class CoronaInsights extends SchemaImpl {
      * The table <code>corona_insights.state_wise</code>.
      */
     public final StateWise STATE_WISE = com.corona.insights.jooq.corona_insights.tables.StateWise.STATE_WISE;
+
+    /**
+     * The table <code>corona_insights.zip_code_mapping</code>.
+     */
+    public final ZipCodeMapping ZIP_CODE_MAPPING = com.corona.insights.jooq.corona_insights.tables.ZipCodeMapping.ZIP_CODE_MAPPING;
 
     /**
      * No further instances allowed
@@ -101,8 +113,10 @@ public class CoronaInsights extends SchemaImpl {
             AgeWiseCases.AGE_WISE_CASES,
             Cases.CASES,
             CountryWise.COUNTRY_WISE,
+            DistrictWise.DISTRICT_WISE,
             Location.LOCATION,
             Properties.PROPERTIES,
-            StateWise.STATE_WISE);
+            StateWise.STATE_WISE,
+            ZipCodeMapping.ZIP_CODE_MAPPING);
     }
 }

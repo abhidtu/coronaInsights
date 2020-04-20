@@ -31,6 +31,11 @@ public class CoronaInsightsCSVRowAttributeBuilder extends CoronaInsightsAttribut
     }
 
     @Override
+    public String getDistrict() {
+        return csvRow.getField(CoronaReportCSVHeaders.DISTRICT.toString());
+    }
+
+    @Override
     public BigDecimal getLatitude() {
         String latitude = csvRow.getField(CoronaReportCSVHeaders.LATITUDE.toString());
         String altLatitude = csvRow.getField(CoronaReportCSVHeaders.ALT_LATITUDE.toString());

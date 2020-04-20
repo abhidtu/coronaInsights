@@ -2,6 +2,7 @@ package com.corona.insights.parser.csv;
 
 public enum CoronaReportCSVHeaders {
 
+    DISTRICT("Admin2"),
     STATE_PROVINCE("Province/State"),
     COUNTRY_REGION("Country/Region"),
     LAST_UPDATE("Last Update"),

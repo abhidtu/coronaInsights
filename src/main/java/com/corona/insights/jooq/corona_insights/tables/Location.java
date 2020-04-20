@@ -43,7 +43,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Location extends TableImpl<LocationRecord> {
 
-    private static final long serialVersionUID = -1651754815;
+    private static final long serialVersionUID = 788484075;
 
     /**
      * The reference instance of <code>corona_insights.location</code>
@@ -74,14 +74,19 @@ public class Location extends TableImpl<LocationRecord> {
     public final TableField<LocationRecord, String> STATE = createField("state", org.jooq.impl.SQLDataType.VARCHAR(250), this, "");
 
     /**
+     * The column <code>corona_insights.location.district</code>.
+     */
+    public final TableField<LocationRecord, String> DISTRICT = createField("district", org.jooq.impl.SQLDataType.VARCHAR(250), this, "");
+
+    /**
      * The column <code>corona_insights.location.latitude</code>.
      */
-    public final TableField<LocationRecord, BigDecimal> LATITUDE = createField("latitude", org.jooq.impl.SQLDataType.DECIMAL(10, 5), this, "");
+    public final TableField<LocationRecord, BigDecimal> LATITUDE = createField("latitude", org.jooq.impl.SQLDataType.DECIMAL(10, 6), this, "");
 
     /**
      * The column <code>corona_insights.location.longitude</code>.
      */
-    public final TableField<LocationRecord, BigDecimal> LONGITUDE = createField("longitude", org.jooq.impl.SQLDataType.DECIMAL(10, 5), this, "");
+    public final TableField<LocationRecord, BigDecimal> LONGITUDE = createField("longitude", org.jooq.impl.SQLDataType.DECIMAL(10, 6), this, "");
 
     /**
      * The column <code>corona_insights.location.file_name</code>.

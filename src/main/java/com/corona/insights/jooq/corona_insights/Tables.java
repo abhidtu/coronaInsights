@@ -7,9 +7,11 @@ package com.corona.insights.jooq.corona_insights;
 import com.corona.insights.jooq.corona_insights.tables.AgeWiseCases;
 import com.corona.insights.jooq.corona_insights.tables.Cases;
 import com.corona.insights.jooq.corona_insights.tables.CountryWise;
+import com.corona.insights.jooq.corona_insights.tables.DistrictWise;
 import com.corona.insights.jooq.corona_insights.tables.Location;
 import com.corona.insights.jooq.corona_insights.tables.Properties;
 import com.corona.insights.jooq.corona_insights.tables.StateWise;
+import com.corona.insights.jooq.corona_insights.tables.ZipCodeMapping;
 
 import javax.annotation.Generated;
 
@@ -43,6 +45,11 @@ public class Tables {
     public static final CountryWise COUNTRY_WISE = com.corona.insights.jooq.corona_insights.tables.CountryWise.COUNTRY_WISE;
 
     /**
+     * The table <code>corona_insights.district_wise</code>.
+     */
+    public static final DistrictWise DISTRICT_WISE = com.corona.insights.jooq.corona_insights.tables.DistrictWise.DISTRICT_WISE;
+
+    /**
      * The table <code>corona_insights.location</code>.
      */
     public static final Location LOCATION = com.corona.insights.jooq.corona_insights.tables.Location.LOCATION;
@@ -56,4 +63,9 @@ public class Tables {
      * The table <code>corona_insights.state_wise</code>.
      */
     public static final StateWise STATE_WISE = com.corona.insights.jooq.corona_insights.tables.StateWise.STATE_WISE;
+
+    /**
+     * The table <code>corona_insights.zip_code_mapping</code>.
+     */
+    public static final ZipCodeMapping ZIP_CODE_MAPPING = com.corona.insights.jooq.corona_insights.tables.ZipCodeMapping.ZIP_CODE_MAPPING;
 }

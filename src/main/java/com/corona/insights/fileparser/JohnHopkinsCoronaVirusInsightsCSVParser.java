@@ -43,6 +43,7 @@ public class JohnHopkinsCoronaVirusInsightsCSVParser implements CoronaVirusFileP
             CoronaVirusReportDataModel coronaVirusReportDataModel = new CoronaVirusReportDataModel();
             coronaVirusReportDataModel.setCountry(coronaInsightsCSVRowAttributeBuilder.getCountry());
             coronaVirusReportDataModel.setState(coronaInsightsCSVRowAttributeBuilder.getState());
+            coronaVirusReportDataModel.setDistrict(coronaInsightsCSVRowAttributeBuilder.getDistrict());
             coronaVirusReportDataModel.setLatitude(coronaInsightsCSVRowAttributeBuilder.getLatitude());
             coronaVirusReportDataModel.setLongitude(coronaInsightsCSVRowAttributeBuilder.getLongitude());
             coronaVirusReportDataModel.setReportedDate(coronaInsightsCSVRowAttributeBuilder.getLastUpdateDate());

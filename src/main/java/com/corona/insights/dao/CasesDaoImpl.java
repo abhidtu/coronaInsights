@@ -8,6 +8,7 @@ import org.jooq.Table;
 import org.jooq.impl.DSL;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
@@ -58,6 +59,22 @@ public class CasesDaoImpl extends CasesDao {
     public List<CoronaVirusETLMetricsDTO> aggregateDataForStateWithCutOffDate(String state, Timestamp cutOffDate) {
         Table<?> aggregated = DSL.using(configuration()).select(DSL.max(CASES.CONFIRMED).as("aggregated_confirmed"), DSL.max(CASES.DEATHS).as("aggregated_deaths"), DSL.max(CASES.RECOVERED).as("aggregated_recovered"), DSL.max(CASES.REPORTING_DATE).as("aggregated_reporting_date"))
                 .from(CASES.join(LOCATION).on(CASES.LOCATION_ID.eq(LOCATION.ID))).where(LOCATION.STATE.eq(state)).and(CASES.CREATED_AT.gt(cutOffDate)).groupBy(CASES.CONFIRMED, CASES.REPORTING_DATE, CASES.LOCATION_ID).asTable("aggregated");
+        return DSL.using(configuration()).select(aggregated.field("aggregated_reporting_date").as("reportedDate").cast(Date.class), DSL.sum(aggregated.field("aggregated_confirmed").coerce(Integer.class)).as("confirmed"), DSL.sum(aggregated.field("aggregated_deaths").coerce(Integer.class)).as("deaths"), DSL.sum(aggregated.field("aggregated_recovered").coerce(Integer.class)).as("recovered"))
+                .from(aggregated).groupBy(aggregated.field("aggregated_reporting_date")).orderBy(aggregated.field("aggregated_reporting_date").desc())
+                .fetchInto(CoronaVirusETLMetricsDTO.class);
+    }
+
+    public List<CoronaVirusETLMetricsDTO> aggregateDataForDestrict(BigDecimal latitude, BigDecimal longitude) {
+        Table<?> aggregated = DSL.using(configuration()).select(DSL.max(CASES.CONFIRMED).as("aggregated_confirmed"), DSL.max(CASES.DEATHS).as("aggregated_deaths"), DSL.max(CASES.RECOVERED).as("aggregated_recovered"), DSL.max(CASES.REPORTING_DATE).as("aggregated_reporting_date"))
+                .from(CASES.join(LOCATION).on(CASES.LOCATION_ID.eq(LOCATION.ID))).where(LOCATION.LATITUDE.eq(latitude)).and(LOCATION.LONGITUDE.eq(longitude)).groupBy(CASES.CONFIRMED, CASES.REPORTING_DATE, CASES.LOCATION_ID).asTable("aggregated");
+        return DSL.using(configuration()).select(aggregated.field("aggregated_reporting_date").as("reportedDate").cast(Date.class), DSL.sum(aggregated.field("aggregated_confirmed").coerce(Integer.class)).as("confirmed"), DSL.sum(aggregated.field("aggregated_deaths").coerce(Integer.class)).as("deaths"), DSL.sum(aggregated.field("aggregated_recovered").coerce(Integer.class)).as("recovered"))
+                .from(aggregated).groupBy(aggregated.field("aggregated_reporting_date")).orderBy(aggregated.field("aggregated_reporting_date").desc())
+                .fetchInto(CoronaVirusETLMetricsDTO.class);
+    }
+
+    public List<CoronaVirusETLMetricsDTO> aggregateDataForDestrictWithCutOffDate(BigDecimal latitude, BigDecimal longitude, Timestamp cutOffDate) {
+        Table<?> aggregated = DSL.using(configuration()).select(DSL.max(CASES.CONFIRMED).as("aggregated_confirmed"), DSL.max(CASES.DEATHS).as("aggregated_deaths"), DSL.max(CASES.RECOVERED).as("aggregated_recovered"), DSL.max(CASES.REPORTING_DATE).as("aggregated_reporting_date"))
+                .from(CASES.join(LOCATION).on(CASES.LOCATION_ID.eq(LOCATION.ID))).where(LOCATION.LATITUDE.eq(latitude)).and(LOCATION.LONGITUDE.eq(longitude)).and(CASES.CREATED_AT.gt(cutOffDate)).groupBy(CASES.CONFIRMED, CASES.REPORTING_DATE, CASES.LOCATION_ID).asTable("aggregated");
         return DSL.using(configuration()).select(aggregated.field("aggregated_reporting_date").as("reportedDate").cast(Date.class), DSL.sum(aggregated.field("aggregated_confirmed").coerce(Integer.class)).as("confirmed"), DSL.sum(aggregated.field("aggregated_deaths").coerce(Integer.class)).as("deaths"), DSL.sum(aggregated.field("aggregated_recovered").coerce(Integer.class)).as("recovered"))
                 .from(aggregated).groupBy(aggregated.field("aggregated_reporting_date")).orderBy(aggregated.field("aggregated_reporting_date").desc())
                 .fetchInto(CoronaVirusETLMetricsDTO.class);

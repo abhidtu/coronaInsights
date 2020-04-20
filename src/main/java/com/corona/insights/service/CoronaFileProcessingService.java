@@ -49,6 +49,7 @@ public class CoronaFileProcessingService {
         Location location = new Location();
         location.setCountry(coronaVirusReportDataModel.getCountry());
         location.setState(coronaVirusReportDataModel.getState());
+        location.setDistrict(coronaVirusReportDataModel.getDistrict());
         location.setLatitude(trimLatLong(coronaVirusReportDataModel.getLatitude()));
         location.setLongitude(trimLatLong(coronaVirusReportDataModel.getLongitude()));
         location.setFileName(fileName);
