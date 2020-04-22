@@ -45,7 +45,7 @@ public class CoronaFileProcessingService {
             });
     }
 
-    private void process(CoronaVirusReportDataModel coronaVirusReportDataModel, String fileName) {
+    public void process(CoronaVirusReportDataModel coronaVirusReportDataModel, String fileName) {
         Location location = new Location();
         location.setCountry(coronaVirusReportDataModel.getCountry());
         location.setState(coronaVirusReportDataModel.getState());

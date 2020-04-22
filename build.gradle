@@ -49,6 +49,7 @@ dependencies {
     compile group: 'org.eclipse.jgit', name: 'org.eclipse.jgit', version: '5.7.0.202003110725-r'
     compile group: 'nu.studer', name: 'gradle-jooq-plugin', version: '3.0.3'
     compile group: 'commons-io', name: 'commons-io', version: '2.6'
+    compile group: 'org.jsoup', name: 'jsoup', version: '1.13.1'
     compile "org.jooq:jooq"
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
