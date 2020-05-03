@@ -7,6 +7,7 @@ package com.corona.insights.jooq.corona_insights.tables;
 import com.corona.insights.jooq.corona_insights.CoronaInsights;
 import com.corona.insights.jooq.corona_insights.Indexes;
 import com.corona.insights.jooq.corona_insights.Keys;
+import com.corona.insights.jooq.corona_insights.enums.StateWiseSource;
 import com.corona.insights.jooq.corona_insights.tables.records.StateWiseRecord;
 
 import java.sql.Date;
@@ -44,7 +45,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class StateWise extends TableImpl<StateWiseRecord> {
 
-    private static final long serialVersionUID = 399386896;
+    private static final long serialVersionUID = -1976277726;
 
     /**
      * The reference instance of <code>corona_insights.state_wise</code>
@@ -93,6 +94,11 @@ public class StateWise extends TableImpl<StateWiseRecord> {
      * The column <code>corona_insights.state_wise.recovered</code>.
      */
     public final TableField<StateWiseRecord, Long> RECOVERED = createField("recovered", org.jooq.impl.SQLDataType.BIGINT.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.BIGINT)), this, "");
+
+    /**
+     * The column <code>corona_insights.state_wise.source</code>.
+     */
+    public final TableField<StateWiseRecord, StateWiseSource> SOURCE = createField("source", org.jooq.impl.SQLDataType.VARCHAR(11).asEnumDataType(com.corona.insights.jooq.corona_insights.enums.StateWiseSource.class), this, "");
 
     /**
      * The column <code>corona_insights.state_wise.created_at</code>.

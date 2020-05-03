@@ -4,10 +4,12 @@
 package com.corona.insights.jooq.corona_insights.tables.daos;
 
 
+import com.corona.insights.jooq.corona_insights.enums.CountryWiseSource;
 import com.corona.insights.jooq.corona_insights.tables.CountryWise;
 import com.corona.insights.jooq.corona_insights.tables.records.CountryWiseRecord;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.annotation.Generated;
@@ -98,5 +100,26 @@ public class CountryWiseDao extends DAOImpl<CountryWiseRecord, com.corona.insigh
      */
     public List<com.corona.insights.jooq.corona_insights.tables.pojos.CountryWise> fetchByRecovered(Long... values) {
         return fetch(CountryWise.COUNTRY_WISE.RECOVERED, values);
+    }
+
+    /**
+     * Fetch records that have <code>source IN (values)</code>
+     */
+    public List<com.corona.insights.jooq.corona_insights.tables.pojos.CountryWise> fetchBySource(CountryWiseSource... values) {
+        return fetch(CountryWise.COUNTRY_WISE.SOURCE, values);
+    }
+
+    /**
+     * Fetch records that have <code>created_at IN (values)</code>
+     */
+    public List<com.corona.insights.jooq.corona_insights.tables.pojos.CountryWise> fetchByCreatedAt(Timestamp... values) {
+        return fetch(CountryWise.COUNTRY_WISE.CREATED_AT, values);
+    }
+
+    /**
+     * Fetch records that have <code>modified_at IN (values)</code>
+     */
+    public List<com.corona.insights.jooq.corona_insights.tables.pojos.CountryWise> fetchByModifiedAt(Timestamp... values) {
+        return fetch(CountryWise.COUNTRY_WISE.MODIFIED_AT, values);
     }
 }

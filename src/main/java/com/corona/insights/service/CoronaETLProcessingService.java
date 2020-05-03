@@ -10,7 +10,6 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -33,27 +32,30 @@ public class CoronaETLProcessingService {
     private StateWiseImplDao stateWiseDao;
     private DistrictWiseDaoImpl districtWiseDao;
     private PropertiesDaoImpl propertiesDao;
+    private DaoUtils daoUtils;
 
     public void process() {
+        daoUtils.removeOtherSourcesData();
+        if(!daoUtils.isUpdateLocked()) {
+            daoUtils.acquireUpdateLock();
+            List<String> countryList = locationDao.getUniqueCountryList();
 
-        List<String> countryList = locationDao.getUniqueCountryList();
+            Timestamp cutOffDate = getCutOffDate();
 
-        Timestamp cutOffDate = getCutOffDate();
-
-        for (String country : countryList) {
-            processCountriesData(country, cutOffDate);
-            List<String> states = locationDao.getUniqueStatesListForCountry(country);
-            for(String state : states) {
-                processStatesData(country, state, cutOffDate);
-                List<Location> locations = locationDao.getUniqueLocationsForDistrict(state);
-                for (Location location : locations) {
-                    processDistrictData(location, cutOffDate);
+            for (String country : countryList) {
+                processCountriesData(country, cutOffDate);
+                List<String> states = locationDao.getUniqueStatesListForCountry(country);
+                for (String state : states) {
+                    processStatesData(country, state, cutOffDate);
+                    List<Location> locations = locationDao.getUniqueLocationsForDistrict(state);
+                    for (Location location : locations) {
+                        processDistrictData(location, cutOffDate);
+                    }
                 }
             }
+            updateCutOffDate();
+            daoUtils.releaseUpdateLock();
         }
-
-        updateCutOffDate();
-
     }
 
     private void processCountriesData(String country, Timestamp cutOffDate) {

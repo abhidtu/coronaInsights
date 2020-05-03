@@ -7,6 +7,7 @@ package com.corona.insights.jooq.corona_insights.tables;
 import com.corona.insights.jooq.corona_insights.CoronaInsights;
 import com.corona.insights.jooq.corona_insights.Indexes;
 import com.corona.insights.jooq.corona_insights.Keys;
+import com.corona.insights.jooq.corona_insights.enums.DistrictWiseSource;
 import com.corona.insights.jooq.corona_insights.tables.records.DistrictWiseRecord;
 
 import java.math.BigDecimal;
@@ -45,7 +46,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class DistrictWise extends TableImpl<DistrictWiseRecord> {
 
-    private static final long serialVersionUID = 1577108819;
+    private static final long serialVersionUID = 1705172587;
 
     /**
      * The reference instance of <code>corona_insights.district_wise</code>
@@ -73,12 +74,12 @@ public class DistrictWise extends TableImpl<DistrictWiseRecord> {
     /**
      * The column <code>corona_insights.district_wise.country</code>.
      */
-    public final TableField<DistrictWiseRecord, String> COUNTRY = createField("country", org.jooq.impl.SQLDataType.VARCHAR(11).nullable(false), this, "");
+    public final TableField<DistrictWiseRecord, String> COUNTRY = createField("country", org.jooq.impl.SQLDataType.VARCHAR(200).nullable(false).defaultValue(org.jooq.impl.DSL.inline("", org.jooq.impl.SQLDataType.VARCHAR)), this, "");
 
     /**
      * The column <code>corona_insights.district_wise.state</code>.
      */
-    public final TableField<DistrictWiseRecord, String> STATE = createField("state", org.jooq.impl.SQLDataType.VARCHAR(11).nullable(false).defaultValue(org.jooq.impl.DSL.inline("", org.jooq.impl.SQLDataType.VARCHAR)), this, "");
+    public final TableField<DistrictWiseRecord, String> STATE = createField("state", org.jooq.impl.SQLDataType.VARCHAR(200).nullable(false).defaultValue(org.jooq.impl.DSL.inline("", org.jooq.impl.SQLDataType.VARCHAR)), this, "");
 
     /**
      * The column <code>corona_insights.district_wise.district</code>.
@@ -109,6 +110,11 @@ public class DistrictWise extends TableImpl<DistrictWiseRecord> {
      * The column <code>corona_insights.district_wise.longitude</code>.
      */
     public final TableField<DistrictWiseRecord, BigDecimal> LONGITUDE = createField("longitude", org.jooq.impl.SQLDataType.DECIMAL(10, 6).nullable(false), this, "");
+
+    /**
+     * The column <code>corona_insights.district_wise.source</code>.
+     */
+    public final TableField<DistrictWiseRecord, DistrictWiseSource> SOURCE = createField("source", org.jooq.impl.SQLDataType.VARCHAR(11).asEnumDataType(com.corona.insights.jooq.corona_insights.enums.DistrictWiseSource.class), this, "");
 
     /**
      * The column <code>corona_insights.district_wise.created_at</code>.

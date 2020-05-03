@@ -7,9 +7,11 @@ package com.corona.insights.jooq.corona_insights.tables;
 import com.corona.insights.jooq.corona_insights.CoronaInsights;
 import com.corona.insights.jooq.corona_insights.Indexes;
 import com.corona.insights.jooq.corona_insights.Keys;
+import com.corona.insights.jooq.corona_insights.enums.CountryWiseSource;
 import com.corona.insights.jooq.corona_insights.tables.records.CountryWiseRecord;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 
@@ -42,7 +44,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class CountryWise extends TableImpl<CountryWiseRecord> {
 
-    private static final long serialVersionUID = -688811573;
+    private static final long serialVersionUID = -1111689037;
 
     /**
      * The reference instance of <code>corona_insights.country_wise</code>
@@ -86,6 +88,21 @@ public class CountryWise extends TableImpl<CountryWiseRecord> {
      * The column <code>corona_insights.country_wise.recovered</code>.
      */
     public final TableField<CountryWiseRecord, Long> RECOVERED = createField("recovered", org.jooq.impl.SQLDataType.BIGINT.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.BIGINT)), this, "");
+
+    /**
+     * The column <code>corona_insights.country_wise.source</code>.
+     */
+    public final TableField<CountryWiseRecord, CountryWiseSource> SOURCE = createField("source", org.jooq.impl.SQLDataType.VARCHAR(11).asEnumDataType(com.corona.insights.jooq.corona_insights.enums.CountryWiseSource.class), this, "");
+
+    /**
+     * The column <code>corona_insights.country_wise.created_at</code>.
+     */
+    public final TableField<CountryWiseRecord, Timestamp> CREATED_AT = createField("created_at", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false).defaultValue(org.jooq.impl.DSL.field("CURRENT_TIMESTAMP", org.jooq.impl.SQLDataType.TIMESTAMP)), this, "");
+
+    /**
+     * The column <code>corona_insights.country_wise.modified_at</code>.
+     */
+    public final TableField<CountryWiseRecord, Timestamp> MODIFIED_AT = createField("modified_at", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false).defaultValue(org.jooq.impl.DSL.field("CURRENT_TIMESTAMP", org.jooq.impl.SQLDataType.TIMESTAMP)), this, "");
 
     /**
      * Create a <code>corona_insights.country_wise</code> table reference

@@ -4,6 +4,7 @@
 package com.corona.insights.jooq.corona_insights.tables.daos;
 
 
+import com.corona.insights.jooq.corona_insights.enums.DistrictWiseSource;
 import com.corona.insights.jooq.corona_insights.tables.DistrictWise;
 import com.corona.insights.jooq.corona_insights.tables.records.DistrictWiseRecord;
 
@@ -129,6 +130,13 @@ public class DistrictWiseDao extends DAOImpl<DistrictWiseRecord, com.corona.insi
      */
     public List<com.corona.insights.jooq.corona_insights.tables.pojos.DistrictWise> fetchByLongitude(BigDecimal... values) {
         return fetch(DistrictWise.DISTRICT_WISE.LONGITUDE, values);
+    }
+
+    /**
+     * Fetch records that have <code>source IN (values)</code>
+     */
+    public List<com.corona.insights.jooq.corona_insights.tables.pojos.DistrictWise> fetchBySource(DistrictWiseSource... values) {
+        return fetch(DistrictWise.DISTRICT_WISE.SOURCE, values);
     }
 
     /**

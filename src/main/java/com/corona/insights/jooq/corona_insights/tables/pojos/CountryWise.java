@@ -4,8 +4,11 @@
 package com.corona.insights.jooq.corona_insights.tables.pojos;
 
 
+import com.corona.insights.jooq.corona_insights.enums.CountryWiseSource;
+
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.annotation.Generated;
 
@@ -23,14 +26,17 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class CountryWise implements Serializable {
 
-    private static final long serialVersionUID = 1562023649;
+    private static final long serialVersionUID = 320963486;
 
-    private Integer id;
-    private Date    reportingDate;
-    private String  country;
-    private Long    confirmed;
-    private Integer deaths;
-    private Long    recovered;
+    private Integer           id;
+    private Date              reportingDate;
+    private String            country;
+    private Long              confirmed;
+    private Integer           deaths;
+    private Long              recovered;
+    private CountryWiseSource source;
+    private Timestamp         createdAt;
+    private Timestamp         modifiedAt;
 
     public CountryWise() {}
 
@@ -41,15 +47,21 @@ public class CountryWise implements Serializable {
         this.confirmed = value.confirmed;
         this.deaths = value.deaths;
         this.recovered = value.recovered;
+        this.source = value.source;
+        this.createdAt = value.createdAt;
+        this.modifiedAt = value.modifiedAt;
     }
 
     public CountryWise(
-        Integer id,
-        Date    reportingDate,
-        String  country,
-        Long    confirmed,
-        Integer deaths,
-        Long    recovered
+        Integer           id,
+        Date              reportingDate,
+        String            country,
+        Long              confirmed,
+        Integer           deaths,
+        Long              recovered,
+        CountryWiseSource source,
+        Timestamp         createdAt,
+        Timestamp         modifiedAt
     ) {
         this.id = id;
         this.reportingDate = reportingDate;
@@ -57,6 +69,9 @@ public class CountryWise implements Serializable {
         this.confirmed = confirmed;
         this.deaths = deaths;
         this.recovered = recovered;
+        this.source = source;
+        this.createdAt = createdAt;
+        this.modifiedAt = modifiedAt;
     }
 
     public Integer getId() {
@@ -113,6 +128,33 @@ public class CountryWise implements Serializable {
         return this;
     }
 
+    public CountryWiseSource getSource() {
+        return this.source;
+    }
+
+    public CountryWise setSource(CountryWiseSource source) {
+        this.source = source;
+        return this;
+    }
+
+    public Timestamp getCreatedAt() {
+        return this.createdAt;
+    }
+
+    public CountryWise setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+        return this;
+    }
+
+    public Timestamp getModifiedAt() {
+        return this.modifiedAt;
+    }
+
+    public CountryWise setModifiedAt(Timestamp modifiedAt) {
+        this.modifiedAt = modifiedAt;
+        return this;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("CountryWise (");
@@ -123,6 +165,9 @@ public class CountryWise implements Serializable {
         sb.append(", ").append(confirmed);
         sb.append(", ").append(deaths);
         sb.append(", ").append(recovered);
+        sb.append(", ").append(source);
+        sb.append(", ").append(createdAt);
+        sb.append(", ").append(modifiedAt);
 
         sb.append(")");
         return sb.toString();

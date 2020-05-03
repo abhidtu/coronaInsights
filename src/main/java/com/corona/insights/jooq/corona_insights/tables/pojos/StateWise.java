@@ -4,6 +4,8 @@
 package com.corona.insights.jooq.corona_insights.tables.pojos;
 
 
+import com.corona.insights.jooq.corona_insights.enums.StateWiseSource;
+
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -26,17 +28,18 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class StateWise implements Serializable {
 
-    private static final long serialVersionUID = 781149282;
+    private static final long serialVersionUID = -1872673044;
 
-    private UInteger  id;
-    private Date      reportingDate;
-    private String    country;
-    private String    state;
-    private Long      confirmed;
-    private Integer   deaths;
-    private Long      recovered;
-    private Timestamp createdAt;
-    private Timestamp modifiedAt;
+    private UInteger        id;
+    private Date            reportingDate;
+    private String          country;
+    private String          state;
+    private Long            confirmed;
+    private Integer         deaths;
+    private Long            recovered;
+    private StateWiseSource source;
+    private Timestamp       createdAt;
+    private Timestamp       modifiedAt;
 
     public StateWise() {}
 
@@ -48,20 +51,22 @@ public class StateWise implements Serializable {
         this.confirmed = value.confirmed;
         this.deaths = value.deaths;
         this.recovered = value.recovered;
+        this.source = value.source;
         this.createdAt = value.createdAt;
         this.modifiedAt = value.modifiedAt;
     }
 
     public StateWise(
-        UInteger  id,
-        Date      reportingDate,
-        String    country,
-        String    state,
-        Long      confirmed,
-        Integer   deaths,
-        Long      recovered,
-        Timestamp createdAt,
-        Timestamp modifiedAt
+        UInteger        id,
+        Date            reportingDate,
+        String          country,
+        String          state,
+        Long            confirmed,
+        Integer         deaths,
+        Long            recovered,
+        StateWiseSource source,
+        Timestamp       createdAt,
+        Timestamp       modifiedAt
     ) {
         this.id = id;
         this.reportingDate = reportingDate;
@@ -70,6 +75,7 @@ public class StateWise implements Serializable {
         this.confirmed = confirmed;
         this.deaths = deaths;
         this.recovered = recovered;
+        this.source = source;
         this.createdAt = createdAt;
         this.modifiedAt = modifiedAt;
     }
@@ -137,6 +143,15 @@ public class StateWise implements Serializable {
         return this;
     }
 
+    public StateWiseSource getSource() {
+        return this.source;
+    }
+
+    public StateWise setSource(StateWiseSource source) {
+        this.source = source;
+        return this;
+    }
+
     public Timestamp getCreatedAt() {
         return this.createdAt;
     }
@@ -166,6 +181,7 @@ public class StateWise implements Serializable {
         sb.append(", ").append(confirmed);
         sb.append(", ").append(deaths);
         sb.append(", ").append(recovered);
+        sb.append(", ").append(source);
         sb.append(", ").append(createdAt);
         sb.append(", ").append(modifiedAt);
 

@@ -2,6 +2,7 @@ package com.corona.insights.etl;
 
 import com.corona.insights.dao.CasesDaoImpl;
 import com.corona.insights.dao.CountryWiseDaoImpl;
+import com.corona.insights.jooq.corona_insights.enums.CountryWiseSource;
 import com.corona.insights.jooq.corona_insights.tables.pojos.CountryWise;
 import com.corona.insights.model.CoronaVirusETLMetricsDTO;
 import lombok.extern.slf4j.Slf4j;
@@ -44,6 +45,7 @@ public class CoronaInsightsCountriesETLProcessor implements ETLProcessor {
             countryWise.setDeaths(coronaVirusETLMetricsDTO.getDeaths());
             countryWise.setRecovered(coronaVirusETLMetricsDTO.getRecovered());
             countryWise.setReportingDate(coronaVirusETLMetricsDTO.getReportedDate());
+            countryWise.setSource(CountryWiseSource.JHU);
             countryWiseList.add(countryWise);
         }
     }
@@ -53,7 +55,6 @@ public class CoronaInsightsCountriesETLProcessor implements ETLProcessor {
         log.info("Step 3: executing Load");
         for (CountryWise countryWise : countryWiseList) {
             try {
-                countryWiseDao.deleteForReportingDate(countryWise.getReportingDate(), countryWise.getCountry());
                 countryWiseDao.insert(countryWise);
                 log.info("Inserting country wise data for country = {}, value = {}", country, countryWise);
             }catch (Exception e) {

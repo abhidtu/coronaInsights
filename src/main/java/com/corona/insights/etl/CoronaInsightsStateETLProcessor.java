@@ -2,6 +2,7 @@ package com.corona.insights.etl;
 
 import com.corona.insights.dao.CasesDaoImpl;
 import com.corona.insights.dao.StateWiseImplDao;
+import com.corona.insights.jooq.corona_insights.enums.StateWiseSource;
 import com.corona.insights.jooq.corona_insights.tables.pojos.StateWise;
 import com.corona.insights.model.CoronaVirusETLMetricsDTO;
 import lombok.extern.slf4j.Slf4j;
@@ -47,6 +48,7 @@ public class CoronaInsightsStateETLProcessor implements ETLProcessor {
             stateWise.setDeaths(coronaVirusETLMetricsDTO.getDeaths());
             stateWise.setRecovered(coronaVirusETLMetricsDTO.getRecovered());
             stateWise.setReportingDate(coronaVirusETLMetricsDTO.getReportedDate());
+            stateWise.setSource(StateWiseSource.JHU);
             stateWiseList.add(stateWise);
         }
     }

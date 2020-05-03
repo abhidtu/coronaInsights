@@ -3,6 +3,7 @@ package com.corona.insights.controller;
 import com.corona.insights.scheduler.FileProcessScheduler;
 import com.corona.insights.scheduler.GitScheduler;
 import com.corona.insights.scheduler.WebCrawlScheduler;
+import com.corona.insights.service.CoronaDataEnrichmentService;
 import com.corona.insights.service.CoronaETLProcessingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ public class CoronaInsights {
 
     private CoronaETLProcessingService coronaETLProcessingService;
 
+    private CoronaDataEnrichmentService coronaDataEnrichmentService;
+
     @Autowired
     public void setFileProcessScheduler(FileProcessScheduler fileProcessScheduler) {
         this.fileProcessScheduler = fileProcessScheduler;
@@ -42,6 +45,11 @@ public class CoronaInsights {
     @Autowired
     public void setWebCrawlScheduler(WebCrawlScheduler webCrawlScheduler) {
         this.webCrawlScheduler = webCrawlScheduler;
+    }
+
+    @Autowired
+    public void setCoronaDataEnrichmentService(CoronaDataEnrichmentService coronaDataEnrichmentService) {
+        this.coronaDataEnrichmentService = coronaDataEnrichmentService;
     }
 
     @RequestMapping(value="/insights/processFiles" , method= RequestMethod.GET)
@@ -64,10 +72,18 @@ public class CoronaInsights {
         coronaETLProcessingService.process();
         return ResponseEntity.ok().build();
     }
+
     @RequestMapping(value="/insights/processRealtime" , method= RequestMethod.GET)
     public ResponseEntity processRealtime() {
         log.info("Executing ETL Job");
         webCrawlScheduler.crawlForData();
+        return ResponseEntity.ok().build();
+    }
+
+    @RequestMapping(value="/insights/enrich" , method= RequestMethod.GET)
+    public ResponseEntity enrichData() {
+        log.info("Executing ETL Job");
+        coronaDataEnrichmentService.enrich();
         return ResponseEntity.ok().build();
     }
 

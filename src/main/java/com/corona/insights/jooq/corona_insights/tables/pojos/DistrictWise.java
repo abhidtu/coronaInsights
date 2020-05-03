@@ -4,6 +4,8 @@
 package com.corona.insights.jooq.corona_insights.tables.pojos;
 
 
+import com.corona.insights.jooq.corona_insights.enums.DistrictWiseSource;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -27,20 +29,21 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class DistrictWise implements Serializable {
 
-    private static final long serialVersionUID = 232095222;
+    private static final long serialVersionUID = 347166014;
 
-    private UInteger   id;
-    private Date       reportingDate;
-    private String     country;
-    private String     state;
-    private String     district;
-    private Long       confirmed;
-    private Integer    deaths;
-    private Long       recovered;
-    private BigDecimal latitude;
-    private BigDecimal longitude;
-    private Timestamp  createdAt;
-    private Timestamp  modifiedAt;
+    private UInteger           id;
+    private Date               reportingDate;
+    private String             country;
+    private String             state;
+    private String             district;
+    private Long               confirmed;
+    private Integer            deaths;
+    private Long               recovered;
+    private BigDecimal         latitude;
+    private BigDecimal         longitude;
+    private DistrictWiseSource source;
+    private Timestamp          createdAt;
+    private Timestamp          modifiedAt;
 
     public DistrictWise() {}
 
@@ -55,23 +58,25 @@ public class DistrictWise implements Serializable {
         this.recovered = value.recovered;
         this.latitude = value.latitude;
         this.longitude = value.longitude;
+        this.source = value.source;
         this.createdAt = value.createdAt;
         this.modifiedAt = value.modifiedAt;
     }
 
     public DistrictWise(
-        UInteger   id,
-        Date       reportingDate,
-        String     country,
-        String     state,
-        String     district,
-        Long       confirmed,
-        Integer    deaths,
-        Long       recovered,
-        BigDecimal latitude,
-        BigDecimal longitude,
-        Timestamp  createdAt,
-        Timestamp  modifiedAt
+        UInteger           id,
+        Date               reportingDate,
+        String             country,
+        String             state,
+        String             district,
+        Long               confirmed,
+        Integer            deaths,
+        Long               recovered,
+        BigDecimal         latitude,
+        BigDecimal         longitude,
+        DistrictWiseSource source,
+        Timestamp          createdAt,
+        Timestamp          modifiedAt
     ) {
         this.id = id;
         this.reportingDate = reportingDate;
@@ -83,6 +88,7 @@ public class DistrictWise implements Serializable {
         this.recovered = recovered;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.source = source;
         this.createdAt = createdAt;
         this.modifiedAt = modifiedAt;
     }
@@ -177,6 +183,15 @@ public class DistrictWise implements Serializable {
         return this;
     }
 
+    public DistrictWiseSource getSource() {
+        return this.source;
+    }
+
+    public DistrictWise setSource(DistrictWiseSource source) {
+        this.source = source;
+        return this;
+    }
+
     public Timestamp getCreatedAt() {
         return this.createdAt;
     }
@@ -209,6 +224,7 @@ public class DistrictWise implements Serializable {
         sb.append(", ").append(recovered);
         sb.append(", ").append(latitude);
         sb.append(", ").append(longitude);
+        sb.append(", ").append(source);
         sb.append(", ").append(createdAt);
         sb.append(", ").append(modifiedAt);
 

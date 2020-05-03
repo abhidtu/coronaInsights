@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 import static com.corona.insights.jooq.corona_insights.tables.Cases.CASES;
 import static com.corona.insights.jooq.corona_insights.tables.Location.LOCATION;
@@ -21,6 +22,10 @@ public class CasesDaoImpl extends CasesDao {
 
     public CasesDaoImpl(Configuration configuration) {
         super(configuration);
+    }
+
+    public Cases getCase(Date reportingDate, Integer locationId) {
+        return DSL.using(configuration()).selectFrom(CASES).where(CASES.LOCATION_ID.eq(locationId)).and(CASES.REPORTING_DATE.eq(reportingDate)).fetchOneInto(Cases.class);
     }
 
     public void createOrUpdate(Cases cases) {
@@ -78,6 +83,23 @@ public class CasesDaoImpl extends CasesDao {
         return DSL.using(configuration()).select(aggregated.field("aggregated_reporting_date").as("reportedDate").cast(Date.class), DSL.sum(aggregated.field("aggregated_confirmed").coerce(Integer.class)).as("confirmed"), DSL.sum(aggregated.field("aggregated_deaths").coerce(Integer.class)).as("deaths"), DSL.sum(aggregated.field("aggregated_recovered").coerce(Integer.class)).as("recovered"))
                 .from(aggregated).groupBy(aggregated.field("aggregated_reporting_date")).orderBy(aggregated.field("aggregated_reporting_date").desc())
                 .fetchInto(CoronaVirusETLMetricsDTO.class);
+    }
+
+    public Map<Date, List<Integer>> fetchReportingDateAggregatedLocationWise() {
+        return DSL.using(configuration()).select(CASES.REPORTING_DATE, CASES.LOCATION_ID).from(CASES).orderBy(CASES.REPORTING_DATE.asc()).fetchGroups(CASES.REPORTING_DATE, CASES.LOCATION_ID);
+    }
+
+    public List<Date> getDistinctReportingDates() {
+        return DSL.using(configuration()).selectDistinct(CASES.REPORTING_DATE).from(CASES).orderBy(CASES.REPORTING_DATE.asc()).fetchInto(Date.class);
+    }
+
+    public List<Integer> getLocationIdsForReportingDate(Date reportingDate) {
+        return DSL.using(configuration()).selectDistinct(CASES.LOCATION_ID).from(CASES).where(CASES.REPORTING_DATE.eq(reportingDate)).fetchInto(Integer.class);
+    }
+
+    public Cases fetchCaseByReportingDateAndLocationId(Date reportingDate, Integer locationId) {
+        return DSL.using(configuration()).select().from(CASES).where(CASES.REPORTING_DATE.eq(reportingDate))
+                                                       .and(CASES.LOCATION_ID.eq(locationId)).limit(1).fetchOneInto(Cases.class);
     }
 
     public Timestamp computeCutOfDate() {

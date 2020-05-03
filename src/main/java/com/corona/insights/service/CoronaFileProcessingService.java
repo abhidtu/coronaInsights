@@ -31,41 +31,54 @@ public class CoronaFileProcessingService {
     }
 
     public void processFile(File file) {
-            log.info("processing file = {}", file.getName());
-            List<CoronaVirusReportDataModel> coronaVirusReportDataModels = coronaVirusFileParser.parse(file);
-            coronaVirusReportDataModels.forEach(coronaVirusReportDataModel -> {
-                try {
-                    log.info("Started processing CoronaVirusReportModel file for state = {}", coronaVirusReportDataModel.toString());
-                    process(coronaVirusReportDataModel, file.getName());
-                    log.info("Successfully processed the CoronaVirus Report model = {}", coronaVirusReportDataModel.getState());
-                } catch (Exception e) {
-                    log.error("Error processing the record = {}", coronaVirusReportDataModel.toString());
-                    e.printStackTrace();
-                }
-            });
+        log.info("processing file = {}", file.getName());
+        List<CoronaVirusReportDataModel> coronaVirusReportDataModels = coronaVirusFileParser.parse(file);
+        coronaVirusReportDataModels.forEach(coronaVirusReportDataModel -> {
+            try {
+                //log.info("Started processing CoronaVirusReportModel file for state = {}", coronaVirusReportDataModel.toString());
+                process(coronaVirusReportDataModel, file.getName());
+                //log.info("Successfully processed the CoronaVirus Report model = {}", coronaVirusReportDataModel.getState());
+            } catch (Exception e) {
+                log.error("Error processing the record = {}", coronaVirusReportDataModel.toString());
+                e.printStackTrace();
+            }
+        });
     }
 
-    public void process(CoronaVirusReportDataModel coronaVirusReportDataModel, String fileName) {
+    private void process(CoronaVirusReportDataModel coronaVirusReportDataModel, String fileName) {
         Location location = new Location();
-        location.setCountry(coronaVirusReportDataModel.getCountry());
+        location.setCountry(restructureCountry(coronaVirusReportDataModel.getCountry()));
         location.setState(coronaVirusReportDataModel.getState());
         location.setDistrict(coronaVirusReportDataModel.getDistrict());
         location.setLatitude(trimLatLong(coronaVirusReportDataModel.getLatitude()));
         location.setLongitude(trimLatLong(coronaVirusReportDataModel.getLongitude()));
         location.setFileName(fileName);
-        log.info("saving location data");
+        //log.info("saving location data");
         Integer locationId = locationDao.createOrUpdate(location);
 
-        Cases cases = new Cases();
-        cases.setLocationId(locationId);
-        cases.setReportingDate(Date.valueOf(coronaVirusReportDataModel.getReportedDate()));
-        cases.setConfirmed(coronaVirusReportDataModel.getConfirmed());
-        cases.setDeaths(coronaVirusReportDataModel.getDeaths());
-        cases.setRecovered(coronaVirusReportDataModel.getRecovered());
-        cases.setReportingTimestamp(coronaVirusReportDataModel.getReportedTimestamp());
-        cases.setFileName(fileName);
-        log.info("Saving the case data");
-        casesDao.createOrUpdate(cases);
+        Date reportingDate = Date.valueOf(coronaVirusReportDataModel.getReportedDate());
+
+        Cases existingCases = casesDao.getCase(reportingDate, locationId);
+        if(existingCases != null) {
+            existingCases.setConfirmed(coronaVirusReportDataModel.getConfirmed());
+            existingCases.setDeaths(coronaVirusReportDataModel.getDeaths());
+            existingCases.setRecovered(coronaVirusReportDataModel.getRecovered());
+            existingCases.setReportingTimestamp(coronaVirusReportDataModel.getReportedTimestamp());
+            existingCases.setFileName(fileName);
+            //log.info("Saving the case data");
+            casesDao.update(existingCases);
+        }else {
+            Cases cases = new Cases();
+            cases.setLocationId(locationId);
+            cases.setReportingDate(reportingDate);
+            cases.setConfirmed(coronaVirusReportDataModel.getConfirmed());
+            cases.setDeaths(coronaVirusReportDataModel.getDeaths());
+            cases.setRecovered(coronaVirusReportDataModel.getRecovered());
+            cases.setReportingTimestamp(coronaVirusReportDataModel.getReportedTimestamp());
+            cases.setFileName(fileName);
+            //log.info("Saving the case data");
+            casesDao.createOrUpdate(cases);
+        }
     }
 
     public List<File> getNewFilesToProcess(List<File> files) {
@@ -86,6 +99,15 @@ public class CoronaFileProcessingService {
             latLong = latLong.setScale(6, RoundingMode.DOWN);
         }
         return latLong;
+    }
+
+    private String restructureCountry(String country) {
+        if (country.equals("Mainland China")) {
+            country = "China";
+        }else if(country.equals("UK")) {
+            country = "United Kingdom";
+        }
+        return country;
     }
 
 }

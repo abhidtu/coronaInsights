@@ -2,6 +2,7 @@ package com.corona.insights.etl;
 
 import com.corona.insights.dao.CasesDaoImpl;
 import com.corona.insights.dao.DistrictWiseDaoImpl;
+import com.corona.insights.jooq.corona_insights.enums.DistrictWiseSource;
 import com.corona.insights.jooq.corona_insights.tables.pojos.DistrictWise;
 import com.corona.insights.jooq.corona_insights.tables.pojos.Location;
 import com.corona.insights.jooq.corona_insights.tables.pojos.StateWise;
@@ -60,6 +61,7 @@ public class CoronaInsightsDistrictETLProcessor implements ETLProcessor {
             districtWise.setDeaths(coronaVirusETLMetricsDTO.getDeaths());
             districtWise.setRecovered(coronaVirusETLMetricsDTO.getRecovered());
             districtWise.setReportingDate(coronaVirusETLMetricsDTO.getReportedDate());
+            districtWise.setSource(DistrictWiseSource.JHU);
             districtWiseList.add(districtWise);
         }
     }

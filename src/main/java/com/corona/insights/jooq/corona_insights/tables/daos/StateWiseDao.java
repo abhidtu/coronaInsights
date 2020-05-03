@@ -4,6 +4,7 @@
 package com.corona.insights.jooq.corona_insights.tables.daos;
 
 
+import com.corona.insights.jooq.corona_insights.enums.StateWiseSource;
 import com.corona.insights.jooq.corona_insights.tables.StateWise;
 import com.corona.insights.jooq.corona_insights.tables.records.StateWiseRecord;
 
@@ -107,6 +108,13 @@ public class StateWiseDao extends DAOImpl<StateWiseRecord, com.corona.insights.j
      */
     public List<com.corona.insights.jooq.corona_insights.tables.pojos.StateWise> fetchByRecovered(Long... values) {
         return fetch(StateWise.STATE_WISE.RECOVERED, values);
+    }
+
+    /**
+     * Fetch records that have <code>source IN (values)</code>
+     */
+    public List<com.corona.insights.jooq.corona_insights.tables.pojos.StateWise> fetchBySource(StateWiseSource... values) {
+        return fetch(StateWise.STATE_WISE.SOURCE, values);
     }
 
     /**

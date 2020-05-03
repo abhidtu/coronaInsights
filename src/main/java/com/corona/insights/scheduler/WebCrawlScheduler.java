@@ -1,12 +1,9 @@
 package com.corona.insights.scheduler;
 
-
 import com.corona.insights.dao.CountryWiseDaoImpl;
-import com.corona.insights.jooq.corona_insights.tables.daos.CountryWiseDao;
+import com.corona.insights.dao.DaoUtils;
+import com.corona.insights.jooq.corona_insights.enums.CountryWiseSource;
 import com.corona.insights.jooq.corona_insights.tables.pojos.CountryWise;
-import com.corona.insights.model.CoronaVirusETLMetricsDTO;
-import com.corona.insights.model.CoronaVirusReportDataModel;
-import com.corona.insights.service.CoronaFileProcessingService;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -30,10 +27,16 @@ import java.util.List;
 public class WebCrawlScheduler {
 
     private CountryWiseDaoImpl countryWiseDao;
+    private DaoUtils daoUtils;
 
     @Autowired
     public void setCountryWiseDao(CountryWiseDaoImpl countryWiseDao) {
         this.countryWiseDao = countryWiseDao;
+    }
+
+    @Autowired
+    public void setDaoUtils(DaoUtils daoUtils) {
+        this.daoUtils = daoUtils;
     }
 
     @Scheduled(cron = "0 */30 * ? * *")
@@ -51,7 +54,6 @@ public class WebCrawlScheduler {
             }
             List<CountryWise> countryWises = new ArrayList<>();
             Date reportedDate =  Date.valueOf(LocalDate.now());
-            Timestamp reportingTimestamp =  Timestamp.valueOf((LocalDateTime.now()));
             for (Node countryNode : countryNodes) {
                 List<Node> statNodes = countryNode.childNodes();
                 CountryWise countryWise = new CountryWise();
@@ -76,23 +78,28 @@ public class WebCrawlScheduler {
                     log.error("Exception while fetching the recovered status for country ={}", country);
                 }
                 countryWise.setReportingDate(reportedDate);
+                countryWise.setSource(CountryWiseSource.WORLDMETERS);
                 countryWises.add(countryWise);
             }
-        load(countryWises);
+        load(countryWises, reportedDate);
         } catch (IOException e) {
+            log.info("Exception while crawling data, Exception = {}", e.getMessage());
             e.printStackTrace();
         }
     }
 
-    private void load(List<CountryWise> countryWiseList) {
-        for (CountryWise countryWise : countryWiseList) {
-            try {
-                countryWiseDao.deleteForReportingDate(countryWise.getReportingDate(), countryWise.getCountry());
-                countryWiseDao.insert(countryWise);
-                log.info("Inserting country wise data for country = {}, value = {}", countryWise.getCountry(), countryWise);
-            }catch (Exception e) {
-                log.error("Exception inserting country wise data for country = {}, value = {}", countryWise.getCountry(), countryWise);
+    private void load(List<CountryWise> countryWiseList, Date reportedDate) {
+        if (!daoUtils.isUpdateLocked()) {
+            countryWiseDao.deleteForReportingDate(reportedDate);
+            for (CountryWise countryWise : countryWiseList) {
+                try {
+                    countryWiseDao.insert(countryWise);
+                    log.info("Inserting country wise data for country = {}, value = {}", countryWise.getCountry(), countryWise);
+                }catch (Exception e) {
+                    log.error("Exception inserting country wise data for country = {}, value = {}", countryWise.getCountry(), countryWise);
+                }
             }
+            daoUtils.releaseUpdateLock();
         }
     }
 
