@@ -1,13 +1,11 @@
 package com.corona.insights.dao;
 
-import com.corona.insights.jooq.corona_insights.enums.CountryWiseSource;
 import com.corona.insights.jooq.corona_insights.enums.StateWiseSource;
 import com.corona.insights.jooq.corona_insights.tables.daos.StateWiseDao;
 import org.jooq.Configuration;
 import org.jooq.impl.DSL;
 import org.springframework.stereotype.Repository;
 
-import static com.corona.insights.jooq.corona_insights.Tables.COUNTRY_WISE;
 import static com.corona.insights.jooq.corona_insights.tables.StateWise.STATE_WISE;
 
 @Repository
