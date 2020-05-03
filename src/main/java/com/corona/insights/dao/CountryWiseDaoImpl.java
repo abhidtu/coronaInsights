@@ -23,7 +23,7 @@ public class CountryWiseDaoImpl extends CountryWiseDao {
     }
 
     public void removeOtherSourcesData() {
-        DSL.deleteFrom(Tables.COUNTRY_WISE).where(COUNTRY_WISE.SOURCE.eq(CountryWiseSource.WORLDMETERS)).execute();
+        DSL.using(configuration()).deleteFrom(Tables.COUNTRY_WISE).where(COUNTRY_WISE.SOURCE.eq(CountryWiseSource.WORLDMETERS)).execute();
     }
 
 }

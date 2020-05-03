@@ -16,7 +16,7 @@ public class DistrictWiseDaoImpl extends DistrictWiseDao {
     }
 
     public void removeOtherSourcesData() {
-        DSL.deleteFrom(Tables.DISTRICT_WISE).where(Tables.DISTRICT_WISE.SOURCE.eq(DistrictWiseSource.WORLDMETERS)).execute();
+        DSL.using(configuration()).deleteFrom(Tables.DISTRICT_WISE).where(Tables.DISTRICT_WISE.SOURCE.eq(DistrictWiseSource.WORLDMETERS)).execute();
     }
 
 }

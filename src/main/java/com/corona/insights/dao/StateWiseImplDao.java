@@ -16,7 +16,7 @@ public class StateWiseImplDao extends StateWiseDao {
     }
 
     public void removeOtherSourcesData() {
-        DSL.deleteFrom(STATE_WISE).where(STATE_WISE.SOURCE.eq(StateWiseSource.WORLDMETERS)).execute();
+        DSL.using(configuration()).deleteFrom(STATE_WISE).where(STATE_WISE.SOURCE.eq(StateWiseSource.WORLDMETERS)).execute();
     }
 
 }
