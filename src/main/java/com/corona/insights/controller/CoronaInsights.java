@@ -1,20 +1,26 @@
 package com.corona.insights.controller;
 
+import com.corona.insights.model.HardestHitDO;
 import com.corona.insights.scheduler.FileProcessScheduler;
 import com.corona.insights.scheduler.GitScheduler;
 import com.corona.insights.scheduler.WebCrawlScheduler;
 import com.corona.insights.service.CoronaDataEnrichmentService;
 import com.corona.insights.service.CoronaETLProcessingService;
+import com.corona.insights.service.CoronaHardestHitService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.bouncycastle.cert.ocsp.Req;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 @RestController
 @RequestMapping("/rest/corona")
 @Slf4j
+@AllArgsConstructor
 public class CoronaInsights {
 
    private FileProcessScheduler fileProcessScheduler;
@@ -27,30 +33,7 @@ public class CoronaInsights {
 
     private CoronaDataEnrichmentService coronaDataEnrichmentService;
 
-    @Autowired
-    public void setFileProcessScheduler(FileProcessScheduler fileProcessScheduler) {
-        this.fileProcessScheduler = fileProcessScheduler;
-    }
-
-    @Autowired
-    public void setGitScheduler(GitScheduler gitScheduler) {
-        this.gitScheduler = gitScheduler;
-    }
-
-    @Autowired
-    public void setCoronaETLProcessingService(CoronaETLProcessingService coronaETLProcessingService) {
-        this.coronaETLProcessingService = coronaETLProcessingService;
-    }
-
-    @Autowired
-    public void setWebCrawlScheduler(WebCrawlScheduler webCrawlScheduler) {
-        this.webCrawlScheduler = webCrawlScheduler;
-    }
-
-    @Autowired
-    public void setCoronaDataEnrichmentService(CoronaDataEnrichmentService coronaDataEnrichmentService) {
-        this.coronaDataEnrichmentService = coronaDataEnrichmentService;
-    }
+    private CoronaHardestHitService coronaHardestHitService;
 
     @RequestMapping(value="/insights/processFiles" , method= RequestMethod.GET)
     public ResponseEntity processCoronaInsights() {
@@ -85,6 +68,21 @@ public class CoronaInsights {
         log.info("Executing ETL Job");
         coronaDataEnrichmentService.enrich();
         return ResponseEntity.ok().build();
+    }
+
+    @RequestMapping(value="/insights/hardestHit" , method= RequestMethod.GET)
+    public ResponseEntity<List<HardestHitDO>> hardestHit(@RequestParam BigDecimal latitude,
+                                                         @RequestParam BigDecimal longitude,
+                                                         @RequestParam int radius) {
+        return ResponseEntity.ok(coronaHardestHitService.getHardestHitDistricts(latitude, longitude, radius));
+    }
+
+    @RequestMapping(value="/insights/hardestHit/country/{country}/state/{state}/district/{district}" , method= RequestMethod.GET)
+    public ResponseEntity<List<HardestHitDO>> hardestHit(@PathVariable String country,
+                                                         @PathVariable String state,
+                                                         @PathVariable String district,
+                                                         @RequestParam int radius) {
+        return ResponseEntity.ok(coronaHardestHitService.getHardestHitDistricts(country, state, district, radius));
     }
 
 }

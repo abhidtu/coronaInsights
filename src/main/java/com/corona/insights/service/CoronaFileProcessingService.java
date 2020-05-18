@@ -81,6 +81,8 @@ public class CoronaFileProcessingService {
         }
     }
 
+
+
     public List<File> getNewFilesToProcess(List<File> files) {
         List<File> newFiles = new ArrayList<>();
         files.forEach(file -> {

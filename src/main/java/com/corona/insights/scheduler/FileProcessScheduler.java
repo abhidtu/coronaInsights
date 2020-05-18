@@ -47,7 +47,7 @@ public class FileProcessScheduler {
                     log.error("Exception while processing file = {}, exception = {}", file.getName(), e.getMessage());
                 }
             }
-            coronaDataEnrichmentService.enrich();
+            //coronaDataEnrichmentService.enrich();
             coronaETLProcessingService.process();
         }
     }
