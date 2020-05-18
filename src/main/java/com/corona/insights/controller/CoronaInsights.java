@@ -85,4 +85,9 @@ public class CoronaInsights {
         return ResponseEntity.ok(coronaHardestHitService.getHardestHitDistricts(country, state, district, radius));
     }
 
+    @RequestMapping(value="/insights/hardestHit/zip/{code}" , method= RequestMethod.GET)
+    public ResponseEntity<List<HardestHitDO>> hardestHitByZipCode(@PathVariable int code,
+                                                                  @RequestParam int radius) {
+        return ResponseEntity.ok(coronaHardestHitService.getHardestHitDistricts(code, radius));
+    }
 }
