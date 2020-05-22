@@ -10,6 +10,7 @@ import com.corona.insights.jooq.corona_insights.tables.CountryWise;
 import com.corona.insights.jooq.corona_insights.tables.DistrictWise;
 import com.corona.insights.jooq.corona_insights.tables.Location;
 import com.corona.insights.jooq.corona_insights.tables.Properties;
+import com.corona.insights.jooq.corona_insights.tables.StateCodeNameMapping;
 import com.corona.insights.jooq.corona_insights.tables.StateWise;
 import com.corona.insights.jooq.corona_insights.tables.ZipCodeMapping;
 
@@ -58,6 +59,11 @@ public class Tables {
      * The table <code>corona_insights.properties</code>.
      */
     public static final Properties PROPERTIES = com.corona.insights.jooq.corona_insights.tables.Properties.PROPERTIES;
+
+    /**
+     * The table <code>corona_insights.state_code_name_mapping</code>.
+     */
+    public static final StateCodeNameMapping STATE_CODE_NAME_MAPPING = com.corona.insights.jooq.corona_insights.tables.StateCodeNameMapping.STATE_CODE_NAME_MAPPING;
 
     /**
      * The table <code>corona_insights.state_wise</code>.

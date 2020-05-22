@@ -39,7 +39,7 @@ public class WebCrawlScheduler {
         this.daoUtils = daoUtils;
     }
 
-    @Scheduled(cron = "0 */30 * ? * *")
+    //@Scheduled(cron = "0 */30 * ? * *")
     public void crawlForData() {
         Document doc = null;
         try {

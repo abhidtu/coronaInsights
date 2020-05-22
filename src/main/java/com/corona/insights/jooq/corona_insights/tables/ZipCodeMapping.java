@@ -41,7 +41,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ZipCodeMapping extends TableImpl<ZipCodeMappingRecord> {
 
-    private static final long serialVersionUID = -1078606150;
+    private static final long serialVersionUID = -68643530;
 
     /**
      * The reference instance of <code>corona_insights.zip_code_mapping</code>
@@ -95,6 +95,11 @@ public class ZipCodeMapping extends TableImpl<ZipCodeMappingRecord> {
      * The column <code>corona_insights.zip_code_mapping.geopoint</code>.
      */
     public final TableField<ZipCodeMappingRecord, String> GEOPOINT = createField("geopoint", org.jooq.impl.SQLDataType.VARCHAR(21).nullable(false), this, "");
+
+    /**
+     * The column <code>corona_insights.zip_code_mapping.state_name</code>.
+     */
+    public final TableField<ZipCodeMappingRecord, String> STATE_NAME = createField("state_name", org.jooq.impl.SQLDataType.VARCHAR(200), this, "");
 
     /**
      * Create a <code>corona_insights.zip_code_mapping</code> table reference

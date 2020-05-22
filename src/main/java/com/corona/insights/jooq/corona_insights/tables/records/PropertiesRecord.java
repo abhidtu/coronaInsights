@@ -31,7 +31,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class PropertiesRecord extends UpdatableRecordImpl<PropertiesRecord> implements Record4<UInteger, String, String, Timestamp> {
 
-    private static final long serialVersionUID = 2081847910;
+    private static final long serialVersionUID = -171061709;
 
     /**
      * Setter for <code>corona_insights.properties.id</code>.
@@ -79,17 +79,17 @@ public class PropertiesRecord extends UpdatableRecordImpl<PropertiesRecord> impl
     }
 
     /**
-     * Setter for <code>corona_insights.properties.value_modified_at</code>.
+     * Setter for <code>corona_insights.properties.modified_at</code>.
      */
-    public PropertiesRecord setValueModifiedAt(Timestamp value) {
+    public PropertiesRecord setModifiedAt(Timestamp value) {
         set(3, value);
         return this;
     }
 
     /**
-     * Getter for <code>corona_insights.properties.value_modified_at</code>.
+     * Getter for <code>corona_insights.properties.modified_at</code>.
      */
-    public Timestamp getValueModifiedAt() {
+    public Timestamp getModifiedAt() {
         return (Timestamp) get(3);
     }
 
@@ -154,7 +154,7 @@ public class PropertiesRecord extends UpdatableRecordImpl<PropertiesRecord> impl
      */
     @Override
     public Field<Timestamp> field4() {
-        return Properties.PROPERTIES.VALUE_MODIFIED_AT;
+        return Properties.PROPERTIES.MODIFIED_AT;
     }
 
     /**
@@ -186,7 +186,7 @@ public class PropertiesRecord extends UpdatableRecordImpl<PropertiesRecord> impl
      */
     @Override
     public Timestamp component4() {
-        return getValueModifiedAt();
+        return getModifiedAt();
     }
 
     /**
@@ -218,7 +218,7 @@ public class PropertiesRecord extends UpdatableRecordImpl<PropertiesRecord> impl
      */
     @Override
     public Timestamp value4() {
-        return getValueModifiedAt();
+        return getModifiedAt();
     }
 
     /**
@@ -253,7 +253,7 @@ public class PropertiesRecord extends UpdatableRecordImpl<PropertiesRecord> impl
      */
     @Override
     public PropertiesRecord value4(Timestamp value) {
-        setValueModifiedAt(value);
+        setModifiedAt(value);
         return this;
     }
 
@@ -283,12 +283,12 @@ public class PropertiesRecord extends UpdatableRecordImpl<PropertiesRecord> impl
     /**
      * Create a detached, initialised PropertiesRecord
      */
-    public PropertiesRecord(UInteger id, String key, String value, Timestamp valueModifiedAt) {
+    public PropertiesRecord(UInteger id, String key, String value, Timestamp modifiedAt) {
         super(Properties.PROPERTIES);
 
         set(0, id);
         set(1, key);
         set(2, value);
-        set(3, valueModifiedAt);
+        set(3, modifiedAt);
     }
 }

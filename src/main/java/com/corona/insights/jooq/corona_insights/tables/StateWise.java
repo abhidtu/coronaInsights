@@ -45,7 +45,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class StateWise extends TableImpl<StateWiseRecord> {
 
-    private static final long serialVersionUID = -1976277726;
+    private static final long serialVersionUID = 1325276957;
 
     /**
      * The reference instance of <code>corona_insights.state_wise</code>
@@ -73,12 +73,12 @@ public class StateWise extends TableImpl<StateWiseRecord> {
     /**
      * The column <code>corona_insights.state_wise.country</code>.
      */
-    public final TableField<StateWiseRecord, String> COUNTRY = createField("country", org.jooq.impl.SQLDataType.VARCHAR(11).nullable(false), this, "");
+    public final TableField<StateWiseRecord, String> COUNTRY = createField("country", org.jooq.impl.SQLDataType.VARCHAR(200).nullable(false).defaultValue(org.jooq.impl.DSL.inline("", org.jooq.impl.SQLDataType.VARCHAR)), this, "");
 
     /**
      * The column <code>corona_insights.state_wise.state</code>.
      */
-    public final TableField<StateWiseRecord, String> STATE = createField("state", org.jooq.impl.SQLDataType.VARCHAR(11).nullable(false).defaultValue(org.jooq.impl.DSL.inline("", org.jooq.impl.SQLDataType.VARCHAR)), this, "");
+    public final TableField<StateWiseRecord, String> STATE = createField("state", org.jooq.impl.SQLDataType.VARCHAR(200).nullable(false).defaultValue(org.jooq.impl.DSL.inline("", org.jooq.impl.SQLDataType.VARCHAR)), this, "");
 
     /**
      * The column <code>corona_insights.state_wise.confirmed</code>.

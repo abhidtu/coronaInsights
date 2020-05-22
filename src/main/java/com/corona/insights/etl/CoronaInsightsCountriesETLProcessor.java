@@ -56,7 +56,7 @@ public class CoronaInsightsCountriesETLProcessor implements ETLProcessor {
         for (CountryWise countryWise : countryWiseList) {
             try {
                 countryWiseDao.insert(countryWise);
-                log.info("Inserting country wise data for country = {}, value = {}", country, countryWise);
+                //log.info("Inserting country wise data for country = {}, value = {}", country, countryWise);
             }catch (Exception e) {
                 log.error("Exception inserting country wise data for country = {}, value = {}", country, countryWise);
             }

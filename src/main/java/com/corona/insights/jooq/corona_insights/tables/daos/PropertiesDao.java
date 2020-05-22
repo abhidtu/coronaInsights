@@ -81,9 +81,9 @@ public class PropertiesDao extends DAOImpl<PropertiesRecord, com.corona.insights
     }
 
     /**
-     * Fetch records that have <code>value_modified_at IN (values)</code>
+     * Fetch records that have <code>modified_at IN (values)</code>
      */
-    public List<com.corona.insights.jooq.corona_insights.tables.pojos.Properties> fetchByValueModifiedAt(Timestamp... values) {
-        return fetch(Properties.PROPERTIES.VALUE_MODIFIED_AT, values);
+    public List<com.corona.insights.jooq.corona_insights.tables.pojos.Properties> fetchByModifiedAt(Timestamp... values) {
+        return fetch(Properties.PROPERTIES.MODIFIED_AT, values);
     }
 }

@@ -71,23 +71,35 @@ public class CoronaInsights {
     }
 
     @RequestMapping(value="/insights/hardestHit" , method= RequestMethod.GET)
-    public ResponseEntity<List<HardestHitDO>> hardestHit(@RequestParam BigDecimal latitude,
+    public ResponseEntity hardestHit(@RequestParam BigDecimal latitude,
                                                          @RequestParam BigDecimal longitude,
                                                          @RequestParam int radius) {
-        return ResponseEntity.ok(coronaHardestHitService.getHardestHitDistricts(latitude, longitude, radius));
+        try {
+            return ResponseEntity.ok(coronaHardestHitService.getHardestHitDistricts(latitude, longitude, radius));
+        }catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @RequestMapping(value="/insights/hardestHit/country/{country}/state/{state}/district/{district}" , method= RequestMethod.GET)
-    public ResponseEntity<List<HardestHitDO>> hardestHit(@PathVariable String country,
+    public ResponseEntity hardestHit(@PathVariable String country,
                                                          @PathVariable String state,
                                                          @PathVariable String district,
                                                          @RequestParam int radius) {
-        return ResponseEntity.ok(coronaHardestHitService.getHardestHitDistricts(country, state, district, radius));
+        try {
+            return ResponseEntity.ok(coronaHardestHitService.getHardestHitDistricts(country, state, district, radius));
+        }catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @RequestMapping(value="/insights/hardestHit/zip/{code}" , method= RequestMethod.GET)
-    public ResponseEntity<List<HardestHitDO>> hardestHitByZipCode(@PathVariable int code,
+    public ResponseEntity hardestHitByZipCode(@PathVariable int code,
                                                                   @RequestParam int radius) {
-        return ResponseEntity.ok(coronaHardestHitService.getHardestHitDistricts(code, radius));
+        try {
+            return ResponseEntity.ok(coronaHardestHitService.getHardestHitDistricts(code, radius));
+        }catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }

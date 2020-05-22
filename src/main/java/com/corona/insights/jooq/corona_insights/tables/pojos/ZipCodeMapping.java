@@ -23,7 +23,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ZipCodeMapping implements Serializable {
 
-    private static final long serialVersionUID = -1148572094;
+    private static final long serialVersionUID = -96166549;
 
     private Integer    zip;
     private String     city;
@@ -33,6 +33,7 @@ public class ZipCodeMapping implements Serializable {
     private Integer    timezone;
     private Boolean    daylightSavingsTimeFlag;
     private String     geopoint;
+    private String     stateName;
 
     public ZipCodeMapping() {}
 
@@ -45,6 +46,7 @@ public class ZipCodeMapping implements Serializable {
         this.timezone = value.timezone;
         this.daylightSavingsTimeFlag = value.daylightSavingsTimeFlag;
         this.geopoint = value.geopoint;
+        this.stateName = value.stateName;
     }
 
     public ZipCodeMapping(
@@ -55,7 +57,8 @@ public class ZipCodeMapping implements Serializable {
         BigDecimal longitude,
         Integer    timezone,
         Boolean    daylightSavingsTimeFlag,
-        String     geopoint
+        String     geopoint,
+        String     stateName
     ) {
         this.zip = zip;
         this.city = city;
@@ -65,6 +68,7 @@ public class ZipCodeMapping implements Serializable {
         this.timezone = timezone;
         this.daylightSavingsTimeFlag = daylightSavingsTimeFlag;
         this.geopoint = geopoint;
+        this.stateName = stateName;
     }
 
     public Integer getZip() {
@@ -139,6 +143,15 @@ public class ZipCodeMapping implements Serializable {
         return this;
     }
 
+    public String getStateName() {
+        return this.stateName;
+    }
+
+    public ZipCodeMapping setStateName(String stateName) {
+        this.stateName = stateName;
+        return this;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("ZipCodeMapping (");
@@ -151,6 +164,7 @@ public class ZipCodeMapping implements Serializable {
         sb.append(", ").append(timezone);
         sb.append(", ").append(daylightSavingsTimeFlag);
         sb.append(", ").append(geopoint);
+        sb.append(", ").append(stateName);
 
         sb.append(")");
         return sb.toString();

@@ -72,7 +72,7 @@ public class CoronaInsightsDistrictETLProcessor implements ETLProcessor {
         for (DistrictWise districtWise : districtWiseList) {
             try {
                 districtWiseDao.insert(districtWise);
-                log.info("Inserting country wise data for country = {}, state = {}, value = {}", country, state, districtWise);
+                //log.info("Inserting country wise data for country = {}, state = {}, value = {}", country, state, districtWise);
             }catch (Exception e) {
                 log.error("Exception inserting country wise data for country = {}, state = {}, value = {}", country, state, districtWise);
             }

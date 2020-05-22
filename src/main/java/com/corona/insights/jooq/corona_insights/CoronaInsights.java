@@ -11,6 +11,7 @@ import com.corona.insights.jooq.corona_insights.tables.CountryWise;
 import com.corona.insights.jooq.corona_insights.tables.DistrictWise;
 import com.corona.insights.jooq.corona_insights.tables.Location;
 import com.corona.insights.jooq.corona_insights.tables.Properties;
+import com.corona.insights.jooq.corona_insights.tables.StateCodeNameMapping;
 import com.corona.insights.jooq.corona_insights.tables.StateWise;
 import com.corona.insights.jooq.corona_insights.tables.ZipCodeMapping;
 
@@ -38,7 +39,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class CoronaInsights extends SchemaImpl {
 
-    private static final long serialVersionUID = -1246417130;
+    private static final long serialVersionUID = -1373330437;
 
     /**
      * The reference instance of <code>corona_insights</code>
@@ -74,6 +75,11 @@ public class CoronaInsights extends SchemaImpl {
      * The table <code>corona_insights.properties</code>.
      */
     public final Properties PROPERTIES = com.corona.insights.jooq.corona_insights.tables.Properties.PROPERTIES;
+
+    /**
+     * The table <code>corona_insights.state_code_name_mapping</code>.
+     */
+    public final StateCodeNameMapping STATE_CODE_NAME_MAPPING = com.corona.insights.jooq.corona_insights.tables.StateCodeNameMapping.STATE_CODE_NAME_MAPPING;
 
     /**
      * The table <code>corona_insights.state_wise</code>.
@@ -116,6 +122,7 @@ public class CoronaInsights extends SchemaImpl {
             DistrictWise.DISTRICT_WISE,
             Location.LOCATION,
             Properties.PROPERTIES,
+            StateCodeNameMapping.STATE_CODE_NAME_MAPPING,
             StateWise.STATE_WISE,
             ZipCodeMapping.ZIP_CODE_MAPPING);
     }

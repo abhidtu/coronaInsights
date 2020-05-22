@@ -10,6 +10,7 @@ import com.corona.insights.jooq.corona_insights.tables.CountryWise;
 import com.corona.insights.jooq.corona_insights.tables.DistrictWise;
 import com.corona.insights.jooq.corona_insights.tables.Location;
 import com.corona.insights.jooq.corona_insights.tables.Properties;
+import com.corona.insights.jooq.corona_insights.tables.StateCodeNameMapping;
 import com.corona.insights.jooq.corona_insights.tables.StateWise;
 import com.corona.insights.jooq.corona_insights.tables.ZipCodeMapping;
 import com.corona.insights.jooq.corona_insights.tables.records.AgeWiseCasesRecord;
@@ -18,6 +19,7 @@ import com.corona.insights.jooq.corona_insights.tables.records.CountryWiseRecord
 import com.corona.insights.jooq.corona_insights.tables.records.DistrictWiseRecord;
 import com.corona.insights.jooq.corona_insights.tables.records.LocationRecord;
 import com.corona.insights.jooq.corona_insights.tables.records.PropertiesRecord;
+import com.corona.insights.jooq.corona_insights.tables.records.StateCodeNameMappingRecord;
 import com.corona.insights.jooq.corona_insights.tables.records.StateWiseRecord;
 import com.corona.insights.jooq.corona_insights.tables.records.ZipCodeMappingRecord;
 
@@ -48,7 +50,7 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     public static final Identity<AgeWiseCasesRecord, UInteger> IDENTITY_AGE_WISE_CASES = Identities0.IDENTITY_AGE_WISE_CASES;
-    public static final Identity<CasesRecord, UInteger> IDENTITY_CASES = Identities0.IDENTITY_CASES;
+    public static final Identity<CasesRecord, Integer> IDENTITY_CASES = Identities0.IDENTITY_CASES;
     public static final Identity<CountryWiseRecord, Integer> IDENTITY_COUNTRY_WISE = Identities0.IDENTITY_COUNTRY_WISE;
     public static final Identity<DistrictWiseRecord, UInteger> IDENTITY_DISTRICT_WISE = Identities0.IDENTITY_DISTRICT_WISE;
     public static final Identity<LocationRecord, Integer> IDENTITY_LOCATION = Identities0.IDENTITY_LOCATION;
@@ -65,6 +67,7 @@ public class Keys {
     public static final UniqueKey<DistrictWiseRecord> KEY_DISTRICT_WISE_PRIMARY = UniqueKeys0.KEY_DISTRICT_WISE_PRIMARY;
     public static final UniqueKey<LocationRecord> KEY_LOCATION_PRIMARY = UniqueKeys0.KEY_LOCATION_PRIMARY;
     public static final UniqueKey<PropertiesRecord> KEY_PROPERTIES_PRIMARY = UniqueKeys0.KEY_PROPERTIES_PRIMARY;
+    public static final UniqueKey<StateCodeNameMappingRecord> KEY_STATE_CODE_NAME_MAPPING_PRIMARY = UniqueKeys0.KEY_STATE_CODE_NAME_MAPPING_PRIMARY;
     public static final UniqueKey<StateWiseRecord> KEY_STATE_WISE_PRIMARY = UniqueKeys0.KEY_STATE_WISE_PRIMARY;
     public static final UniqueKey<ZipCodeMappingRecord> KEY_ZIP_CODE_MAPPING_PRIMARY = UniqueKeys0.KEY_ZIP_CODE_MAPPING_PRIMARY;
 
@@ -79,7 +82,7 @@ public class Keys {
 
     private static class Identities0 {
         public static Identity<AgeWiseCasesRecord, UInteger> IDENTITY_AGE_WISE_CASES = Internal.createIdentity(AgeWiseCases.AGE_WISE_CASES, AgeWiseCases.AGE_WISE_CASES.ID);
-        public static Identity<CasesRecord, UInteger> IDENTITY_CASES = Internal.createIdentity(Cases.CASES, Cases.CASES.ID);
+        public static Identity<CasesRecord, Integer> IDENTITY_CASES = Internal.createIdentity(Cases.CASES, Cases.CASES.ID);
         public static Identity<CountryWiseRecord, Integer> IDENTITY_COUNTRY_WISE = Internal.createIdentity(CountryWise.COUNTRY_WISE, CountryWise.COUNTRY_WISE.ID);
         public static Identity<DistrictWiseRecord, UInteger> IDENTITY_DISTRICT_WISE = Internal.createIdentity(DistrictWise.DISTRICT_WISE, DistrictWise.DISTRICT_WISE.ID);
         public static Identity<LocationRecord, Integer> IDENTITY_LOCATION = Internal.createIdentity(Location.LOCATION, Location.LOCATION.ID);
@@ -94,6 +97,7 @@ public class Keys {
         public static final UniqueKey<DistrictWiseRecord> KEY_DISTRICT_WISE_PRIMARY = Internal.createUniqueKey(DistrictWise.DISTRICT_WISE, "KEY_district_wise_PRIMARY", DistrictWise.DISTRICT_WISE.ID);
         public static final UniqueKey<LocationRecord> KEY_LOCATION_PRIMARY = Internal.createUniqueKey(Location.LOCATION, "KEY_location_PRIMARY", Location.LOCATION.ID);
         public static final UniqueKey<PropertiesRecord> KEY_PROPERTIES_PRIMARY = Internal.createUniqueKey(Properties.PROPERTIES, "KEY_properties_PRIMARY", Properties.PROPERTIES.ID);
+        public static final UniqueKey<StateCodeNameMappingRecord> KEY_STATE_CODE_NAME_MAPPING_PRIMARY = Internal.createUniqueKey(StateCodeNameMapping.STATE_CODE_NAME_MAPPING, "KEY_state_code_name_mapping_PRIMARY", StateCodeNameMapping.STATE_CODE_NAME_MAPPING.STATE);
         public static final UniqueKey<StateWiseRecord> KEY_STATE_WISE_PRIMARY = Internal.createUniqueKey(StateWise.STATE_WISE, "KEY_state_wise_PRIMARY", StateWise.STATE_WISE.ID);
         public static final UniqueKey<ZipCodeMappingRecord> KEY_ZIP_CODE_MAPPING_PRIMARY = Internal.createUniqueKey(ZipCodeMapping.ZIP_CODE_MAPPING, "KEY_zip_code_mapping_PRIMARY", ZipCodeMapping.ZIP_CODE_MAPPING.ZIP);
     }
