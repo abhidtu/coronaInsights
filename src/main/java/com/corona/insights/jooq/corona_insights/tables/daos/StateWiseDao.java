@@ -90,6 +90,27 @@ public class StateWiseDao extends DAOImpl<StateWiseRecord, com.corona.insights.j
     }
 
     /**
+     * Fetch records that have <code>delta_confirmed IN (values)</code>
+     */
+    public List<com.corona.insights.jooq.corona_insights.tables.pojos.StateWise> fetchByDeltaConfirmed(Integer... values) {
+        return fetch(StateWise.STATE_WISE.DELTA_CONFIRMED, values);
+    }
+
+    /**
+     * Fetch records that have <code>delta_deaths IN (values)</code>
+     */
+    public List<com.corona.insights.jooq.corona_insights.tables.pojos.StateWise> fetchByDeltaDeaths(Integer... values) {
+        return fetch(StateWise.STATE_WISE.DELTA_DEATHS, values);
+    }
+
+    /**
+     * Fetch records that have <code>delta_recovered IN (values)</code>
+     */
+    public List<com.corona.insights.jooq.corona_insights.tables.pojos.StateWise> fetchByDeltaRecovered(Integer... values) {
+        return fetch(StateWise.STATE_WISE.DELTA_RECOVERED, values);
+    }
+
+    /**
      * Fetch records that have <code>confirmed IN (values)</code>
      */
     public List<com.corona.insights.jooq.corona_insights.tables.pojos.StateWise> fetchByConfirmed(Long... values) {
@@ -108,6 +129,20 @@ public class StateWiseDao extends DAOImpl<StateWiseRecord, com.corona.insights.j
      */
     public List<com.corona.insights.jooq.corona_insights.tables.pojos.StateWise> fetchByRecovered(Long... values) {
         return fetch(StateWise.STATE_WISE.RECOVERED, values);
+    }
+
+    /**
+     * Fetch records that have <code>active IN (values)</code>
+     */
+    public List<com.corona.insights.jooq.corona_insights.tables.pojos.StateWise> fetchByActive(Long... values) {
+        return fetch(StateWise.STATE_WISE.ACTIVE, values);
+    }
+
+    /**
+     * Fetch records that have <code>delta_active IN (values)</code>
+     */
+    public List<com.corona.insights.jooq.corona_insights.tables.pojos.StateWise> fetchByDeltaActive(Integer... values) {
+        return fetch(StateWise.STATE_WISE.DELTA_ACTIVE, values);
     }
 
     /**

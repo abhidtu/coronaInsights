@@ -16,6 +16,7 @@ import javax.annotation.Generated;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
+import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
@@ -25,6 +26,7 @@ import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
 import org.jooq.impl.TableImpl;
+import org.jooq.types.UInteger;
 
 
 /**
@@ -40,7 +42,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class StateCodeNameMapping extends TableImpl<StateCodeNameMappingRecord> {
 
-    private static final long serialVersionUID = 187179828;
+    private static final long serialVersionUID = -116189767;
 
     /**
      * The reference instance of <code>corona_insights.state_code_name_mapping</code>
@@ -56,19 +58,24 @@ public class StateCodeNameMapping extends TableImpl<StateCodeNameMappingRecord> 
     }
 
     /**
-     * The column <code>corona_insights.state_code_name_mapping.State</code>.
+     * The column <code>corona_insights.state_code_name_mapping.id</code>.
      */
-    public final TableField<StateCodeNameMappingRecord, String> STATE = createField("State", org.jooq.impl.SQLDataType.VARCHAR(20).nullable(false), this, "");
+    public final TableField<StateCodeNameMappingRecord, UInteger> ID = createField("id", org.jooq.impl.SQLDataType.INTEGERUNSIGNED.nullable(false).identity(true), this, "");
+
+    /**
+     * The column <code>corona_insights.state_code_name_mapping.state</code>.
+     */
+    public final TableField<StateCodeNameMappingRecord, String> STATE = createField("state", org.jooq.impl.SQLDataType.VARCHAR(200).nullable(false).defaultValue(org.jooq.impl.DSL.inline("", org.jooq.impl.SQLDataType.VARCHAR)), this, "");
 
     /**
      * The column <code>corona_insights.state_code_name_mapping.Abbrev</code>.
      */
-    public final TableField<StateCodeNameMappingRecord, String> ABBREV = createField("Abbrev", org.jooq.impl.SQLDataType.VARCHAR(6).nullable(false), this, "");
+    public final TableField<StateCodeNameMappingRecord, String> ABBREV = createField("Abbrev", org.jooq.impl.SQLDataType.VARCHAR(200).nullable(false).defaultValue(org.jooq.impl.DSL.inline("", org.jooq.impl.SQLDataType.VARCHAR)), this, "");
 
     /**
      * The column <code>corona_insights.state_code_name_mapping.Code</code>.
      */
-    public final TableField<StateCodeNameMappingRecord, String> CODE = createField("Code", org.jooq.impl.SQLDataType.VARCHAR(2).nullable(false), this, "");
+    public final TableField<StateCodeNameMappingRecord, String> CODE = createField("Code", org.jooq.impl.SQLDataType.VARCHAR(20), this, "");
 
     /**
      * Create a <code>corona_insights.state_code_name_mapping</code> table reference
@@ -117,6 +124,14 @@ public class StateCodeNameMapping extends TableImpl<StateCodeNameMappingRecord> 
     @Override
     public List<Index> getIndexes() {
         return Arrays.<Index>asList(Indexes.STATE_CODE_NAME_MAPPING_PRIMARY);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Identity<StateCodeNameMappingRecord, UInteger> getIdentity() {
+        return Keys.IDENTITY_STATE_CODE_NAME_MAPPING;
     }
 
     /**

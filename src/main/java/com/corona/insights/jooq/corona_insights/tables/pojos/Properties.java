@@ -25,12 +25,12 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Properties implements Serializable {
 
-    private static final long serialVersionUID = -1436144301;
+    private static final long serialVersionUID = -1048793686;
 
     private UInteger  id;
     private String    key;
     private String    value;
-    private Timestamp modifiedAt;
+    private Timestamp valueModifiedAt;
 
     public Properties() {}
 
@@ -38,19 +38,19 @@ public class Properties implements Serializable {
         this.id = value.id;
         this.key = value.key;
         this.value = value.value;
-        this.modifiedAt = value.modifiedAt;
+        this.valueModifiedAt = value.valueModifiedAt;
     }
 
     public Properties(
         UInteger  id,
         String    key,
         String    value,
-        Timestamp modifiedAt
+        Timestamp valueModifiedAt
     ) {
         this.id = id;
         this.key = key;
         this.value = value;
-        this.modifiedAt = modifiedAt;
+        this.valueModifiedAt = valueModifiedAt;
     }
 
     public UInteger getId() {
@@ -80,12 +80,12 @@ public class Properties implements Serializable {
         return this;
     }
 
-    public Timestamp getModifiedAt() {
-        return this.modifiedAt;
+    public Timestamp getValueModifiedAt() {
+        return this.valueModifiedAt;
     }
 
-    public Properties setModifiedAt(Timestamp modifiedAt) {
-        this.modifiedAt = modifiedAt;
+    public Properties setValueModifiedAt(Timestamp valueModifiedAt) {
+        this.valueModifiedAt = valueModifiedAt;
         return this;
     }
 
@@ -96,7 +96,7 @@ public class Properties implements Serializable {
         sb.append(id);
         sb.append(", ").append(key);
         sb.append(", ").append(value);
-        sb.append(", ").append(modifiedAt);
+        sb.append(", ").append(valueModifiedAt);
 
         sb.append(")");
         return sb.toString();

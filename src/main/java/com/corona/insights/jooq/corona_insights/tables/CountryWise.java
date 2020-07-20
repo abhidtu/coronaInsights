@@ -44,7 +44,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class CountryWise extends TableImpl<CountryWiseRecord> {
 
-    private static final long serialVersionUID = -1111689037;
+    private static final long serialVersionUID = -312316119;
 
     /**
      * The reference instance of <code>corona_insights.country_wise</code>
@@ -75,6 +75,21 @@ public class CountryWise extends TableImpl<CountryWiseRecord> {
     public final TableField<CountryWiseRecord, String> COUNTRY = createField("country", org.jooq.impl.SQLDataType.VARCHAR(250).nullable(false).defaultValue(org.jooq.impl.DSL.inline("", org.jooq.impl.SQLDataType.VARCHAR)), this, "");
 
     /**
+     * The column <code>corona_insights.country_wise.delta_confirmed</code>.
+     */
+    public final TableField<CountryWiseRecord, Integer> DELTA_CONFIRMED = createField("delta_confirmed", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.INTEGER)), this, "");
+
+    /**
+     * The column <code>corona_insights.country_wise.delta_deaths</code>.
+     */
+    public final TableField<CountryWiseRecord, Integer> DELTA_DEATHS = createField("delta_deaths", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.INTEGER)), this, "");
+
+    /**
+     * The column <code>corona_insights.country_wise.delta_recovered</code>.
+     */
+    public final TableField<CountryWiseRecord, Integer> DELTA_RECOVERED = createField("delta_recovered", org.jooq.impl.SQLDataType.INTEGER.defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.INTEGER)), this, "");
+
+    /**
      * The column <code>corona_insights.country_wise.confirmed</code>.
      */
     public final TableField<CountryWiseRecord, Long> CONFIRMED = createField("confirmed", org.jooq.impl.SQLDataType.BIGINT.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.BIGINT)), this, "");
@@ -88,6 +103,16 @@ public class CountryWise extends TableImpl<CountryWiseRecord> {
      * The column <code>corona_insights.country_wise.recovered</code>.
      */
     public final TableField<CountryWiseRecord, Long> RECOVERED = createField("recovered", org.jooq.impl.SQLDataType.BIGINT.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.BIGINT)), this, "");
+
+    /**
+     * The column <code>corona_insights.country_wise.active</code>.
+     */
+    public final TableField<CountryWiseRecord, Long> ACTIVE = createField("active", org.jooq.impl.SQLDataType.BIGINT.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.BIGINT)), this, "");
+
+    /**
+     * The column <code>corona_insights.country_wise.delta_active</code>.
+     */
+    public final TableField<CountryWiseRecord, Integer> DELTA_ACTIVE = createField("delta_active", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.INTEGER)), this, "");
 
     /**
      * The column <code>corona_insights.country_wise.source</code>.

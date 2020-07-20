@@ -82,6 +82,27 @@ public class CountryWiseDao extends DAOImpl<CountryWiseRecord, com.corona.insigh
     }
 
     /**
+     * Fetch records that have <code>delta_confirmed IN (values)</code>
+     */
+    public List<com.corona.insights.jooq.corona_insights.tables.pojos.CountryWise> fetchByDeltaConfirmed(Integer... values) {
+        return fetch(CountryWise.COUNTRY_WISE.DELTA_CONFIRMED, values);
+    }
+
+    /**
+     * Fetch records that have <code>delta_deaths IN (values)</code>
+     */
+    public List<com.corona.insights.jooq.corona_insights.tables.pojos.CountryWise> fetchByDeltaDeaths(Integer... values) {
+        return fetch(CountryWise.COUNTRY_WISE.DELTA_DEATHS, values);
+    }
+
+    /**
+     * Fetch records that have <code>delta_recovered IN (values)</code>
+     */
+    public List<com.corona.insights.jooq.corona_insights.tables.pojos.CountryWise> fetchByDeltaRecovered(Integer... values) {
+        return fetch(CountryWise.COUNTRY_WISE.DELTA_RECOVERED, values);
+    }
+
+    /**
      * Fetch records that have <code>confirmed IN (values)</code>
      */
     public List<com.corona.insights.jooq.corona_insights.tables.pojos.CountryWise> fetchByConfirmed(Long... values) {
@@ -100,6 +121,20 @@ public class CountryWiseDao extends DAOImpl<CountryWiseRecord, com.corona.insigh
      */
     public List<com.corona.insights.jooq.corona_insights.tables.pojos.CountryWise> fetchByRecovered(Long... values) {
         return fetch(CountryWise.COUNTRY_WISE.RECOVERED, values);
+    }
+
+    /**
+     * Fetch records that have <code>active IN (values)</code>
+     */
+    public List<com.corona.insights.jooq.corona_insights.tables.pojos.CountryWise> fetchByActive(Long... values) {
+        return fetch(CountryWise.COUNTRY_WISE.ACTIVE, values);
+    }
+
+    /**
+     * Fetch records that have <code>delta_active IN (values)</code>
+     */
+    public List<com.corona.insights.jooq.corona_insights.tables.pojos.CountryWise> fetchByDeltaActive(Integer... values) {
+        return fetch(CountryWise.COUNTRY_WISE.DELTA_ACTIVE, values);
     }
 
     /**

@@ -29,16 +29,21 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class DistrictWise implements Serializable {
 
-    private static final long serialVersionUID = 347166014;
+    private static final long serialVersionUID = 880616086;
 
     private UInteger           id;
     private Date               reportingDate;
     private String             country;
     private String             state;
     private String             district;
+    private Integer            deltaConfirmed;
+    private Integer            deltaDeaths;
+    private Integer            deltaRecovered;
     private Long               confirmed;
     private Integer            deaths;
     private Long               recovered;
+    private Long               active;
+    private Integer            deltaActive;
     private BigDecimal         latitude;
     private BigDecimal         longitude;
     private DistrictWiseSource source;
@@ -53,9 +58,14 @@ public class DistrictWise implements Serializable {
         this.country = value.country;
         this.state = value.state;
         this.district = value.district;
+        this.deltaConfirmed = value.deltaConfirmed;
+        this.deltaDeaths = value.deltaDeaths;
+        this.deltaRecovered = value.deltaRecovered;
         this.confirmed = value.confirmed;
         this.deaths = value.deaths;
         this.recovered = value.recovered;
+        this.active = value.active;
+        this.deltaActive = value.deltaActive;
         this.latitude = value.latitude;
         this.longitude = value.longitude;
         this.source = value.source;
@@ -69,9 +79,14 @@ public class DistrictWise implements Serializable {
         String             country,
         String             state,
         String             district,
+        Integer            deltaConfirmed,
+        Integer            deltaDeaths,
+        Integer            deltaRecovered,
         Long               confirmed,
         Integer            deaths,
         Long               recovered,
+        Long               active,
+        Integer            deltaActive,
         BigDecimal         latitude,
         BigDecimal         longitude,
         DistrictWiseSource source,
@@ -83,9 +98,14 @@ public class DistrictWise implements Serializable {
         this.country = country;
         this.state = state;
         this.district = district;
+        this.deltaConfirmed = deltaConfirmed;
+        this.deltaDeaths = deltaDeaths;
+        this.deltaRecovered = deltaRecovered;
         this.confirmed = confirmed;
         this.deaths = deaths;
         this.recovered = recovered;
+        this.active = active;
+        this.deltaActive = deltaActive;
         this.latitude = latitude;
         this.longitude = longitude;
         this.source = source;
@@ -138,6 +158,33 @@ public class DistrictWise implements Serializable {
         return this;
     }
 
+    public Integer getDeltaConfirmed() {
+        return this.deltaConfirmed;
+    }
+
+    public DistrictWise setDeltaConfirmed(Integer deltaConfirmed) {
+        this.deltaConfirmed = deltaConfirmed;
+        return this;
+    }
+
+    public Integer getDeltaDeaths() {
+        return this.deltaDeaths;
+    }
+
+    public DistrictWise setDeltaDeaths(Integer deltaDeaths) {
+        this.deltaDeaths = deltaDeaths;
+        return this;
+    }
+
+    public Integer getDeltaRecovered() {
+        return this.deltaRecovered;
+    }
+
+    public DistrictWise setDeltaRecovered(Integer deltaRecovered) {
+        this.deltaRecovered = deltaRecovered;
+        return this;
+    }
+
     public Long getConfirmed() {
         return this.confirmed;
     }
@@ -162,6 +209,24 @@ public class DistrictWise implements Serializable {
 
     public DistrictWise setRecovered(Long recovered) {
         this.recovered = recovered;
+        return this;
+    }
+
+    public Long getActive() {
+        return this.active;
+    }
+
+    public DistrictWise setActive(Long active) {
+        this.active = active;
+        return this;
+    }
+
+    public Integer getDeltaActive() {
+        return this.deltaActive;
+    }
+
+    public DistrictWise setDeltaActive(Integer deltaActive) {
+        this.deltaActive = deltaActive;
         return this;
     }
 
@@ -219,9 +284,14 @@ public class DistrictWise implements Serializable {
         sb.append(", ").append(country);
         sb.append(", ").append(state);
         sb.append(", ").append(district);
+        sb.append(", ").append(deltaConfirmed);
+        sb.append(", ").append(deltaDeaths);
+        sb.append(", ").append(deltaRecovered);
         sb.append(", ").append(confirmed);
         sb.append(", ").append(deaths);
         sb.append(", ").append(recovered);
+        sb.append(", ").append(active);
+        sb.append(", ").append(deltaActive);
         sb.append(", ").append(latitude);
         sb.append(", ").append(longitude);
         sb.append(", ").append(source);

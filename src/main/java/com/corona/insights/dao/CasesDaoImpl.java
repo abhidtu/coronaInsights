@@ -41,7 +41,7 @@ public class CasesDaoImpl extends CasesDao {
         Table<?> aggregated = DSL.using(configuration()).select(DSL.max(CASES.CONFIRMED).as("aggregated_confirmed"), DSL.max(CASES.DEATHS).as("aggregated_deaths"), DSL.max(CASES.RECOVERED).as("aggregated_recovered"), DSL.max(CASES.REPORTING_DATE).as("aggregated_reporting_date"))
                                  .from(CASES.join(LOCATION).on(CASES.LOCATION_ID.eq(LOCATION.ID))).where(LOCATION.COUNTRY.eq(country)).groupBy(CASES.CONFIRMED, CASES.REPORTING_DATE, CASES.LOCATION_ID).asTable("aggregated");
         return DSL.using(configuration()).select(aggregated.field("aggregated_reporting_date").as("reportedDate").cast(Date.class), DSL.sum(aggregated.field("aggregated_confirmed").coerce(Integer.class)).as("confirmed"), DSL.sum(aggregated.field("aggregated_deaths").coerce(Integer.class)).as("deaths"), DSL.sum(aggregated.field("aggregated_recovered").coerce(Integer.class)).as("recovered"))
-                                         .from(aggregated).groupBy(aggregated.field("aggregated_reporting_date")).orderBy(aggregated.field("aggregated_reporting_date").desc())
+                                         .from(aggregated).groupBy(aggregated.field("aggregated_reporting_date")).orderBy(aggregated.field("aggregated_reporting_date").asc())
                                          .fetchInto(CoronaVirusETLMetricsDTO.class);
     }
 
@@ -49,7 +49,7 @@ public class CasesDaoImpl extends CasesDao {
         Table<?> aggregated = DSL.using(configuration()).select(DSL.max(CASES.CONFIRMED).as("aggregated_confirmed"), DSL.max(CASES.DEATHS).as("aggregated_deaths"), DSL.max(CASES.RECOVERED).as("aggregated_recovered"), DSL.max(CASES.REPORTING_DATE).as("aggregated_reporting_date"))
                 .from(CASES.join(LOCATION).on(CASES.LOCATION_ID.eq(LOCATION.ID))).where(LOCATION.COUNTRY.eq(country)).and(CASES.CREATED_AT.gt(cutOffDate)).groupBy(CASES.CONFIRMED, CASES.REPORTING_DATE, CASES.LOCATION_ID).asTable("aggregated");
         return DSL.using(configuration()).select(aggregated.field("aggregated_reporting_date").as("reportedDate").cast(Date.class), DSL.sum(aggregated.field("aggregated_confirmed").coerce(Integer.class)).as("confirmed"), DSL.sum(aggregated.field("aggregated_deaths").coerce(Integer.class)).as("deaths"), DSL.sum(aggregated.field("aggregated_recovered").coerce(Integer.class)).as("recovered"))
-                .from(aggregated).groupBy(aggregated.field("aggregated_reporting_date")).orderBy(aggregated.field("aggregated_reporting_date").desc())
+                .from(aggregated).groupBy(aggregated.field("aggregated_reporting_date")).orderBy(aggregated.field("aggregated_reporting_date").asc())
                 .fetchInto(CoronaVirusETLMetricsDTO.class);
     }
 
@@ -57,7 +57,7 @@ public class CasesDaoImpl extends CasesDao {
         Table<?> aggregated = DSL.using(configuration()).select(DSL.max(CASES.CONFIRMED).as("aggregated_confirmed"), DSL.max(CASES.DEATHS).as("aggregated_deaths"), DSL.max(CASES.RECOVERED).as("aggregated_recovered"), DSL.max(CASES.REPORTING_DATE).as("aggregated_reporting_date"))
                 .from(CASES.join(LOCATION).on(CASES.LOCATION_ID.eq(LOCATION.ID))).where(LOCATION.STATE.eq(state)).groupBy(CASES.CONFIRMED, CASES.REPORTING_DATE, CASES.LOCATION_ID).asTable("aggregated");
         return DSL.using(configuration()).select(aggregated.field("aggregated_reporting_date").as("reportedDate").cast(Date.class), DSL.sum(aggregated.field("aggregated_confirmed").coerce(Integer.class)).as("confirmed"), DSL.sum(aggregated.field("aggregated_deaths").coerce(Integer.class)).as("deaths"), DSL.sum(aggregated.field("aggregated_recovered").coerce(Integer.class)).as("recovered"))
-                .from(aggregated).groupBy(aggregated.field("aggregated_reporting_date")).orderBy(aggregated.field("aggregated_reporting_date").desc())
+                .from(aggregated).groupBy(aggregated.field("aggregated_reporting_date")).orderBy(aggregated.field("aggregated_reporting_date").asc())
                 .fetchInto(CoronaVirusETLMetricsDTO.class);
     }
 
@@ -65,7 +65,7 @@ public class CasesDaoImpl extends CasesDao {
         Table<?> aggregated = DSL.using(configuration()).select(DSL.max(CASES.CONFIRMED).as("aggregated_confirmed"), DSL.max(CASES.DEATHS).as("aggregated_deaths"), DSL.max(CASES.RECOVERED).as("aggregated_recovered"), DSL.max(CASES.REPORTING_DATE).as("aggregated_reporting_date"))
                 .from(CASES.join(LOCATION).on(CASES.LOCATION_ID.eq(LOCATION.ID))).where(LOCATION.STATE.eq(state)).and(CASES.CREATED_AT.gt(cutOffDate)).groupBy(CASES.CONFIRMED, CASES.REPORTING_DATE, CASES.LOCATION_ID).asTable("aggregated");
         return DSL.using(configuration()).select(aggregated.field("aggregated_reporting_date").as("reportedDate").cast(Date.class), DSL.sum(aggregated.field("aggregated_confirmed").coerce(Integer.class)).as("confirmed"), DSL.sum(aggregated.field("aggregated_deaths").coerce(Integer.class)).as("deaths"), DSL.sum(aggregated.field("aggregated_recovered").coerce(Integer.class)).as("recovered"))
-                .from(aggregated).groupBy(aggregated.field("aggregated_reporting_date")).orderBy(aggregated.field("aggregated_reporting_date").desc())
+                .from(aggregated).groupBy(aggregated.field("aggregated_reporting_date")).orderBy(aggregated.field("aggregated_reporting_date").asc())
                 .fetchInto(CoronaVirusETLMetricsDTO.class);
     }
 

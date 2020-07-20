@@ -43,7 +43,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Properties extends TableImpl<PropertiesRecord> {
 
-    private static final long serialVersionUID = -255316960;
+    private static final long serialVersionUID = -357428040;
 
     /**
      * The reference instance of <code>corona_insights.properties</code>
@@ -74,9 +74,9 @@ public class Properties extends TableImpl<PropertiesRecord> {
     public final TableField<PropertiesRecord, String> VALUE = createField("value", org.jooq.impl.SQLDataType.VARCHAR(200).defaultValue(org.jooq.impl.DSL.inline("", org.jooq.impl.SQLDataType.VARCHAR)), this, "");
 
     /**
-     * The column <code>corona_insights.properties.modified_at</code>.
+     * The column <code>corona_insights.properties.value_modified_at</code>.
      */
-    public final TableField<PropertiesRecord, Timestamp> MODIFIED_AT = createField("modified_at", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false).defaultValue(org.jooq.impl.DSL.field("CURRENT_TIMESTAMP", org.jooq.impl.SQLDataType.TIMESTAMP)), this, "");
+    public final TableField<PropertiesRecord, Timestamp> VALUE_MODIFIED_AT = createField("value_modified_at", org.jooq.impl.SQLDataType.TIMESTAMP, this, "");
 
     /**
      * Create a <code>corona_insights.properties</code> table reference

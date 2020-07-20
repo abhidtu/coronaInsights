@@ -28,15 +28,20 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class StateWise implements Serializable {
 
-    private static final long serialVersionUID = -1872673044;
+    private static final long serialVersionUID = -1214466923;
 
     private UInteger        id;
     private Date            reportingDate;
     private String          country;
     private String          state;
+    private Integer         deltaConfirmed;
+    private Integer         deltaDeaths;
+    private Integer         deltaRecovered;
     private Long            confirmed;
     private Integer         deaths;
     private Long            recovered;
+    private Long            active;
+    private Integer         deltaActive;
     private StateWiseSource source;
     private Timestamp       createdAt;
     private Timestamp       modifiedAt;
@@ -48,9 +53,14 @@ public class StateWise implements Serializable {
         this.reportingDate = value.reportingDate;
         this.country = value.country;
         this.state = value.state;
+        this.deltaConfirmed = value.deltaConfirmed;
+        this.deltaDeaths = value.deltaDeaths;
+        this.deltaRecovered = value.deltaRecovered;
         this.confirmed = value.confirmed;
         this.deaths = value.deaths;
         this.recovered = value.recovered;
+        this.active = value.active;
+        this.deltaActive = value.deltaActive;
         this.source = value.source;
         this.createdAt = value.createdAt;
         this.modifiedAt = value.modifiedAt;
@@ -61,9 +71,14 @@ public class StateWise implements Serializable {
         Date            reportingDate,
         String          country,
         String          state,
+        Integer         deltaConfirmed,
+        Integer         deltaDeaths,
+        Integer         deltaRecovered,
         Long            confirmed,
         Integer         deaths,
         Long            recovered,
+        Long            active,
+        Integer         deltaActive,
         StateWiseSource source,
         Timestamp       createdAt,
         Timestamp       modifiedAt
@@ -72,9 +87,14 @@ public class StateWise implements Serializable {
         this.reportingDate = reportingDate;
         this.country = country;
         this.state = state;
+        this.deltaConfirmed = deltaConfirmed;
+        this.deltaDeaths = deltaDeaths;
+        this.deltaRecovered = deltaRecovered;
         this.confirmed = confirmed;
         this.deaths = deaths;
         this.recovered = recovered;
+        this.active = active;
+        this.deltaActive = deltaActive;
         this.source = source;
         this.createdAt = createdAt;
         this.modifiedAt = modifiedAt;
@@ -116,6 +136,33 @@ public class StateWise implements Serializable {
         return this;
     }
 
+    public Integer getDeltaConfirmed() {
+        return this.deltaConfirmed;
+    }
+
+    public StateWise setDeltaConfirmed(Integer deltaConfirmed) {
+        this.deltaConfirmed = deltaConfirmed;
+        return this;
+    }
+
+    public Integer getDeltaDeaths() {
+        return this.deltaDeaths;
+    }
+
+    public StateWise setDeltaDeaths(Integer deltaDeaths) {
+        this.deltaDeaths = deltaDeaths;
+        return this;
+    }
+
+    public Integer getDeltaRecovered() {
+        return this.deltaRecovered;
+    }
+
+    public StateWise setDeltaRecovered(Integer deltaRecovered) {
+        this.deltaRecovered = deltaRecovered;
+        return this;
+    }
+
     public Long getConfirmed() {
         return this.confirmed;
     }
@@ -140,6 +187,24 @@ public class StateWise implements Serializable {
 
     public StateWise setRecovered(Long recovered) {
         this.recovered = recovered;
+        return this;
+    }
+
+    public Long getActive() {
+        return this.active;
+    }
+
+    public StateWise setActive(Long active) {
+        this.active = active;
+        return this;
+    }
+
+    public Integer getDeltaActive() {
+        return this.deltaActive;
+    }
+
+    public StateWise setDeltaActive(Integer deltaActive) {
+        this.deltaActive = deltaActive;
         return this;
     }
 
@@ -178,9 +243,14 @@ public class StateWise implements Serializable {
         sb.append(", ").append(reportingDate);
         sb.append(", ").append(country);
         sb.append(", ").append(state);
+        sb.append(", ").append(deltaConfirmed);
+        sb.append(", ").append(deltaDeaths);
+        sb.append(", ").append(deltaRecovered);
         sb.append(", ").append(confirmed);
         sb.append(", ").append(deaths);
         sb.append(", ").append(recovered);
+        sb.append(", ").append(active);
+        sb.append(", ").append(deltaActive);
         sb.append(", ").append(source);
         sb.append(", ").append(createdAt);
         sb.append(", ").append(modifiedAt);

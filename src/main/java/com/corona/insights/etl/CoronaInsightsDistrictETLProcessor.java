@@ -50,6 +50,7 @@ public class CoronaInsightsDistrictETLProcessor implements ETLProcessor {
     @Override
     public void transform() {
         log.info("Step 2: executing Transform for country = {}, state = {}, district = {}", country, state, district);
+        CoronaVirusETLMetricsDTO previousCoronaVirusETLMetricsDTO = new CoronaVirusETLMetricsDTO();
         for (CoronaVirusETLMetricsDTO coronaVirusETLMetricsDTO : coronaVirusETLMetricsDTOList) {
             DistrictWise districtWise = new DistrictWise();
             districtWise.setCountry(country);
@@ -57,12 +58,24 @@ public class CoronaInsightsDistrictETLProcessor implements ETLProcessor {
             districtWise.setDistrict(district);
             districtWise.setLatitude(latitude);
             districtWise.setLongitude(longitude);
+
             districtWise.setConfirmed(coronaVirusETLMetricsDTO.getConfirmed());
             districtWise.setDeaths(coronaVirusETLMetricsDTO.getDeaths());
             districtWise.setRecovered(coronaVirusETLMetricsDTO.getRecovered());
+            districtWise.setActive(coronaVirusETLMetricsDTO.getConfirmed() - coronaVirusETLMetricsDTO.getDeaths() - coronaVirusETLMetricsDTO.getRecovered());
+
+            coronaVirusETLMetricsDTO.computeDelta(previousCoronaVirusETLMetricsDTO);
+
+            districtWise.setDeltaConfirmed(coronaVirusETLMetricsDTO.getDeltaConfirmed());
+            districtWise.setDeltaDeaths(coronaVirusETLMetricsDTO.getDeltaDeaths());
+            districtWise.setDeltaRecovered(coronaVirusETLMetricsDTO.getDeltaRecovered());
+            districtWise.setDeltaActive(coronaVirusETLMetricsDTO.getDeltaActive());
+
             districtWise.setReportingDate(coronaVirusETLMetricsDTO.getReportedDate());
             districtWise.setSource(DistrictWiseSource.JHU);
             districtWiseList.add(districtWise);
+
+            previousCoronaVirusETLMetricsDTO = coronaVirusETLMetricsDTO;
         }
     }
 

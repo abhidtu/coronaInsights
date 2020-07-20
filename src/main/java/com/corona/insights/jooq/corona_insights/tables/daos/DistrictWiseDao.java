@@ -98,6 +98,27 @@ public class DistrictWiseDao extends DAOImpl<DistrictWiseRecord, com.corona.insi
     }
 
     /**
+     * Fetch records that have <code>delta_confirmed IN (values)</code>
+     */
+    public List<com.corona.insights.jooq.corona_insights.tables.pojos.DistrictWise> fetchByDeltaConfirmed(Integer... values) {
+        return fetch(DistrictWise.DISTRICT_WISE.DELTA_CONFIRMED, values);
+    }
+
+    /**
+     * Fetch records that have <code>delta_deaths IN (values)</code>
+     */
+    public List<com.corona.insights.jooq.corona_insights.tables.pojos.DistrictWise> fetchByDeltaDeaths(Integer... values) {
+        return fetch(DistrictWise.DISTRICT_WISE.DELTA_DEATHS, values);
+    }
+
+    /**
+     * Fetch records that have <code>delta_recovered IN (values)</code>
+     */
+    public List<com.corona.insights.jooq.corona_insights.tables.pojos.DistrictWise> fetchByDeltaRecovered(Integer... values) {
+        return fetch(DistrictWise.DISTRICT_WISE.DELTA_RECOVERED, values);
+    }
+
+    /**
      * Fetch records that have <code>confirmed IN (values)</code>
      */
     public List<com.corona.insights.jooq.corona_insights.tables.pojos.DistrictWise> fetchByConfirmed(Long... values) {
@@ -116,6 +137,20 @@ public class DistrictWiseDao extends DAOImpl<DistrictWiseRecord, com.corona.insi
      */
     public List<com.corona.insights.jooq.corona_insights.tables.pojos.DistrictWise> fetchByRecovered(Long... values) {
         return fetch(DistrictWise.DISTRICT_WISE.RECOVERED, values);
+    }
+
+    /**
+     * Fetch records that have <code>active IN (values)</code>
+     */
+    public List<com.corona.insights.jooq.corona_insights.tables.pojos.DistrictWise> fetchByActive(Long... values) {
+        return fetch(DistrictWise.DISTRICT_WISE.ACTIVE, values);
+    }
+
+    /**
+     * Fetch records that have <code>delta_active IN (values)</code>
+     */
+    public List<com.corona.insights.jooq.corona_insights.tables.pojos.DistrictWise> fetchByDeltaActive(Integer... values) {
+        return fetch(DistrictWise.DISTRICT_WISE.DELTA_ACTIVE, values);
     }
 
     /**

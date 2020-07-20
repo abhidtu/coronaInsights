@@ -113,11 +113,4 @@ public class ZipCodeMappingDao extends DAOImpl<ZipCodeMappingRecord, com.corona.
     public List<com.corona.insights.jooq.corona_insights.tables.pojos.ZipCodeMapping> fetchByGeopoint(String... values) {
         return fetch(ZipCodeMapping.ZIP_CODE_MAPPING.GEOPOINT, values);
     }
-
-    /**
-     * Fetch records that have <code>state_name IN (values)</code>
-     */
-    public List<com.corona.insights.jooq.corona_insights.tables.pojos.ZipCodeMapping> fetchByStateName(String... values) {
-        return fetch(ZipCodeMapping.ZIP_CODE_MAPPING.STATE_NAME, values);
-    }
 }

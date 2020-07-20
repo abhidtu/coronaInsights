@@ -46,7 +46,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class DistrictWise extends TableImpl<DistrictWiseRecord> {
 
-    private static final long serialVersionUID = 1705172587;
+    private static final long serialVersionUID = 677800414;
 
     /**
      * The reference instance of <code>corona_insights.district_wise</code>
@@ -87,6 +87,21 @@ public class DistrictWise extends TableImpl<DistrictWiseRecord> {
     public final TableField<DistrictWiseRecord, String> DISTRICT = createField("district", org.jooq.impl.SQLDataType.VARCHAR(200).nullable(false).defaultValue(org.jooq.impl.DSL.inline("", org.jooq.impl.SQLDataType.VARCHAR)), this, "");
 
     /**
+     * The column <code>corona_insights.district_wise.delta_confirmed</code>.
+     */
+    public final TableField<DistrictWiseRecord, Integer> DELTA_CONFIRMED = createField("delta_confirmed", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.INTEGER)), this, "");
+
+    /**
+     * The column <code>corona_insights.district_wise.delta_deaths</code>.
+     */
+    public final TableField<DistrictWiseRecord, Integer> DELTA_DEATHS = createField("delta_deaths", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.INTEGER)), this, "");
+
+    /**
+     * The column <code>corona_insights.district_wise.delta_recovered</code>.
+     */
+    public final TableField<DistrictWiseRecord, Integer> DELTA_RECOVERED = createField("delta_recovered", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.INTEGER)), this, "");
+
+    /**
      * The column <code>corona_insights.district_wise.confirmed</code>.
      */
     public final TableField<DistrictWiseRecord, Long> CONFIRMED = createField("confirmed", org.jooq.impl.SQLDataType.BIGINT.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.BIGINT)), this, "");
@@ -100,6 +115,16 @@ public class DistrictWise extends TableImpl<DistrictWiseRecord> {
      * The column <code>corona_insights.district_wise.recovered</code>.
      */
     public final TableField<DistrictWiseRecord, Long> RECOVERED = createField("recovered", org.jooq.impl.SQLDataType.BIGINT.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.BIGINT)), this, "");
+
+    /**
+     * The column <code>corona_insights.district_wise.active</code>.
+     */
+    public final TableField<DistrictWiseRecord, Long> ACTIVE = createField("active", org.jooq.impl.SQLDataType.BIGINT.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.BIGINT)), this, "");
+
+    /**
+     * The column <code>corona_insights.district_wise.delta_active</code>.
+     */
+    public final TableField<DistrictWiseRecord, Integer> DELTA_ACTIVE = createField("delta_active", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.INTEGER)), this, "");
 
     /**
      * The column <code>corona_insights.district_wise.latitude</code>.

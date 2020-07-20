@@ -38,15 +38,29 @@ public class CoronaInsightsCountriesETLProcessor implements ETLProcessor {
     @Override
     public void transform() {
         log.info("Step 2: executing Transform for country = {}", country);
+        CoronaVirusETLMetricsDTO previousCoronaVirusETLMetricsDTO = new CoronaVirusETLMetricsDTO();
         for (CoronaVirusETLMetricsDTO coronaVirusETLMetricsDTO : coronaVirusETLMetricsDTOList) {
             CountryWise countryWise = new CountryWise();
-            countryWise.setConfirmed(coronaVirusETLMetricsDTO.getConfirmed());
             countryWise.setCountry(country);
+
+            countryWise.setConfirmed(coronaVirusETLMetricsDTO.getConfirmed());
             countryWise.setDeaths(coronaVirusETLMetricsDTO.getDeaths());
             countryWise.setRecovered(coronaVirusETLMetricsDTO.getRecovered());
+            countryWise.setActive(coronaVirusETLMetricsDTO.getConfirmed() - coronaVirusETLMetricsDTO.getDeaths() - coronaVirusETLMetricsDTO.getRecovered());
+
+            coronaVirusETLMetricsDTO.computeDelta(previousCoronaVirusETLMetricsDTO);
+
+            countryWise.setDeltaConfirmed(coronaVirusETLMetricsDTO.getDeltaConfirmed());
+            countryWise.setDeltaDeaths(coronaVirusETLMetricsDTO.getDeltaDeaths());
+            countryWise.setDeltaRecovered(coronaVirusETLMetricsDTO.getDeltaRecovered());
+            countryWise.setDeltaActive(coronaVirusETLMetricsDTO.getDeltaActive());
+
             countryWise.setReportingDate(coronaVirusETLMetricsDTO.getReportedDate());
             countryWise.setSource(CountryWiseSource.JHU);
             countryWiseList.add(countryWise);
+
+            previousCoronaVirusETLMetricsDTO = coronaVirusETLMetricsDTO;
+
         }
     }
 
@@ -56,7 +70,7 @@ public class CoronaInsightsCountriesETLProcessor implements ETLProcessor {
         for (CountryWise countryWise : countryWiseList) {
             try {
                 countryWiseDao.insert(countryWise);
-                //log.info("Inserting country wise data for country = {}, value = {}", country, countryWise);
+                log.info("Inserting country wise data for country = {}, value = {}", country, countryWise);
             }catch (Exception e) {
                 log.error("Exception inserting country wise data for country = {}, value = {}", country, countryWise);
             }

@@ -79,9 +79,9 @@ jooq {
     coronainsights(sourceSets.main) {
         jdbc {
             driver = 'com.mysql.jdbc.Driver'
-            url = "jdbc:mysql://34.83.173.131:3306/corona_insights"
+            url = "jdbc:mysql://35.193.245.1:3306/corona_insights"
             user = "root"
-            password = 'Florence1$'
+            password = 'florence'
         }
         generator {
             database {

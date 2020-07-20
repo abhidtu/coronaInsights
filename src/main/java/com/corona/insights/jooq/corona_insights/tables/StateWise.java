@@ -45,7 +45,7 @@ import org.jooq.types.UInteger;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class StateWise extends TableImpl<StateWiseRecord> {
 
-    private static final long serialVersionUID = 1325276957;
+    private static final long serialVersionUID = 1641239352;
 
     /**
      * The reference instance of <code>corona_insights.state_wise</code>
@@ -81,6 +81,21 @@ public class StateWise extends TableImpl<StateWiseRecord> {
     public final TableField<StateWiseRecord, String> STATE = createField("state", org.jooq.impl.SQLDataType.VARCHAR(200).nullable(false).defaultValue(org.jooq.impl.DSL.inline("", org.jooq.impl.SQLDataType.VARCHAR)), this, "");
 
     /**
+     * The column <code>corona_insights.state_wise.delta_confirmed</code>.
+     */
+    public final TableField<StateWiseRecord, Integer> DELTA_CONFIRMED = createField("delta_confirmed", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.INTEGER)), this, "");
+
+    /**
+     * The column <code>corona_insights.state_wise.delta_deaths</code>.
+     */
+    public final TableField<StateWiseRecord, Integer> DELTA_DEATHS = createField("delta_deaths", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.INTEGER)), this, "");
+
+    /**
+     * The column <code>corona_insights.state_wise.delta_recovered</code>.
+     */
+    public final TableField<StateWiseRecord, Integer> DELTA_RECOVERED = createField("delta_recovered", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.INTEGER)), this, "");
+
+    /**
      * The column <code>corona_insights.state_wise.confirmed</code>.
      */
     public final TableField<StateWiseRecord, Long> CONFIRMED = createField("confirmed", org.jooq.impl.SQLDataType.BIGINT.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.BIGINT)), this, "");
@@ -94,6 +109,16 @@ public class StateWise extends TableImpl<StateWiseRecord> {
      * The column <code>corona_insights.state_wise.recovered</code>.
      */
     public final TableField<StateWiseRecord, Long> RECOVERED = createField("recovered", org.jooq.impl.SQLDataType.BIGINT.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.BIGINT)), this, "");
+
+    /**
+     * The column <code>corona_insights.state_wise.active</code>.
+     */
+    public final TableField<StateWiseRecord, Long> ACTIVE = createField("active", org.jooq.impl.SQLDataType.BIGINT.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.BIGINT)), this, "");
+
+    /**
+     * The column <code>corona_insights.state_wise.delta_active</code>.
+     */
+    public final TableField<StateWiseRecord, Integer> DELTA_ACTIVE = createField("delta_active", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.INTEGER)), this, "");
 
     /**
      * The column <code>corona_insights.state_wise.source</code>.
