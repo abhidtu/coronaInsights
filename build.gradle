@@ -29,6 +29,9 @@ repositories {
     maven {
         url "https://plugins.gradle.org/m2/"
     }
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 ext {
@@ -45,6 +48,15 @@ dependencies {
     implementation 'de.codecentric:spring-boot-admin-starter-server'
     implementation 'org.apache.commons:commons-csv:1.8'
     implementation 'de.siegmar:fastcsv:1.0.3'
+    implementation files('libs/jsapi.jar')
+    implementation files('libs/freetts-jsapi10.jar')
+    implementation files('libs/freetts.jar')
+    implementation files('libs/cmu_us_kal.jar')
+    implementation files('libs/cmu_time_awb.jar')
+    implementation files('libs/cmudict04.jar')
+    implementation files('libs/cmulex.jar')
+    implementation files('libs/cmutimelex.jar')
+    implementation files('libs/en_us.jar')
     jooqRuntime("mysql:mysql-connector-java:8.0.13")
     compile group: 'org.eclipse.jgit', name: 'org.eclipse.jgit', version: '5.7.0.202003110725-r'
     compile group: 'nu.studer', name: 'gradle-jooq-plugin', version: '3.0.3'

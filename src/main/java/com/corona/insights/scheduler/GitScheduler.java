@@ -22,7 +22,7 @@ public class GitScheduler {
         this.gitClient = gitClient;
     }
 
-    @Scheduled(cron = "0 0 */2 ? * *")
+    //@Scheduled(cron = "0 0 */2 ? * *")
     public void pollForRepo() {
         try {
             log.info("Executing the repository poll scheduler");

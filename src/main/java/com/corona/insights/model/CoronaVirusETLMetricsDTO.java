@@ -1,9 +1,7 @@
 package com.corona.insights.model;
 
-import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -35,10 +33,10 @@ public class CoronaVirusETLMetricsDTO {
     }
 
     public void computeDelta(CoronaVirusETLMetricsDTO coronaVirusETLMetricsDTO) {
-        deltaConfirmed = (int)(confirmed != null ? confirmed : 0 - coronaVirusETLMetricsDTO.getConfirmed());
-        deltaDeaths = (deaths != null ? deaths : 0 - coronaVirusETLMetricsDTO.getDeaths());
-        deltaActive = (active != null ? active : 0 - coronaVirusETLMetricsDTO.getActive());
-        deltaRecovered = (int)(recovered != null ? active : 0 - coronaVirusETLMetricsDTO.getRecovered());
+        deltaConfirmed = (int)(confirmed != null ? confirmed - coronaVirusETLMetricsDTO.getConfirmed() : 0 );
+        deltaDeaths = (deaths != null ? deaths - coronaVirusETLMetricsDTO.getDeaths() : 0 - coronaVirusETLMetricsDTO.getDeaths());
+        deltaActive = (active != null ? active - coronaVirusETLMetricsDTO.getActive() : 0 - coronaVirusETLMetricsDTO.getActive());
+        deltaRecovered = (int)(recovered != null ? recovered - coronaVirusETLMetricsDTO.getRecovered() : 0 - coronaVirusETLMetricsDTO.getRecovered());
     }
 
     public Long getConfirmed() {

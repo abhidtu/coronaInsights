@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
 import javax.sql.DataSource;
 
@@ -46,6 +47,11 @@ public class Configuration {
     @Bean
     FileContainerClient getFileContainerClient() {
         return new BashFileContainerClient(sourceFolderPath, fileContainerBasePath, incomingFolder, processingFolder, archiveFolder);
+    }
+
+    @Bean
+    public RestTemplate getCoronaRestTemplate() {
+        return new RestTemplate();
     }
 
 

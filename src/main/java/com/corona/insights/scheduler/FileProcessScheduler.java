@@ -31,7 +31,7 @@ public class FileProcessScheduler {
         this.daoUtils = daoUtils;
     }
 
-    @Scheduled(cron = "0 0 */2 ? * *")
+    //@Scheduled(cron = "0 0 */2 ? * *")
     public void pollForFiles() {
         if(!daoUtils.isUpdateLocked()) {
             daoUtils.acquireUpdateLock();
@@ -53,9 +53,9 @@ public class FileProcessScheduler {
                     }
                 }
                 //coronaDataEnrichmentService.enrich();
+                daoUtils.releaseUpdateLock();
                 coronaETLProcessingService.process();
             }
-            daoUtils.releaseUpdateLock();
         }
     }
 
